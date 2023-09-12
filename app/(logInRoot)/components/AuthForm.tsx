@@ -34,6 +34,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
+      role: "",
       name: "",
       email: "",
       password: "",
@@ -58,7 +59,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
           }
 
           if (callback?.ok) {
-            router.push("/conversations");
+            router.push("/dashboard");
           }
         })
         .catch(() => toast.error("Something went wrong!"))
@@ -76,7 +77,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
           }
 
           if (callback?.ok) {
-            router.push("/conversations");
+            router.push("/dashboard");
           }
         })
         .finally(() => setIsLoading(false));
@@ -97,7 +98,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
       >
         <form className='space-y-6' onSubmit={handleSubmit(onSubmit)}>
           <div className='flex items-center justify-center gap-x-5 mb-10'>
-            <div className="p-2 bg-black/70 rounded-lg">
+            <div className='p-2 bg-black/70 rounded-lg'>
               <MdCastForEducation className='w-12 h-12 text-yellow-300'></MdCastForEducation>
             </div>
             <h2
@@ -109,18 +110,30 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
             text-gray-900
           '
             >
-              {variant === "LOGIN" ? "Sign in to your account" : "Create User"}
+              {variant === "LOGIN"
+                ? "Sign in to your account"
+                : "Create User For EduGrade"}
             </h2>
           </div>
           {variant === "REGISTER" && (
-            <Input
-              disabled={isLoading}
-              register={register}
-              errors={errors}
-              required
-              id='name'
-              label='Name'
-            />
+            <>
+              <Input
+                disabled={isLoading}
+                register={register}
+                errors={errors}
+                required
+                id='name'
+                label='Name'
+              />
+              <Input
+                disabled={isLoading}
+                register={register}
+                errors={errors}
+                required
+                id='role'
+                label='Role'
+              />
+            </>
           )}
           <Input
             disabled={isLoading}

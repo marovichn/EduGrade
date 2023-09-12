@@ -1,10 +1,11 @@
 import AuthForm from "./components/AuthForm";
-import Image from "next/image"
+import Image from "next/image";
 
 const Auth = () => {
   return (
-    <div
-      className='
+    <>
+      <div
+        className='
         flex 
         min-h-full 
         flex-col 
@@ -12,12 +13,17 @@ const Auth = () => {
         py-12 
         sm:px-6 
         lg:px-8 
-        bg-transparent
+        bg-auth-banner
+        bg-repeat
+        -z-10
       '
-    >
-      <Image src="/rulers.jpg" alt="background"fill className="absolute -z-10 fill opacity-5"></Image>
-      <AuthForm variant="LOGIN"/>
-    </div>
+      >
+        <div className='absolute w-full h-full bg-white top-0 left-0 opacity-80'></div>
+        <div className='z-10'>
+          <AuthForm variant='LOGIN' />
+        </div>
+      </div>
+    </>
   );
 };
 

@@ -5,6 +5,7 @@ import { FC } from "react";
 import axios from "axios";
 import { signIn, useSession } from "next-auth/react";
 import { useCallback, useEffect, useState } from "react";
+import { MdCastForEducation } from "react-icons/md";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 
@@ -95,6 +96,22 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
         '
       >
         <form className='space-y-6' onSubmit={handleSubmit(onSubmit)}>
+          <div className='flex items-center justify-center gap-x-5 mb-10'>
+            <div className="p-2 bg-black/70 rounded-lg">
+              <MdCastForEducation className='w-12 h-12 text-yellow-300'></MdCastForEducation>
+            </div>
+            <h2
+              className=' 
+            text-center 
+            text-3xl 
+            font-extrabold 
+            tracking-tight 
+            text-gray-900
+          '
+            >
+              {variant === "LOGIN" ? "Sign in to your account" : "Create User"}
+            </h2>
+          </div>
           {variant === "REGISTER" && (
             <Input
               disabled={isLoading}
@@ -129,21 +146,6 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
             </Button>
           </div>
         </form>
-
-        <div className='mt-6'>
-          <div className='relative'>
-            <div
-              className='
-                absolute 
-                inset-0 
-                flex 
-                items-center
-              '
-            >
-              <div className='w-full border-t border-gray-300' />
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

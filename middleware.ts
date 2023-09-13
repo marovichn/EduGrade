@@ -5,3 +5,7 @@ export default withAuth({
     signIn: "/",
   },
 });
+
+export const config = {
+  matcher: ["/dashboard/:path*", "/users/:path*"],
+};

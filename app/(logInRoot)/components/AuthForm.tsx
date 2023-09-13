@@ -13,6 +13,7 @@ import Input from "@/app/components/inputs/Input";
 import Button from "@/app/components/Button";
 import { toast } from "react-hot-toast";
 import Select from "@/app/components/inputs/Select";
+import prisma from "@/app/libs/prismadb";
 
 interface AuthFormProps {
   variant: Variant;
@@ -24,7 +25,6 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    console.log(session?.status);
     if (session?.status === "authenticated") {
       router.push("/dashboard");
     }
@@ -36,56 +36,55 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
-      role: "",
       name: "",
+      role: "",
       email: "",
       password: "",
     },
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
-    /* setIsLoading(true);
+    const onSubmit: SubmitHandler<FieldValues> = (data) => {
+      setIsLoading(true);
 
-    if (variant === "REGISTER") {
-      axios
-        .post("/api/register", data)
-        .then(() =>
-          signIn("credentials", {
-            ...data,
-            redirect: false,
+      if (variant === "REGISTER") {
+        axios
+          .post("/api/register", data)
+          .then(() =>
+            signIn("credentials", {
+              ...data,
+              redirect: false,
+            })
+          )
+          .then((callback) => {
+            if (callback?.error) {
+              toast.error("Invalid credentials!");
+            }
+
+            if (callback?.ok) {
+              router.push("/dashboard");
+            }
           })
-        )
-        .then((callback) => {
-          if (callback?.error) {
-            toast.error("Invalid credentials!");
-          }
+          .catch(() => toast.error("Something went wrong!"))
+          .finally(() => setIsLoading(false));
+      }
 
-          if (callback?.ok) {
-            router.push("/dashboard");
-          }
+      if (variant === "LOGIN") {
+        signIn("credentials", {
+          ...data,
+          redirect: false,
         })
-        .catch(() => toast.error("Something went wrong!"))
-        .finally(() => setIsLoading(false));
-    }
+          .then((callback) => {
+            if (callback?.error) {
+              toast.error("Invalid credentials!");
+            }
 
-    if (variant === "LOGIN") {
-      signIn("credentials", {
-        ...data,
-        redirect: false,
-      })
-        .then((callback) => {
-          if (callback?.error) {
-            toast.error("Invalid credentials!");
-          }
-
-          if (callback?.ok) {
-            router.push("/dashboard");
-          }
-        })
-        .finally(() => setIsLoading(false));
-    } */
-  };
+            if (callback?.ok) {
+              router.push("/dashboard");
+            }
+          })
+          .finally(() => setIsLoading(false));
+      }
+    };
 
   return (
     <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
@@ -136,7 +135,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
                 errors={errors}
                 required
                 id='role'
-                label='Role'
+                label='Select Users Role'
               />
             </>
           )}
@@ -160,7 +159,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
           />
           <div>
             <Button disabled={isLoading} fullWidth type='submit'>
-              Sign in
+              {variant === "LOGIN" ? "Sign in" : "Create"}
             </Button>
           </div>
         </form>

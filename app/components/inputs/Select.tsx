@@ -13,15 +13,28 @@ interface SelectProps {
   name: string;
 }
 
-const Select: FC<SelectProps> = ({ register, options, name, ...rest }) => {
+const Select: FC<SelectProps> = ({ register, options, name,id,label, ...rest }) => {
   return (
-    <select {...register(name)} {...rest}>
-      {options.map((value) => (
-        <option key={value} value={value}>
-          {value}
-        </option>
-      ))}
-    </select>
+    <>
+      <label
+        htmlFor={id}
+        className='
+          block 
+          text-sm 
+          font-medium 
+          leading-6 
+          text-gray-900
+        '
+      >{label}
+      </label>
+      <select className="w-full p-2 border-2 rounded-md " {...register(name)} {...rest}>
+        {options.map((value) => (
+          <option key={value} value={value}>
+            {value}
+          </option>
+        ))}
+      </select>
+    </>
   );
 };
 

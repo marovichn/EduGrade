@@ -32,8 +32,8 @@ model Group {
   createdAt       DateTime @default(now())
   ends    DateTime?
 
-  teacher User  @relation(fields: [teacherId], references: [id])
-  teacherId String @db.ObjectId
+  teacher User?  @relation(fields: [teacherId], references: [id])
+  teacherId String? @db.ObjectId
 
   subject Subject @relation(fields: [subjectId], references: [id])
   subjectId String @db.ObjectId

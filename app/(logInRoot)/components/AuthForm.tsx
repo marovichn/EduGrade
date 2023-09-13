@@ -13,7 +13,6 @@ import Input from "@/app/components/inputs/Input";
 import Button from "@/app/components/Button";
 import { toast } from "react-hot-toast";
 import Select from "@/app/components/inputs/Select";
-import prisma from "@/app/libs/prismadb";
 
 interface AuthFormProps {
   variant: Variant;
@@ -129,7 +128,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
               />
               <Select
                 name='role'
-                options={["Admin", "User"]}
+                options={["Admin", "Student", "Teacher"]}
                 disabled={isLoading}
                 register={register}
                 errors={errors}

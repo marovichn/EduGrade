@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import Input from "@/app/components/inputs/Input";
 import Button from "@/app/components/Button";
 import { toast } from "react-hot-toast";
+import Select from "@/app/components/inputs/Select";
 
 interface AuthFormProps {
   variant: Variant;
@@ -23,6 +24,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    console.log(session?.status);
     if (session?.status === "authenticated") {
       router.push("/dashboard");
     }
@@ -42,7 +44,8 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    setIsLoading(true);
+    console.log(data);
+    /* setIsLoading(true);
 
     if (variant === "REGISTER") {
       axios
@@ -81,7 +84,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
           }
         })
         .finally(() => setIsLoading(false));
-    }
+    } */
   };
 
   return (
@@ -125,7 +128,9 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
                 id='name'
                 label='Name'
               />
-              <Input
+              <Select
+                name='role'
+                options={["Admin", "User"]}
                 disabled={isLoading}
                 register={register}
                 errors={errors}

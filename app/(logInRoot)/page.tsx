@@ -19,7 +19,7 @@ const Auth = () => {
       >
         <div className='absolute w-full h-full bg-white top-0 left-0 opacity-80'></div>
         <div className='z-10'>
-          <AuthForm variant='LOGIN' />
+          <AuthForm variant='REGISTER' />
         </div>
       </div>
     </>

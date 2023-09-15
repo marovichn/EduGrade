@@ -90,11 +90,12 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
       <div
         className='
         bg-white
-          px-4
-          py-8
+          px-[50px]
+          py-16
+          pb-20
           shadow
           sm:rounded-lg
-          sm:px-10
+          sm:px-6
         '
       >
         <form className='space-y-6' onSubmit={handleSubmit(onSubmit)}>

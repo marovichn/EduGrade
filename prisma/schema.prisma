@@ -10,7 +10,33 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model Admin {
+  id              String @id @default(auto()) @map("_id") @db.ObjectId
+  name            String?
+  email           String?   @unique
+  emailVerified   DateTime?
+  image           String?
+  hashedPassword  String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  role            String?
+}
+
+model Teacher {
+  id              String @id @default(auto()) @map("_id") @db.ObjectId
+  name            String?
+  email           String?   @unique
+  emailVerified   DateTime?
+  image           String?
+  hashedPassword  String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  role            String?
+
+  groups Group[]
+}
+
+model Student {
   id              String @id @default(auto()) @map("_id") @db.ObjectId
   name            String?
   email           String?   @unique
@@ -32,14 +58,34 @@ model Group {
   createdAt       DateTime @default(now())
   ends    DateTime?
 
-  teacher User?  @relation(fields: [teacherId], references: [id])
+  results  Result[]
+  //attendances Attendance[]
+  //assignments Assignment[]
+  //activityGrades  Activity
+
+  teacher Teacher?  @relation(fields: [teacherId], references: [id])
   teacherId String? @db.ObjectId
 
   subject Subject @relation(fields: [subjectId], references: [id])
   subjectId String @db.ObjectId
+
+  student Student @relation(fields: [studentId], references: [id])
+  studentId String @db.ObjectId
+}
+
+model Result{
+id              String @id @default(auto()) @map("_id") @db.ObjectId
+type            String
+value           String
+description     String?
+
+group           Group  @relation(fields: [groupId], references: [id])
+groupId         String @db.ObjectId
 }
 
 model Subject{
   id              String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+
   groups  Group[]
 }

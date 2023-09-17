@@ -1,14 +1,44 @@
-"use client"
+"use client";
 
-import { signOut } from 'next-auth/react'
-import { FC } from 'react'
+import { FC } from "react";
 
-interface pageProps {
-  
-}
+interface pageProps {}
 
 const page: FC<pageProps> = ({}) => {
-  return <div onClick={()=>signOut()}>Dashboard</div>
-}
+  return (
+    <main>
+      DASHBOARD
+      <div>fsf</div>
+      <div>fsf</div>
+      <div>fsf</div>
+      <div>fsf</div>
+      <div>fsf</div>
+      <div>fsf</div>
+      <div>fsf</div>
+      <div>fsf</div>
+      <div>fsf</div>
+      <div>fsf</div>
+      <div>fsf</div>
+      <div>fsf</div>
+      <div>fsf</div>
+      <div>fsf</div>
+      <div>fsf</div>
+      <div>fsf</div>
+      <div>fsf</div>
+      <div>fsf</div>
+      <div>fsf</div>
+      <div>fsf</div>
+      <div>fsf</div>
+      <div>fsf</div>
+      <div>fsf</div>
+      <div>fsf</div>
+      <div>fsf</div>
+      <div>fsf</div>
+      <div>fsf</div>
+      <div>fsf</div>
+      <div>fsf</div>
+    </main>
+  );
+};
 
-export default page
+export default page;

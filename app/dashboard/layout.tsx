@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { MdCastForEducation } from "react-icons/md";
+import Avatar from "../components/Avatar";
 
 export default function DashboardLayout({
   children,
@@ -17,6 +18,7 @@ export default function DashboardLayout({
               EduGrade
             </span>
           </Link>
+          <Avatar></Avatar>
         </div>
       </nav>
       <div className='fixed top-16 z-15 bg-yellow-300 text-black w-full h-16 rounded-b-xl'></div>

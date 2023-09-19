@@ -101,7 +101,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
         <form className='space-y-6' onSubmit={handleSubmit(onSubmit)}>
           <div className='flex items-center justify-center gap-x-5 mb-10'>
             <div className='p-2 bg-black/70 rounded-lg'>
-              <MdCastForEducation className='w-12 h-12 text-yellow-300'></MdCastForEducation>
+              <MdCastForEducation className='w-12 h-12 text-yellow-300'/>
             </div>
             <h2
               className=' 

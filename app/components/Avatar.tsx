@@ -5,11 +5,14 @@ import { Admin, Student, Teacher } from "@prisma/client";
 import Image from "next/image";
 
 interface AvatarProps {
-  user?: Admin | Student | Teacher;
+  user?: {
+    name?: string | null | undefined;
+    email?: string | null | undefined;
+    image?: string | null | undefined;
+  };
 }
 
 const Avatar: React.FC<AvatarProps> = ({ user }) => {
-
   return (
     <div className='relative'>
       <div

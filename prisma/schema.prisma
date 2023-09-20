@@ -10,6 +10,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
+
 model Admin {
   id              String @id @default(auto()) @map("_id") @db.ObjectId
   name            String?
@@ -21,6 +23,7 @@ model Admin {
   updatedAt       DateTime @updatedAt
   role            String?
 }
+
 
 model Teacher {
   id              String @id @default(auto()) @map("_id") @db.ObjectId
@@ -40,6 +43,7 @@ model Teacher {
 
   groups Group[]
 }
+
 
 model Student {
   id              String @id @default(auto()) @map("_id") @db.ObjectId
@@ -61,6 +65,7 @@ model Student {
   groups Group[]
 }
 
+
 model Group {
   id              String @id @default(auto()) @map("_id") @db.ObjectId
 
@@ -70,9 +75,9 @@ model Group {
   ends    DateTime?
 
   results  Result[]
-  //attendances Attendance[]
-  //assignments Assignment[]
-  //activityGrades  Activity
+  attendances Attendance[]
+  assignments Assignment[]
+  activityGrades  Activity[]
 
   teacher Teacher?  @relation(fields: [teacherId], references: [id])
   teacherId String? @db.ObjectId
@@ -84,11 +89,52 @@ model Group {
   studentId String @db.ObjectId
 }
 
+
 model Result{
 id              String @id @default(auto()) @map("_id") @db.ObjectId
 type            String
 value           String
 description     String?
+date            DateTime?
+
+group           Group  @relation(fields: [groupId], references: [id])
+groupId         String @db.ObjectId
+}
+
+
+model Activity{
+id              String @id @default(auto()) @map("_id") @db.ObjectId
+type            String
+value           String
+description     String?
+date            DateTime?
+
+group           Group  @relation(fields: [groupId], references: [id])
+groupId         String @db.ObjectId
+}
+
+
+model Attendance{
+id              String @id @default(auto()) @map("_id") @db.ObjectId
+type            String
+description     String?
+date            DateTime?
+numberOfClasses Int
+classes         String[]
+
+group           Group  @relation(fields: [groupId], references: [id])
+groupId         String @db.ObjectId
+}
+
+
+model Assignment{
+id              String @id @default(auto()) @map("_id") @db.ObjectId
+type            String
+value           String
+description     String?
+dateStart            DateTime?
+dateDue            DateTime?
+done            Boolean?
 
 group           Group  @relation(fields: [groupId], references: [id])
 groupId         String @db.ObjectId

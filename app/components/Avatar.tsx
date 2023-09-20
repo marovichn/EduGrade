@@ -1,7 +1,5 @@
 "use client";
 
-import { Admin, Student, Teacher } from "@prisma/client";
-
 import Image from "next/image";
 
 interface AvatarProps {

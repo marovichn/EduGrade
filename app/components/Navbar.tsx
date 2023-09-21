@@ -8,6 +8,7 @@ import { signOut, useSession } from "next-auth/react";
 import { LogOut } from "lucide-react";
 import { navRoutes } from "../helpers/NavRoutes";
 import { Admin, Student, Teacher } from "@prisma/client";
+import NavItem from "./NavItem";
 
 interface NavbarProps {
   user?: Admin | Student | Teacher;
@@ -45,13 +46,13 @@ const Navbar: FC<NavbarProps> = ({user}) => {
       <div className='fixed top-16 z-15 bg-gray-300 text-black w-full h-16'>
         <div className='flex items-center justify-around gap-x-4 mt-[26px] w-full'>
           {user?.role === "Admin"
-            ? adminRoutes.map((route, index) => <div>{route.name}</div>)
+            ? adminRoutes.map((route, index) => <NavItem route={route} />)
             : ""}
           {user?.role === "Student"
-            ? studentRoutes.map((route, index) => <div>{route.name}</div>)
+            ? studentRoutes.map((route, index) => <NavItem route={route} />)
             : ""}
           {user?.role === "Teacher"
-            ? teacherRoutes.map((route, index) => <div>{route.name}</div>)
+            ? teacherRoutes.map((route, index) => <NavItem route={route} />)
             : ""}
         </div>
       </div>

@@ -6,7 +6,8 @@ const Auth = () => {
       <div
         className='
         flex 
-        min-h-full 
+        min-h-[100vh] 
+        min-w-full
         flex-col 
         justify-center 
         py-12 
@@ -17,7 +18,7 @@ const Auth = () => {
         -z-10
       '
       >
-        <div className='absolute w-full h-full bg-white top-0 left-0 opacity-80'></div>
+        <div className='absolute bg-white top-0 left-0 w-full h-full opacity-80'></div>
         <div className='z-10'>
           <AuthForm variant='LOGIN' />
         </div>

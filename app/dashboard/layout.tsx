@@ -10,7 +10,6 @@ export default function DashboardLayout({
   return (
     <>
       <Navbar/>
-      <div className='fixed top-16 z-15 bg-gray-300 text-black w-full h-16'></div>
       <div className='mt-32'>{children}</div>
     </>
   );

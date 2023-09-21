@@ -132,8 +132,8 @@ id              String @id @default(auto()) @map("_id") @db.ObjectId
 type            String
 value           String
 description     String?
-dateStart            DateTime?
-dateDue            DateTime?
+dateStart       DateTime?
+dateDue         DateTime?
 done            Boolean?
 
 group           Group  @relation(fields: [groupId], references: [id])

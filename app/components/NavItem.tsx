@@ -21,6 +21,7 @@ const NavItem: FC<NavItemProps> = ({ route }) => {
 
   return (
     <Link
+    key={route.name}
     href={route.href}
       className={
         selected

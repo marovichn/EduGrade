@@ -35,7 +35,7 @@ const Navbar: FC<NavbarProps> = ({user}) => {
               <Avatar user={session.data?.user}></Avatar>
             </Link>
             <div
-              className='w-full h-full hover:bg-white/20 group p-2 rounded-xl mb-1'
+              className='w-full h-full hover:bg-white/20 group p-2 rounded-xl mb-1 cursor-pointer'
               onClick={() => signOut()}
             >
               <LogOut className='group-hover:text-black text-white '></LogOut>

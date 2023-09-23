@@ -13,19 +13,26 @@ const Actions: FC<ActionsProps> = ({ userRole }) => {
   return (
     <div className='mt-16'>
       {actions.map((a) => (
-        <div className='w-full h-20 flex justify-center items-center my-4 group'>
-          <div className='flex items-center justify-between bg-gray-500 w-full h-full rounded-lg px-4'>
+        <Link
+          href={userRole === "Admin" ? `${a.href}/create` : a.href}
+          className='w-full h-20 flex justify-center items-center my-4 group '
+          key={a.name}
+        >
+          <div className='flex items-center justify-between bg-gray-500 w-full h-full rounded-lg px-4 hover:bg-gray-400'>
             <div className='flex items-center justify-around gap-x-3'>
-              <div className='flex justify-center items-center w-10 h-10 bg-gray-400 rounded-lg'>
+              <div className='flex justify-center items-center w-10 h-10 bg-gray-300/60 rounded-lg'>
                 <a.icon className='text-white' />
               </div>
-              <h1 className='text-xl font-bold text-white'>{userRole === "Admin" && "Create "}{a.name}</h1>
+              <h1 className='text-xl font-bold text-white'>
+                {userRole === "Admin" && "Create "}
+                {a.name}
+              </h1>
             </div>
-            <Link href={userRole === "Admin" ? `${a.href}/create` : a.href}>
+            <div>
               <ArrowRightFromLine className='text-white group-hover:animate-pulse transition group-hover:scale-125 mr-2' />
-            </Link>
+            </div>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );

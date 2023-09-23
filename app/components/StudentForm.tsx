@@ -92,7 +92,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant, userRole }) => {
 
   return (
     <PageWrapper>
-      <div className='flex flex-col items-center justify-center'>
+      <div className='flex flex-col items-center justify-center -mt-10'>
         <div
           className='
         bg-white
@@ -121,6 +121,15 @@ const AuthForm: FC<AuthFormProps> = ({ variant, userRole }) => {
             </div>
             {variant === "REGISTER" && (
               <>
+                <Input
+                  disabled={isLoading}
+                  register={register}
+                  errors={errors}
+                  required
+                  id='name'
+                  label='Image'
+                  placeholder="! Feature in construction, to be implemented !"
+                />
                 <Input
                   disabled={isLoading}
                   register={register}
@@ -158,6 +167,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant, userRole }) => {
                   register={register}
                   errors={errors}
                   required
+                  type="email"
                   id='parentEmail'
                   label='Parents Email'
                 />
@@ -180,7 +190,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant, userRole }) => {
                 />
                 <Select
                   name='role'
-                  options={["Admin", "Student", "Teacher"]}
+                  options={["Student"]}
                   disabled={isLoading}
                   register={register}
                   errors={errors}

@@ -1,6 +1,5 @@
 import getCurrentUser from "@/app/actions/getCurrentUser";
-import CreateForm from "@/app/components/CreateForm";
-import { useRouter } from "next/navigation";
+import StudentForm from "@/app/components/StudentForm";
 import { FC } from "react";
 
 interface pageProps {}
@@ -8,9 +7,8 @@ interface pageProps {}
 const page: FC<pageProps> =async ({}) => {
 const user =await getCurrentUser();
 
-
   return (
-      <CreateForm variant='REGISTER' userRole={user?.role}></CreateForm>
+      <StudentForm variant='REGISTER' userRole={user?.role}></StudentForm>
   );
 };
 

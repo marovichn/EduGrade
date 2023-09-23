@@ -9,7 +9,7 @@ interface SelectProps {
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
   disabled?: boolean;
-  options: ["Admin", "Student", "Teacher"];
+  options: string[];
   name: string;
 }
 

@@ -44,7 +44,7 @@ const Navbar: FC<NavbarProps> = ({user}) => {
         </div>
       </nav>
       <div className='fixed top-16 z-15 bg-gray-300 text-black w-full h-16'>
-        <div className='flex items-center justify-around gap-x-4 mt-2 w-full h-full'>
+        <div className='flex items-center justify-around  mt-2 w-full h-full'>
           {user?.role === "Admin"
             ? adminRoutes.map((route) => <NavItem route={route} />)
             : ""}

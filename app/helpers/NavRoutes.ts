@@ -1,4 +1,4 @@
-import { IconNode, GraduationCap, User2, Group, BookCopy, CalendarCheck, Sticker, ListChecks, ListTodo} from "lucide-react";
+import { IconNode, GraduationCap, User2, Group, BookCopy, CalendarCheck, Sticker, ListChecks, ListTodo, Radio} from "lucide-react";
 
 type navRoutes = [
   {
@@ -10,70 +10,70 @@ type navRoutes = [
 ];
 
 export const navRoutes = [
-  { href: "/students", role: "Admin", name: "Students", icon: User2 },
-  { href: "/teachers", role: "Admin", name: "Teachers", icon: GraduationCap },
-  { href: "/subjects", role: "Admin", name: "Subjects", icon: BookCopy },
-  { href: "/groups", role: "Admin", name: "Groups", icon: Group },
+  { href: "/dashboard/students", role: "Admin", name: "Students", icon: User2 },
+  { href: "/dashboard/teachers", role: "Admin", name: "Teachers", icon: GraduationCap },
+  { href: "/dashboard/subjects", role: "Admin", name: "Subjects", icon: BookCopy },
+  { href: "/dashboard/groups", role: "Admin", name: "Groups", icon: Group },
 
-  { href: "/updates", role: "Student", name: "All Grades", icon: User2 },
+  { href: "/dashboard/updates", role: "Student", name: "All Grades", icon: Radio },
   {
-    href: "/results",
+    href: "/dashboard/results",
     role: "Student",
     name: "Subjects Grades",
     icon: ListChecks,
   },
   {
-    href: "/activity",
+    href: "/dashboard/activity",
     role: "Student",
     name: "Subjects Activities",
     icon: Sticker,
   },
   {
-    href: "/attendance",
+    href: "/dashboard/attendance",
     role: "Student",
     name: "Attendance",
     icon: CalendarCheck,
   },
   {
-    href: "/teachers",
+    href: "/dashboard/teachers",
     role: "Student",
     name: "My Teachers",
     icon: GraduationCap,
   },
   {
-    href: "/assignments",
+    href: "/dashboard/assignments",
     role: "Student",
     name: "Assignments",
     icon: ListTodo,
   },
 
-  { href: "/groups", role: "Teacher", name: "All Groups", icon: User2 },
+  { href: "/dashboard/groups", role: "Teacher", name: "All Groups", icon: User2 },
   {
-    href: "/results",
+    href: "/dashboard/results",
     role: "Teacher",
     name: "Subjects Grades",
     icon: ListChecks,
   },
   {
-    href: "/activity",
+    href: "/dashboard/activity",
     role: "Teacher",
     name: "Subjects Activities",
     icon: Sticker,
   },
   {
-    href: "/attendance",
+    href: "/dashboard/attendance",
     role: "Teacher",
     name: "Attendance",
     icon: CalendarCheck,
   },
   {
-    href: "/students",
+    href: "/dashboard/students",
     role: "Teacher",
     name: "My Students",
     icon: GraduationCap,
   },
   {
-    href: "/assignments",
+    href: "/dashboard/assignments",
     role: "Teacher",
     name: "Assignments",
     icon: ListTodo,

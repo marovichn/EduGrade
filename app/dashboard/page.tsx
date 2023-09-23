@@ -1,15 +1,18 @@
-"use client";
-
 import { FC } from "react";
+import getCurrentUser from "../actions/getCurrentUser";
+import PageWrapper from "../components/PageWrapper";
 
 interface pageProps {}
 
-const page: FC<pageProps> = ({}) => {
+const page: FC<pageProps> = async ({}) => {
+  const user = await getCurrentUser();
   return (
-    <main className="bg-white h-full text-black pt-10 -mt-3 p-4">
-      DASHBOARD
-      
-    </main>
+    <PageWrapper>
+      <h1 className='text-4xl font-extrabold text-gray-700'>
+        Welcome back, {user?.name}!
+      </h1>
+      <p className='font-light'>{user?.role}</p>
+    </PageWrapper>
   );
 };
 

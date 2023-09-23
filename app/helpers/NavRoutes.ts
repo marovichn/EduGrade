@@ -1,4 +1,4 @@
-import { IconNode, GraduationCap, User2, Group, BookCopy, CalendarCheck, Sticker, ListChecks, ListTodo, Radio} from "lucide-react";
+import { IconNode, GraduationCap, User2, Group, BookCopy, CalendarCheck, Sticker, ListChecks, ListTodo, Radio, ShieldPlus} from "lucide-react";
 
 type navRoutes = [
   {
@@ -10,8 +10,9 @@ type navRoutes = [
 ];
 
 export const navRoutes = [
-  { href: "/dashboard/students", role: "Admin", name: "Students", icon: User2 },
-  { href: "/dashboard/teachers", role: "Admin", name: "Teachers", icon: GraduationCap },
+  { href: "/dashboard/students", role: "Admin", name: "Student Profiles", icon: User2 },
+  { href: "/dashboard/teachers", role: "Admin", name: "Teacher Profiles", icon: GraduationCap },
+  { href: "/dashboard/admins", role: "Admin", name: "Admin Profiles", icon: ShieldPlus },
   { href: "/dashboard/subjects", role: "Admin", name: "Subjects", icon: BookCopy },
   { href: "/dashboard/groups", role: "Admin", name: "Groups", icon: Group },
 
@@ -19,13 +20,13 @@ export const navRoutes = [
   {
     href: "/dashboard/results",
     role: "Student",
-    name: "Subjects Grades",
+    name: "Subject Grades",
     icon: ListChecks,
   },
   {
     href: "/dashboard/activity",
     role: "Student",
-    name: "Subjects Activities",
+    name: "Subject Activities",
     icon: Sticker,
   },
   {
@@ -43,7 +44,7 @@ export const navRoutes = [
   {
     href: "/dashboard/assignments",
     role: "Student",
-    name: "Assignments",
+    name: " My Assignments",
     icon: ListTodo,
   },
 

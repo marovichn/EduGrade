@@ -1,6 +1,7 @@
 import { FC } from "react";
 import getCurrentUser from "../actions/getCurrentUser";
 import PageWrapper from "../components/PageWrapper";
+import Actions from "../components/Actions";
 
 interface pageProps {}
 
@@ -12,6 +13,8 @@ const page: FC<pageProps> = async ({}) => {
         Welcome back, {user?.name}!
       </h1>
       <p className='font-light'>{user?.role}</p>
+
+      <Actions userRole={user?.role}></Actions>
     </PageWrapper>
   );
 };

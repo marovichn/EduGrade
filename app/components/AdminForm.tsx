@@ -39,7 +39,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
    /*  setIsLoading(true); */
     console.log(data);
-/* 
+
     if (variant === "REGISTER") {
       axios
         .post("/api/register", data)
@@ -77,7 +77,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
           }
         })
         .finally(() => setIsLoading(false));
-    } */
+    }
   };
 
   return (

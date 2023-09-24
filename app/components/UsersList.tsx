@@ -5,6 +5,7 @@ import {
   ArrowRight,
   FileEdit,
   GraduationCap,
+  ShieldAlert,
   ShieldPlus,
   User2,
   UserPlus,
@@ -12,6 +13,7 @@ import {
 import Link from "next/link";
 import { FC } from "react";
 import PageWrapper from "./PageWrapper";
+import { useSession } from "next-auth/react";
 
 interface UsersListProps {
   users?: Admin[] | Student[] | Teacher[] | null | undefined;
@@ -68,6 +70,7 @@ const UsersList: FC<UsersListProps> = ({ users, roleUrl }) => {
             All {roleUrl?.charAt(0).toUpperCase() + roleUrl?.slice(1)!} on
             EduGrade:
           </h1>
+          {}
           <Link
             href={`${roleUrl}/create`}
             className='w-12 h-12 bg-yellow-300 flex items-center justify-center rounded-lg hover:bg-yellow-200 pl-1'
@@ -75,6 +78,14 @@ const UsersList: FC<UsersListProps> = ({ users, roleUrl }) => {
             <UserPlus />
           </Link>
         </div>
+        {users?.length === 0 && (
+          <div className="flex flex-col items-center justify-center">
+            You are not allowed to see this data!
+            <div className="my-28">
+              <ShieldAlert className="" size={250}/>
+            </div>
+          </div>
+        )}
         {indexedUsers?.map((user, index) => (
           <Link
             href={`/dashboard/${roleUrl}/${user.id}`}
@@ -104,27 +115,29 @@ const UsersList: FC<UsersListProps> = ({ users, roleUrl }) => {
           </Link>
         ))}
       </div>
-      <div className='w-full mt-10 mb-16'>
-        <div className='flex items-center justify-center gap-x-10'>
-          <div className='flex items-center justify-center gap-x-10 bg-gray-200 p-3 rounded-xl'>
-            <div
-              className='w-8 h-8 bg-gray-400 flex items-center justify-center rounded-full hover:bg-gray-300'
-              onClick={() => previous()}
-            >
-              <ArrowLeft className='hover:animate-pulse' />
-            </div>
-            <h1 className='font-bold'>
-              {page} / {Math.ceil(users?.length! / 5)}
-            </h1>
-            <div
-              className='w-8 h-8 bg-gray-400 flex items-center justify-center rounded-full hover:bg-gray-300'
-              onClick={() => next()}
-            >
-              <ArrowRight className='hover:animate-pulse' />
+      {users?.length !== 0 && (
+        <div className='w-full mt-10 mb-16'>
+          <div className='flex items-center justify-center gap-x-10'>
+            <div className='flex items-center justify-center gap-x-10 bg-gray-200 p-3 rounded-xl'>
+              <div
+                className='w-8 h-8 bg-gray-400 flex items-center justify-center rounded-full hover:bg-gray-300'
+                onClick={() => previous()}
+              >
+                <ArrowLeft className='hover:animate-pulse' />
+              </div>
+              <h1 className='font-bold'>
+                {page} / {Math.ceil(users?.length! / 5)}
+              </h1>
+              <div
+                className='w-8 h-8 bg-gray-400 flex items-center justify-center rounded-full hover:bg-gray-300'
+                onClick={() => next()}
+              >
+                <ArrowRight className='hover:animate-pulse' />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </PageWrapper>
   );
 };

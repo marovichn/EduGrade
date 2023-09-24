@@ -1,8 +1,13 @@
+import getCurrentUser from "@/app/actions/getCurrentUser";
 import prisma from "@/app/libs/prismadb";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
+    const currentUser = await getCurrentUser();
+    if (currentUser?.role !== "Admin") {
+      return new NextResponse("Anauthorized", { status: 401 });
+    }
     const {
       name,
       description,

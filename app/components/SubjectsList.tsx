@@ -58,22 +58,24 @@ const subjectsList: FC<subjectsListProps> = ({ subjects }) => {
             key={subject.name}
           >
             <div
-              className={`bg-gray-400 w-8 h-full rounded-lg mr-3 flex items-center justify-center`}
-              style={{ backgroundColor: subject.color!, opacity: "70%" }}
+              className={`bg-gray-500 w-8 h-full rounded-lg mr-3 flex items-center justify-center`}
             >
               <h1 className='text-white font-extrabold'>{index + 1}.</h1>
             </div>
             <div
-              className={`flex items-center justify-between bg-gray-400 w-full h-full rounded-lg px-4 hover:bg-gray-400`}
+              className={`flex items-center justify-between border-2 border-gray-400 w-full h-full rounded-lg px-4 hover:bg-gray-400`}
             >
               <div className='flex items-center justify-around gap-x-3'>
-                <div className='flex justify-center items-center w-10 h-10 bg-gray-300/60 rounded-lg'>
+                <div
+                  className='flex justify-center items-center w-10 h-10 bg-gray-300/60 rounded-lg'
+                  style={{ backgroundColor: subject.color!, opacity: "70%" }}
+                >
                   <Book className='text-white' />
                 </div>
-                <h1 className='text-xl font-bold text-white'>{subject.name}</h1>
+                <h1 className='text-xl font-bold text-black'>{subject.name}</h1>
               </div>
               <div>
-                <FileEdit className='text-white group-hover:animate-pulse transition group-hover:scale-125 mr-2' />
+                <FileEdit className='text-black group-hover:animate-pulse transition group-hover:scale-125 mr-2' />
               </div>
             </div>
           </Link>

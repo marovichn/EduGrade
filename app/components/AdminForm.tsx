@@ -34,6 +34,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
       role: "",
       email: "",
       password: "",
+      code:"",
     },
   });
 
@@ -117,6 +118,15 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
                   required
                   id='name'
                   label='Name'
+                />
+                <Input
+                  disabled={isLoading}
+                  register={register}
+                  errors={errors}
+                  required
+                  id='code'
+                  label='Code Identifier'
+                  placeholder="(PP-DC-01)"
                 />
                 <Input
                   disabled={isLoading}

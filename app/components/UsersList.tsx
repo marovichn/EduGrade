@@ -64,9 +64,16 @@ const UsersList: FC<UsersListProps> = ({ users, roleUrl }) => {
     <PageWrapper>
       <div className=''>
         <div className='mb-16 text-4xl font-bold flex items-center justify-between'>
-          <h1>All {roleUrl?.charAt(0).toUpperCase() + roleUrl?.slice(1)!} on EduGrade:</h1>
-          <Link href={`${roleUrl}/create`} className="w-12 h-12 bg-yellow-300 flex items-center justify-center rounded-lg hover:bg-yellow-200 pl-1"><UserPlus/></Link>
-          
+          <h1>
+            All {roleUrl?.charAt(0).toUpperCase() + roleUrl?.slice(1)!} on
+            EduGrade:
+          </h1>
+          <Link
+            href={`${roleUrl}/create`}
+            className='w-12 h-12 bg-yellow-300 flex items-center justify-center rounded-lg hover:bg-yellow-200 pl-1'
+          >
+            <UserPlus />
+          </Link>
         </div>
         {indexedUsers?.map((user, index) => (
           <Link
@@ -77,17 +84,21 @@ const UsersList: FC<UsersListProps> = ({ users, roleUrl }) => {
             <div className='bg-gray-500 w-8 h-full rounded-lg mr-3 flex items-center justify-center'>
               <h1 className='text-white font-extrabold'>{index + 1}.</h1>
             </div>
-            <div className='flex items-center justify-between bg-gray-400 w-full h-full rounded-lg px-4 hover:bg-gray-400'>
+            <div className='flex items-center justify-between border-2 border-gray-400 w-full h-full rounded-lg px-4 hover:bg-gray-400 group'>
               <div className='flex items-center justify-around gap-x-3'>
-                <div className='flex justify-center items-center w-10 h-10 bg-gray-300/60 rounded-lg'>
+                <div className='flex justify-center items-center w-10 h-10 bg-black/60 rounded-lg'>
                   {Icon}
                 </div>
-                <h1 className='text-xl font-bold text-white'>
-                  {user.name} {user.lastname && user.lastname}
-                </h1>
+                <div className='flex flex-col items-start justify-start'>
+                  <h1 className='text-xl font-bold text-black'>
+                    {user.name} {user.lastname && user.lastname}{" "}
+                    {user.code && "-" + user.code}
+                  </h1>
+                  <p>{user.email}</p>
+                </div>
               </div>
               <div>
-                <FileEdit className='text-white group-hover:animate-pulse transition group-hover:scale-125 mr-2' />
+                <FileEdit className='text-bray-700 group-hover:animate-pulse transition group-hover:scale-125 mr-2' />
               </div>
             </div>
           </Link>

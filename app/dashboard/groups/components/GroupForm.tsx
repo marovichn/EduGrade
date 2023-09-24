@@ -3,31 +3,63 @@
 import Variant from "@/types";
 import { FC } from "react";
 import axios from "axios";
-import { signIn, useSession } from "next-auth/react";
-import { useCallback, useEffect, useState } from "react";
-import { MdCastForEducation } from "react-icons/md";
+import { signIn} from "next-auth/react";
+import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 
 import Input from "@/app/components/inputs/Input";
 import Button from "@/app/components/Button";
 import { toast } from "react-hot-toast";
-import Select from "@/app/components/inputs/Select";
 import PageWrapper from "@/app/components/PageWrapper";
 import SelectSpecific from "./SelectSpecific";
-import { Student, Subject, Teacher } from "@prisma/client";
 import SelectSpecificSubject from "./SelectSpecificSubject";
 
 interface GroupFormProps {
   variant: Variant;
-  teachers: Teacher[]
-  students: Student[]
-  subjects: Subject[]
+  userRole: string | null | undefined
 }
 
-const GroupForm: FC<GroupFormProps> = ({ variant, teachers, students, subjects }) => {
+const GroupForm: FC<GroupFormProps> = ({ variant, userRole}) => {
   const router = useRouter();
+
+  if(userRole !== "Admin"){
+    router.push("/dashboard")
+    return;
+  }
   const [isLoading, setIsLoading] = useState(false);
+  const [teachers, setTeachers] = useState([]);
+  const [students, setStudents] = useState([]);
+  const [subjects, setSubjects] = useState([]);
+  useEffect(() => {
+    const getTeachers = async () => {
+      const res = await axios.get("/api/teachers");
+      if (res.status !== 200) {
+        return;
+      }
+      setTeachers(res.data);
+    };
+
+    const getStudents = async () => {
+      const res = await axios.get("/api/students");
+      if (res.status !== 200) {
+        return;
+      }
+      setStudents(res.data);
+    };
+
+    const getSubjects = async () => {
+      const res = await axios.get("/api/subjects");
+      if (res.status !== 200) {
+        return;
+      }
+      setSubjects(res.data);
+    };
+    getTeachers();
+    getStudents();
+    getSubjects();
+  }, []);
+
 
   const {
     register,

@@ -21,7 +21,7 @@ const page: FC<pageProps> = ({}) => {
 
   return (
     <div>
-      <UsersList users={students}></UsersList>
+      <UsersList users={students} roleUrl='students'></UsersList>
     </div>
   );
 };

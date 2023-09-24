@@ -43,7 +43,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant, userRole }) => {
       parentName: "",
       parentEmail: "",
       parentPhone: "",
-      biography:"",
+      biography: "",
     },
   });
 
@@ -53,20 +53,9 @@ const AuthForm: FC<AuthFormProps> = ({ variant, userRole }) => {
     if (variant === "REGISTER") {
       axios
         .post("/api/register", data)
-        .then(() =>
-          signIn("credentials", {
-            ...data,
-            redirect: false,
-          })
-        )
-        .then((callback) => {
-          if (callback?.error) {
-            toast.error("Invalid credentials!");
-          }
-
-          if (callback?.ok) {
-            router.push("/dashboard");
-          }
+        .then(() => {
+          toast.success("Student Profile created.");
+          router.push("/dashboard/students");
         })
         .catch(() => toast.error("Something went wrong!"))
         .finally(() => setIsLoading(false));
@@ -121,7 +110,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant, userRole }) => {
             </div>
             {variant === "REGISTER" && (
               <>
-                <Input
+                {/* <Input
                   disabled={isLoading}
                   register={register}
                   errors={errors}
@@ -129,7 +118,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant, userRole }) => {
                   id='name'
                   label='Image'
                   placeholder="! Feature in construction, to be implemented !"
-                />
+                /> */}
                 <Input
                   disabled={isLoading}
                   register={register}
@@ -167,7 +156,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant, userRole }) => {
                   register={register}
                   errors={errors}
                   required
-                  type="email"
+                  type='email'
                   id='parentEmail'
                   label='Parents Email'
                 />

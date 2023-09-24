@@ -37,26 +37,15 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-   /*  setIsLoading(true); */
+    /*  setIsLoading(true); */
     console.log(data);
 
     if (variant === "REGISTER") {
       axios
         .post("/api/register", data)
-        .then(() =>
-          signIn("credentials", {
-            ...data,
-            redirect: false,
-          })
-        )
-        .then((callback) => {
-          if (callback?.error) {
-            toast.error("Invalid credentials!");
-          }
-
-          if (callback?.ok) {
-            router.push("/dashboard");
-          }
+        .then(() => {
+          toast.success("Admin Created");
+          router.push("/dashboard/admins");
         })
         .catch(() => toast.error("Something went wrong!"))
         .finally(() => setIsLoading(false));
@@ -106,12 +95,12 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
               >
                 {variant === "LOGIN"
                   ? "Sign in to your account"
-                  : "Create Student Profile For EduGrade"}
+                  : "Create Admin Profile For EduGrade"}
               </h2>
             </div>
             {variant === "REGISTER" && (
               <>
-                <Input
+                {/*        <Input
                   disabled={isLoading}
                   register={register}
                   errors={errors}
@@ -119,7 +108,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
                   id='name'
                   label='Image'
                   placeholder='! Feature in construction, to be implemented !'
-                />
+                /> */}
                 <Input
                   disabled={isLoading}
                   register={register}
@@ -130,7 +119,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
                 />
                 <Select
                   name='role'
-                  options={["Student"]}
+                  options={["Admin"]}
                   disabled={isLoading}
                   register={register}
                   errors={errors}

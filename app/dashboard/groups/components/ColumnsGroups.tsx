@@ -1,6 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
+import CellActionGroup from "./CellActionGroup"
 import {
   Activity,
   Assignment,
@@ -30,33 +31,6 @@ export const columns: ColumnDef<GroupColumn>[] = [
     header: "Name",
   },
   {
-    accessorKey: "results",
-    header: "Results Number",
-    cell: ({ row }) => (
-      <div className='flex items-center gap-x-2'>
-        {row.original.results?.length}
-      </div>
-    ),
-  },
-  {
-    accessorKey: "attendances",
-    header: "All Attendances Number",
-    cell: ({ row }) => (
-      <div className='flex items-center gap-x-2'>
-        {row.original.attendances?.length}
-      </div>
-    ),
-  },
-  {
-    accessorKey: "assignments",
-    header: "Assignments Number",
-    cell: ({ row }) => (
-      <div className='flex items-center gap-x-2'>
-        {row.original.assignments?.length}
-      </div>
-    ),
-  },
-  {
     accessorKey: "teacher",
     header: "Group Teacher",
     cell: ({ row }) => (
@@ -84,7 +58,38 @@ export const columns: ColumnDef<GroupColumn>[] = [
     ),
   },
   {
+    accessorKey: "results",
+    header: "Number of Results",
+    cell: ({ row }) => (
+      <div className='flex items-center gap-x-2'>
+        {row.original.results?.length}
+      </div>
+    ),
+  },
+  {
+    accessorKey: "attendances",
+    header: "All Attendances Number",
+    cell: ({ row }) => (
+      <div className='flex items-center gap-x-2'>
+        {row.original.attendances?.length}
+      </div>
+    ),
+  },
+  {
+    accessorKey: "assignments",
+    header: "Assignments Number",
+    cell: ({ row }) => (
+      <div className='flex items-center gap-x-2'>
+        {row.original.assignments?.length}
+      </div>
+    ),
+  },
+  {
     accessorKey: "createdAt",
     header: "Date",
+  },
+  {
+    id: "actions",
+    cell: ({ row }) => <CellActionGroup data={row.original} />,
   },
 ];

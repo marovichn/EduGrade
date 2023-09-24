@@ -14,7 +14,9 @@ const page: FC<pageProps> =async ({}) => {
 
    if (user?.role !== "Admin") {
      router.push("/dashboard");
+     return;
    }
+
   const [students, setStudents] = useState([]);
   useEffect(() => {
     const getStudents = async () => {

@@ -73,14 +73,14 @@ model Student {
 model Group {
   id              String @id @default(auto()) @map("_id") @db.ObjectId
 
-  name String
-  description String
+  name            String
+  description     String
   createdAt       DateTime @default(now())
-  ends    DateTime?
+  ends            DateTime?
 
-  results  Result[]
-  attendances Attendance[]
-  assignments Assignment[]
+  results         Result[]
+  attendances     Attendance[]
+  assignments     Assignment[]
   activityGrades  Activity[]
 
   teacher Teacher?  @relation(fields: [teacherId], references: [id])

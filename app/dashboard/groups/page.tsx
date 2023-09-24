@@ -22,6 +22,7 @@ const page: FC<pageProps> = ({}) => {
     };
     getGroups();
   }, []);
+  console.log(groups)
 
   return (
     <PageWrapper>
@@ -31,7 +32,7 @@ const page: FC<pageProps> = ({}) => {
           EduGrade:
         </h1>
         <Link
-          href={`/groups/create`}
+          href={`groups/create`}
           className='w-12 h-12 bg-yellow-300 flex items-center justify-center rounded-lg hover:bg-yellow-200 pl-1'
         >
           <Group /> <Plus className="w-3 h-3 mb-3"/>

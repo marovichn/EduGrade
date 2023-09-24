@@ -1,29 +1,29 @@
-import { FC } from 'react'
+"use client";
 
-interface pageProps {
-  
-}
+import UsersList from "@/app/components/UsersList";
+import axios from "axios";
+import { FC, useEffect, useState } from "react";
+
+interface pageProps {}
 
 const page: FC<pageProps> = ({}) => {
-  return <div>
-    <div>teacher1</div>
-    <div>teacher1</div>
-    <div>teacher1</div>
-    <div>teacher1</div>
-    <div>teacher1</div>
-    <div>teacher1</div>
-    <div>teacher1</div>
-    <div>teacher1</div>
-    <div>teacher1</div>
-    <div>teacher1</div>
-    <div>teacher1</div>
-    <div>teacher1</div>
-    <div>teacher1</div>
-    <div>teacher1</div>
-    <div>teacher1</div>
-    <div>teacher1</div>
-    <div>teacher1</div>
-  </div>
-}
+  const [teachers, setTeachers] = useState([]);
+  useEffect(() => {
+    const getTeachers = async () => {
+      const res = await axios.get("/api/teachers");
+      if (res.status !== 200) {
+        return;
+      }
+      setTeachers(res.data);
+    };
+    getTeachers();
+  }, []);
 
-export default page
+  return (
+    <div>
+      <UsersList users={teachers} roleUrl='teachers'></UsersList>
+    </div>
+  );
+};
+
+export default page;

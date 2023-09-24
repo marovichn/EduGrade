@@ -1,7 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import CellActionGroup from "./CellActionGroup"
+import CellActionGroup from "./CellActionGroup";
 import {
   Activity,
   Assignment,

@@ -59,12 +59,12 @@ const subjectsList: FC<subjectsListProps> = ({ subjects }) => {
           >
             <div
               className={`bg-gray-400 w-8 h-full rounded-lg mr-3 flex items-center justify-center`}
+              style={{ backgroundColor: subject.color!, opacity: "70%" }}
             >
               <h1 className='text-white font-extrabold'>{index + 1}.</h1>
             </div>
             <div
               className={`flex items-center justify-between bg-gray-400 w-full h-full rounded-lg px-4 hover:bg-gray-400`}
-              style={{ backgroundColor: subject.color!, opacity: "70%" }}
             >
               <div className='flex items-center justify-around gap-x-3'>
                 <div className='flex justify-center items-center w-10 h-10 bg-gray-300/60 rounded-lg'>

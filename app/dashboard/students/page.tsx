@@ -1,28 +1,25 @@
-import { FC } from 'react'
+"use client";
 
-interface pageProps {
-  
-}
+import axios from "axios";
+import { FC, useEffect, useState } from "react";
+
+interface pageProps {}
 
 const page: FC<pageProps> = ({}) => {
-  return <div>
-    <p>student1</p>
-    <p>student1</p>
-    <p>student1</p>
-    <p>student1</p>
-    <p>student1</p>
-    <p>student1</p>
-    <p>student1</p>
-    <p>student1</p>
-    <p>student1</p>
-    <p>student1</p>
-    <p>student1</p>
-    <p>student1</p>
-    <p>student1</p>
-    <p>student1</p>
-    <p>student1</p>
-    <p>student1</p>
-  </div>
-}
+  const [students, setStudents] = useState([]);
+  useEffect(() => {
+    const getStudents = async () => {
+      const res = await axios.get("/api/students");
+      if (res.status !== 200) {
+        return;
+      }
+      setStudents(res.data);
+    };
+    getStudents();
+  }, []);
+  console.log(students)
 
-export default page
+  return <div></div>;
+};
+
+export default page;

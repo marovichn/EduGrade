@@ -145,6 +145,7 @@ model Subject{
   id              String @id @default(auto()) @map("_id") @db.ObjectId
   name String
   description String?
+  color        String?
 
   groups  Group[]
 }

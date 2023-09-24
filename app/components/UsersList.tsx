@@ -93,7 +93,7 @@ const UsersList: FC<UsersListProps> = ({ users, roleUrl }) => {
           </Link>
         ))}
       </div>
-      <div className='w-full mt-10 mb-5'>
+      <div className='w-full mt-10 mb-16'>
         <div className='flex items-center justify-center gap-x-10'>
           <div className='flex items-center justify-center gap-x-10 bg-gray-200 p-3 rounded-xl'>
             <div

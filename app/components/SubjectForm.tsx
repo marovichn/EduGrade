@@ -34,15 +34,8 @@ const SubjectForm: FC<SubjectFormProps> = ({ variant, userRole }) => {
   } = useForm<FieldValues>({
     defaultValues: {
       name: "",
-      role: "",
-      email: "",
-      password: "",
-      lastname: "",
-      adress: "",
-      parentName: "",
-      parentEmail: "",
-      parentPhone: "",
-      biography: "",
+      description: "",
+      color: "",
     },
   });
 
@@ -51,10 +44,10 @@ const SubjectForm: FC<SubjectFormProps> = ({ variant, userRole }) => {
 
     if (variant === "REGISTER") {
       axios
-        .post("/api/register", data)
+        .post("/api/create-subject", data)
         .then(() => {
-          toast.success("Student Profile created.");
-          router.push("/dashboard/students");
+          toast.success("Subject created.");
+          router.push("/dashboard/subjects");
         })
         .catch(() => toast.error("Something went wrong!"))
         .finally(() => setIsLoading(false));
@@ -104,20 +97,11 @@ const SubjectForm: FC<SubjectFormProps> = ({ variant, userRole }) => {
               >
                 {variant === "LOGIN"
                   ? "Sign in to your account"
-                  : "Create Student Profile For EduGrade"}
+                  : "Create Subject For EduGrade"}
               </h2>
             </div>
             {variant === "REGISTER" && (
               <>
-                {/* <Input
-                  disabled={isLoading}
-                  register={register}
-                  errors={errors}
-                  required
-                  id='name'
-                  label='Image'
-                  placeholder="! Feature in construction, to be implemented !"
-                /> */}
                 <Input
                   disabled={isLoading}
                   register={register}
@@ -131,81 +115,72 @@ const SubjectForm: FC<SubjectFormProps> = ({ variant, userRole }) => {
                   register={register}
                   errors={errors}
                   required
-                  id='lastname'
-                  label='Last Name'
-                />
-                <Input
-                  disabled={isLoading}
-                  register={register}
-                  errors={errors}
-                  required
-                  id='adress'
-                  label='Adress'
-                />
-                <Input
-                  disabled={isLoading}
-                  register={register}
-                  errors={errors}
-                  required
-                  id='parentName'
-                  label='Parents Name'
-                />
-                <Input
-                  disabled={isLoading}
-                  register={register}
-                  errors={errors}
-                  required
-                  type='email'
-                  id='parentEmail'
-                  label='Parents Email'
-                />
-                <Input
-                  disabled={isLoading}
-                  register={register}
-                  errors={errors}
-                  required
-                  id='biography'
-                  label='Short Biography'
-                />
-
-                <Input
-                  disabled={isLoading}
-                  register={register}
-                  errors={errors}
-                  required
-                  id='parentPhone'
-                  label='Parents Phone Number'
+                  id='description'
+                  label='Short Description'
                 />
                 <Select
-                  name='role'
-                  options={["Student"]}
+                  name='color'
+                  options={[
+                    "#FF6633",
+                    "#FFB399",
+                    "#FF33FF",
+                    "#FFFF99",
+                    "#00B3E6",
+                    "#E6B333",
+                    "#3366E6",
+                    "#999966",
+                    "#99FF99",
+                    "#B34D4D",
+                    "#80B300",
+                    "#809900",
+                    "#E6B3B3",
+                    "#6680B3",
+                    "#66991A",
+                    "#FF99E6",
+                    "#CCFF1A",
+                    "#FF1A66",
+                    "#E6331A",
+                    "#33FFCC",
+                    "#66994D",
+                    "#B366CC",
+                    "#4D8000",
+                    "#B33300",
+                    "#CC80CC",
+                    "#66664D",
+                    "#991AFF",
+                    "#E666FF",
+                    "#4DB3FF",
+                    "#1AB399",
+                    "#E666B3",
+                    "#33991A",
+                    "#CC9999",
+                    "#B3B31A",
+                    "#00E680",
+                    "#4D8066",
+                    "#809980",
+                    "#E6FF80",
+                    "#1AFF33",
+                    "#999933",
+                    "#FF3380",
+                    "#CCCC00",
+                    "#66E64D",
+                    "#4D80CC",
+                    "#9900B3",
+                    "#E64D66",
+                    "#4DB380",
+                    "#FF4D4D",
+                    "#99E6E6",
+                    "#6666FF",
+                  ]}
                   disabled={isLoading}
                   register={register}
                   errors={errors}
                   required
-                  id='role'
-                  label='Select Users Role'
+                  id='color'
+                  label='Select Subject color'
                 />
               </>
             )}
-            <Input
-              disabled={isLoading}
-              register={register}
-              errors={errors}
-              required
-              id='email'
-              label='Email address'
-              type='email'
-            />
-            <Input
-              disabled={isLoading}
-              register={register}
-              errors={errors}
-              required
-              id='password'
-              label='Password'
-              type='password'
-            />
             <div>
               <Button disabled={isLoading} fullWidth type='submit'>
                 {variant === "LOGIN" ? "Sign in" : "Create"}

@@ -1,12 +1,20 @@
 "use client"
 
+import getCurrentUser from "@/app/actions/getCurrentUser";
 import UsersList from "@/app/components/UsersList";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { FC, useEffect, useState } from "react";
 
 interface pageProps {}
 
-const page: FC<pageProps> = ({}) => {
+const page: FC<pageProps> =async ({}) => {
+  const user = await getCurrentUser();
+  const router = useRouter();
+
+  if(user?.role !== "Admin"){
+    router.push("/dashboard");
+  }
   const [admins, setAdmins] = useState([]);
   useEffect(() => {
     const getAdmins = async () => {

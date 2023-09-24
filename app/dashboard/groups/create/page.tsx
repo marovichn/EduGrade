@@ -3,10 +3,18 @@
 import { FC, useEffect, useState } from "react";
 import GroupForm from "../components/GroupForm";
 import axios from "axios";
+import getCurrentUser from "@/app/actions/getCurrentUser";
+import { useRouter } from "next/navigation";
 
 interface pageProps {}
 
-const page: FC<pageProps> = ({}) => {
+const page: FC<pageProps> =async ({}) => {
+   const user = await getCurrentUser();
+   const router = useRouter();
+
+   if (user?.role !== "Admin") {
+     router.push("/dashboard");
+   }
   const [teachers, setTeachers] = useState([]);
   const [students, setStudents] = useState([]);
   const [subjects, setSubjects] = useState([]);

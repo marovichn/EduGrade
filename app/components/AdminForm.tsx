@@ -17,12 +17,16 @@ import PageWrapper from "./PageWrapper";
 
 interface AuthFormProps {
   variant: Variant;
+  userRole: string | null | undefined;
 }
 
-const AuthForm: FC<AuthFormProps> = ({ variant }) => {
+const AuthForm: FC<AuthFormProps> = ({ variant, userRole}) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
+    if (!userRole || userRole !== "Admin") {
+      router.push("/dashboard");
+    }
   const {
     register,
     handleSubmit,

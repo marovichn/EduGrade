@@ -7,10 +7,18 @@ import axios from "axios";
 import PageWrapper from "@/app/components/PageWrapper";
 import Link from "next/link";
 import { Group, Plus } from "lucide-react";
+import getCurrentUser from "@/app/actions/getCurrentUser";
+import { useRouter } from "next/navigation";
 
 interface pageProps {}
 
-const page: FC<pageProps> = ({}) => {
+const page: FC<pageProps> =async ({}) => {
+   const user = await getCurrentUser();
+   const router = useRouter();
+
+   if (user?.role !== "Admin") {
+     router.push("/dashboard");
+   }
   const [groups, setGroups] = useState([]);
   useEffect(() => {
     const getGroups = async () => {

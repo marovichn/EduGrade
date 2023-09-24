@@ -84,7 +84,7 @@ const UsersList: FC<UsersListProps> = ({ users, roleUrl }) => {
             <div className='bg-gray-500 w-8 h-full rounded-lg mr-3 flex items-center justify-center'>
               <h1 className='text-white font-extrabold'>{index + 1}.</h1>
             </div>
-            <div className='flex items-center justify-between border-2 border-gray-400 w-full h-full rounded-lg px-4 hover:bg-gray-400 group'>
+            <div className='flex items-center justify-between border-2 border-gray-400 w-full h-full rounded-lg px-4 hover:bg-gray-200 group'>
               <div className='flex items-center justify-around gap-x-3'>
                 <div className='flex justify-center items-center w-10 h-10 bg-black/60 rounded-lg'>
                   {Icon}

@@ -1,5 +1,6 @@
 "use client";
 
+import UsersList from "@/app/components/UsersList";
 import axios from "axios";
 import { FC, useEffect, useState } from "react";
 
@@ -17,9 +18,12 @@ const page: FC<pageProps> = ({}) => {
     };
     getStudents();
   }, []);
-  console.log(students)
 
-  return <div></div>;
+  return (
+    <div>
+      <UsersList users={students}></UsersList>
+    </div>
+  );
 };
 
 export default page;

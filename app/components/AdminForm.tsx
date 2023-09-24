@@ -30,6 +30,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
   } = useForm<FieldValues>({
     defaultValues: {
       name: "",
+      lastname:"",
       role: "",
       email: "",
       password: "",
@@ -116,6 +117,14 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
                   required
                   id='name'
                   label='Name'
+                />
+                <Input
+                  disabled={isLoading}
+                  register={register}
+                  errors={errors}
+                  required
+                  id='lastname'
+                  label='Last Name'
                 />
                 <Select
                   name='role'

@@ -45,7 +45,7 @@ const UsersList: FC<UsersListProps> = ({ users }) => {
                 {Icon}
               </div>
               <h1 className='text-xl font-bold text-white'>
-                {user.name}
+                {user.name} {}
               </h1>
             </div>
             <div>

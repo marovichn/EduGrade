@@ -15,6 +15,7 @@ datasource db {
 model Admin {
   id              String @id @default(auto()) @map("_id") @db.ObjectId
   name            String?
+  lastname        String?
   email           String?   @unique
   emailVerified   DateTime?
   image           String?

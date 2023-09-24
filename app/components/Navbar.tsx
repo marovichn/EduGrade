@@ -19,7 +19,6 @@ const Navbar: FC<NavbarProps> = ({user}) => {
   const adminRoutes = navRoutes.filter((r) => r.role === "Admin");
   const teacherRoutes = navRoutes.filter((r) => r.role === "Teacher");
   const session = useSession();
-  console.log(user);
   return (
     <>
       <nav className='bg-gray-700 fixed w-full z-20 top-0 left-0 border-0 rounded-b-xl'>

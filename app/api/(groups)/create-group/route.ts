@@ -6,23 +6,24 @@ export async function POST(request: Request) {
     const {
       name,
       description,
-      ends,
+      time,
+      date,
       teacher: teacherId,
       student: studentId,
       subject: subjectId,
     } = await request.json();
 
     const data = {
-        name,
-        description,
-        ends: new Date(ends),
-        teacherId,
-        studentId,
-        subjectId,
-    }
+      name,
+      description,
+      ends: new Date(date + " " + time),
+      teacherId,
+      studentId,
+      subjectId,
+    };
 
     const group = await prisma.group.create({
-      data
+      data,
     });
 
     return NextResponse.json(group);

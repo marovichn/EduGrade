@@ -37,7 +37,8 @@ const GroupForm: FC<GroupFormProps> = ({ variant, teachers, students, subjects }
     defaultValues: {
       name: "",
       description: "",
-      ends: "",
+      date: "",
+      time:"",
       teacher:"",
       subject:"",
       student:"",
@@ -138,9 +139,18 @@ const GroupForm: FC<GroupFormProps> = ({ variant, teachers, students, subjects }
                   register={register}
                   errors={errors}
                   required
-                  id='ends'
-                  label='When due?'
+                  id='date'
+                  label='When due (date)?'
                   type="date"
+                />
+                <Input
+                  disabled={isLoading}
+                  register={register}
+                  errors={errors}
+                  required
+                  id='time'
+                  label='When due (time)?'
+                  type="time"
                 />
                 <SelectSpecific
                   name='teacher'

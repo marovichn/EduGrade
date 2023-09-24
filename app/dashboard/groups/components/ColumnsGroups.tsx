@@ -87,6 +87,11 @@ export const columns: ColumnDef<GroupColumn>[] = [
   {
     accessorKey: "createdAt",
     header: "Date",
+    cell: ({ row }) => (
+      <div className='flex items-center gap-x-2'>
+        {new Date(row.original.createdAt).toDateString()}
+      </div>
+    ),
   },
   {
     id: "actions",

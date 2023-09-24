@@ -22,7 +22,6 @@ const page: FC<pageProps> = ({}) => {
     };
     getGroups();
   }, []);
-  console.log(groups)
 
   return (
     <PageWrapper>

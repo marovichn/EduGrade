@@ -64,7 +64,7 @@ const UsersList: FC<UsersListProps> = ({ users, roleUrl }) => {
     <PageWrapper>
       <div className=''>
         <div className='mb-16 text-4xl font-bold flex items-center justify-between'>
-          <h1>All Students on EduGrade:</h1>
+          <h1>All {roleUrl?.charAt(0).toUpperCase() + roleUrl?.slice(1)!} on EduGrade:</h1>
           <Link href={`${roleUrl}/create`} className="w-12 h-12 bg-yellow-300 flex items-center justify-center rounded-lg hover:bg-yellow-200 pl-1"><UserPlus/></Link>
           
         </div>

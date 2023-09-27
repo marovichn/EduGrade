@@ -48,7 +48,7 @@ export const navRoutes = [
     icon: ListTodo,
   },
 
-  { href: "/dashboard/groups", role: "Teacher", name: "All Groups", icon: User2 },
+  { href: "/dashboard/my-groups", role: "Teacher", name: "My Groups", icon: User2 },
   {
     href: "/dashboard/results",
     role: "Teacher",

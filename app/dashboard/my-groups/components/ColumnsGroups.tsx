@@ -62,7 +62,7 @@ export const columns: ColumnDef<GroupColumn>[] = [
     header: "Number of Results",
     cell: ({ row }) => (
       <div className='flex items-center gap-x-2'>
-        {row.original.results?.length}
+        {row.original.results?.length ? row.original.results?.length : "0"}
       </div>
     ),
   },
@@ -71,7 +71,9 @@ export const columns: ColumnDef<GroupColumn>[] = [
     header: "All Attendances Number",
     cell: ({ row }) => (
       <div className='flex items-center gap-x-2'>
-        {row.original.attendances?.length}
+        {row.original.attendances?.length
+          ? row.original.attendances?.length
+          : "0"}
       </div>
     ),
   },
@@ -80,7 +82,9 @@ export const columns: ColumnDef<GroupColumn>[] = [
     header: "Assignments Number",
     cell: ({ row }) => (
       <div className='flex items-center gap-x-2'>
-        {row.original.assignments?.length}
+        {row.original.assignments?.length
+          ? row.original.assignments?.length
+          : "0"}
       </div>
     ),
   },

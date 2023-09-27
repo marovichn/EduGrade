@@ -33,9 +33,7 @@ const CellAction: FC<CellActionProps> = ({ data }) => {
         <DropdownMenuContent className='bg-white'>
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuItem
-            onClick={() =>
-              router.push(`/dashboaard/my-groups/${data.id}`)
-            }
+            onClick={() => router.push(`/dashboaard/my-groups/${data.id}`)}
           >
             <CheckCheck className='mr-2 h-4 w-4' />
             Add Grade

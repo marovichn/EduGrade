@@ -24,6 +24,7 @@ interface CreateResultDisplayProps {
 const CreateResultDisplay: FC<CreateResultDisplayProps> = ({ user }) => {
   const [groups, setGroups] = useState([]);
   const [students, setStudents] = useState<any[]>([]);
+  const [subjects, setSubjects] = useState<any[]>([]);
   useEffect(() => {
     const getGroups = async () => {
       const res = await axios.post("/api/my-groups", { user });
@@ -32,6 +33,7 @@ const CreateResultDisplay: FC<CreateResultDisplayProps> = ({ user }) => {
       }
       setGroups(res.data);
       const studentIds = res.data.map((group: Group) => group.studentId);
+      const subjectIds = res.data.map((group: Group) => group.subjectId);
 
       studentIds.forEach((studentId: string) => {
         const getStudent = async () => {
@@ -39,6 +41,13 @@ const CreateResultDisplay: FC<CreateResultDisplayProps> = ({ user }) => {
           setStudents((p) => [...p, student.data[0]]);
         };
         getStudent();
+      });
+      subjectIds.forEach((subjectId: string) => {
+        const getSubject = async () => {
+          const subject = await axios.post("/api/my-subjects", { subjectId });
+          setSubjects((p) => [...p, subject.data[0]]);
+        };
+        getSubject();
       });
 
       if (res.status !== 200) {
@@ -51,7 +60,12 @@ const CreateResultDisplay: FC<CreateResultDisplayProps> = ({ user }) => {
 
   return (
     <>
-      <ResultsForm students={students} groups={groups} userRole={user?.role} />
+      <ResultsForm
+        subjects={subjects}
+        students={students}
+        groups={groups}
+        userRole={user?.role}
+      />
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { Group, Student } from "@prisma/client";
+import { Group, Student, Subject } from "@prisma/client";
 import { FC } from "react";
 import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 
@@ -10,7 +10,7 @@ interface SelectGroupProps {
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
   disabled?: boolean;
-  options: Student[];
+  options: Student[] | Subject[];
   name: string;
 }
 

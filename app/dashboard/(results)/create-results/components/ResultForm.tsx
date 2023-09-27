@@ -1,25 +1,26 @@
 "use client";
 
-import { FC } from "react";
+import { FC, useRef } from "react";
 import axios from "axios";
-import {  useState } from "react";
+import { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 
 import { toast } from "react-hot-toast";
 
 import PageWrapper from "@/app/components/PageWrapper";
-import { Group } from "@prisma/client";
+import { Group, Student } from "@prisma/client";
 import SelectGroup from "./SelectGroup";
 import Select from "@/app/components/inputs/Select";
 import { grades } from "@/app/helpers/Grades";
 
 interface ResultsFormProps {
   userRole: string | null | undefined;
-  groups: Group[]
+  groups: Group[];
+  students: Student[];
 }
 
-const ResultsForm: FC<ResultsFormProps> = ({ userRole, groups }) => {
+const ResultsForm: FC<ResultsFormProps> = ({ userRole, students }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -66,22 +67,37 @@ const ResultsForm: FC<ResultsFormProps> = ({ userRole, groups }) => {
           <form className='space-y-6 w-full' onSubmit={handleSubmit(onSubmit)}>
             <SelectGroup
               name='group'
-              options={groups}
+              options={students}
               disabled={isLoading}
               register={register}
               errors={errors}
               required
               id='role'
-              label='Select Group (Student)'
+              label='Select Student'
             />
             <div>
-                <h1 className="mb-5">Select Grade:</h1>
-                <div className="w-full bg-gray-100 h-[104px] rounded-lg flex justify-around items-center gap-x-4">{grades.map((grade)=>(<div key={grade.key}  className="w-20 h-20 flex items-center justify-center rounded-md bg-white text-2xl
-                border-2 border-transparent hover:border-2 hover:border-yellow-300">{grade.value}</div>))}</div>
+              <h1 className='mb-5'>Select Grade:</h1>
+              <div className='w-full bg-gray-100 h-[104px] rounded-lg flex justify-around items-center gap-x-4'>
+                {grades.map((grade) => (
+                  <div
+                    key={grade.key}
+                    className='w-20 h-20 flex items-center justify-center rounded-md bg-white text-2xl
+                border-2 border-transparent hover:border-2 hover:border-yellow-300'
+                  >
+                    {grade.value}
+                  </div>
+                ))}
+              </div>
             </div>
             <Select
               name='type'
-              options={["Exam", "Class Activity", "Group Project", "individual Project", "Other"]}
+              options={[
+                "Exam",
+                "Class Activity",
+                "Group Project",
+                "individual Project",
+                "Other",
+              ]}
               disabled={isLoading}
               register={register}
               errors={errors}

@@ -11,7 +11,7 @@ export async function POST(request: Request) {
   }
 
   const groups = await prisma.group.findMany({
-    where: { id: user?.id },
+    where: { teacherId: user?.id },
     include: {
       student: true,
       subject: true,

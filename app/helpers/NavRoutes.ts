@@ -50,7 +50,7 @@ export const navRoutes = [
 
   { href: "/dashboard/my-groups", role: "Teacher", name: "My Groups", icon: User2 },
   {
-    href: "/dashboard/results",
+    href: "/dashboard/create-results",
     role: "Teacher",
     name: "Subjects Grades",
     icon: ListChecks,

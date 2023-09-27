@@ -99,7 +99,7 @@ id              String @id @default(auto()) @map("_id") @db.ObjectId
 type            String
 value           String
 description     String?
-date            DateTime?
+date            DateTime? @default(now())
 
 group           Group  @relation(fields: [groupId], references: [id])
 groupId         String @db.ObjectId

@@ -77,7 +77,7 @@ const ResultsForm: FC<ResultsFormProps> = ({
     setIsLoading(true);
     const data = { ...dataForm, value: selectedActivity.value };
     axios
-      .post("/api/create-result", data)
+      .post("/api/create-activity", data)
       .then(() => {
         toast.success("Activity Added");
         router.push("/dashboard/students");

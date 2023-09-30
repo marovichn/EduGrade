@@ -56,13 +56,13 @@ export const navRoutes = [
     icon: ListChecks,
   },
   {
-    href: "/dashboard/activity",
+    href: "/dashboard/create-activity",
     role: "Teacher",
     name: "Subjects Activities",
     icon: Sticker,
   },
   {
-    href: "/dashboard/attendance",
+    href: "/dashboard/add-attendance",
     role: "Teacher",
     name: "Attendance",
     icon: CalendarCheck,
@@ -74,7 +74,7 @@ export const navRoutes = [
     icon: GraduationCap,
   },
   {
-    href: "/dashboard/assignments",
+    href: "/dashboard/create-assignments",
     role: "Teacher",
     name: "Assignments",
     icon: ListTodo,

@@ -31,6 +31,15 @@ const ResultsForm: FC<ResultsFormProps> = ({
 }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedGrade, setSelectedGrade] = useState({ key: "A", value: "A" });
+
+  const handleSelect = ({ key, value }: { key: string; value: string }) => {
+    if (selectedGrade.key === key) {
+      return;
+    } else {
+      setSelectedGrade({ key, value });
+    }
+  };
 
   if (!userRole || userRole !== "Teacher") {
     router.push("/dashboard");
@@ -49,15 +58,14 @@ const ResultsForm: FC<ResultsFormProps> = ({
     },
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = (dataForm) => {
     setIsLoading(true);
-    ///Submiting selected div
-    const value = "";
+    const data = { ...dataForm, value: selectedGrade.value };
     axios
-      .post("/api/register", { data, value })
+      .post("/api/create-result", data)
       .then(() => {
-        toast.success("Admin Created");
-        router.push("/dashboard/admins");
+        toast.success("Grade Added");
+        router.push("/dashboard/students");
       })
       .catch(() => toast.error("Something went wrong!"))
       .finally(() => setIsLoading(false));
@@ -79,8 +87,8 @@ const ResultsForm: FC<ResultsFormProps> = ({
         <h1 className='text-4xl font-bold mb-10'>Add Grade:</h1>
         <form className='space-y-6 w-full' onSubmit={handleSubmit(onSubmit)}>
           <SelectGroup
-            name='group'
-            options={students}
+            name='groupId'
+            options={groups}
             disabled={isLoading}
             register={register}
             errors={errors}
@@ -89,7 +97,7 @@ const ResultsForm: FC<ResultsFormProps> = ({
             label='Select Group'
           />
           <SelectGroup
-            name='student'
+            name='studentId'
             options={students}
             disabled={isLoading}
             register={register}
@@ -99,7 +107,7 @@ const ResultsForm: FC<ResultsFormProps> = ({
             label='Select Student'
           />
           <SelectGroup
-            name='subject'
+            name='subjectId'
             options={subjects}
             disabled={isLoading}
             register={register}
@@ -113,9 +121,15 @@ const ResultsForm: FC<ResultsFormProps> = ({
             <div className='w-full bg-gray-100 h-[104px] rounded-lg flex  lg:justify-around justify-center items-center gap-x-6 lg:gap-x-4'>
               {grades.map((grade) => (
                 <div
+                  onClick={() =>
+                    handleSelect({ key: grade.key, value: grade.value })
+                  }
                   key={grade.key}
-                  className='w-20 h-20 flex items-center justify-center rounded-md bg-white text-2xl
-                border-2 border-transparent hover:border-2 hover:border-yellow-300'
+                  className={
+                    selectedGrade.key === grade.key
+                      ? "w-20 h-20 flex items-center justify-center rounded-md  text-2xl bg-yellow-100 border-2 border-yellow-300 cursor-pointer"
+                      : "w-20 h-20 flex items-center justify-center rounded-md bg-white text-2xl border-2 border-transparent hover:border-2 hover:border-yellow-300  cursor-pointer"
+                  }
                 >
                   {grade.value}
                 </div>

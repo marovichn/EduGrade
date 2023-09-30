@@ -32,16 +32,26 @@ const CreateResultDisplay: FC<CreateResultDisplayProps> = ({ user }) => {
         return;
       }
       setGroups(res.data);
-      const studentIds = res.data.map((group: Group) => group.studentId);
-      const subjectIds = res.data.map((group: Group) => group.subjectId);
 
-      studentIds.forEach((studentId: string) => {
+      const studentIdsSet = new Set<string[]>(
+        res.data.map((group: Group) => group.studentId)
+      );
+      //@ts-ignore
+      const studentIds = [...studentIdsSet];
+      const subjectIdsSet = new Set<string>(
+        res.data.map((group: Group) => group.subjectId)
+      );
+      //@ts-ignore
+      const subjectIds = [...subjectIdsSet];
+
+      studentIds.forEach((studentId) => {
         const getStudent = async () => {
           const student = await axios.post("/api/my-students", { studentId });
           setStudents((p) => [...p, student.data[0]]);
         };
         getStudent();
       });
+
       subjectIds.forEach((subjectId: string) => {
         const getSubject = async () => {
           const subject = await axios.post("/api/my-subjects", { subjectId });
@@ -56,7 +66,6 @@ const CreateResultDisplay: FC<CreateResultDisplayProps> = ({ user }) => {
     };
     getGroups();
   }, []);
-  console.log(students);
 
   return (
     <>

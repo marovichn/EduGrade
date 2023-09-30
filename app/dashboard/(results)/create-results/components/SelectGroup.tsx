@@ -10,7 +10,7 @@ interface SelectGroupProps {
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
   disabled?: boolean;
-  options: Student[] | Subject[];
+  options: Student[] | Subject[] | Group[];
   name: string;
 }
 

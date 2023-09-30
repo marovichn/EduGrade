@@ -72,20 +72,18 @@ const AddAttendanceDisplay: FC<AddAttendanceDisplayProps> = ({ user }) => {
 
   return (
     <PageWrapper>
-      <div className='flex items-center justify-around gap-x-5'>
-        <div className='flex flex-col items-start justify-center'>
-          <h1 className='text-3xl font-bold'>Add Attendance: </h1>
-          <div className='flex flex-col items-start justify-center pt-10 w-full gap-y-6'>
-            <h1>Choose Date:</h1>
+      <div className='flex items-start justify-around gap-x-5'>
+        <div className='flex flex-col items-start'>
+          <h1 className='text-4xl font-bold mb-10 mt-6 '>Add Attendance: </h1>
+            <h1 className="mb-3">Choose Date:</h1>
             <Calendar
               mode='single'
               selected={date}
               onSelect={setDate}
               className='rounded-md border'
             />
-          </div>
         </div>
-        <div>
+        <div className="w-full">
           <AttendanceForm
             userRole={user?.role}
             groups={groups}

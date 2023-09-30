@@ -162,18 +162,17 @@ const ResultsForm: FC<ResultsFormProps> = ({
           <Select
             name='type'
             options={[
-              "Exam",
               "Class Activity",
-              "Group Project",
-              "individual Project",
-              "Other",
+              "Group Project Activity",
+              "individual Project Activity",
+              "Other Activity",
             ]}
             disabled={isLoading}
             register={register}
             errors={errors}
             required
             id='type'
-            label='Select Type of Grade'
+            label='Select Type of Activity'
           />
           <Input
             disabled={isLoading}

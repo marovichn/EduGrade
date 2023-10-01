@@ -8,7 +8,29 @@ export async function GET() {
     throw new NextResponse("Unauthorized", { status: 401 });
   }
 
-  const assignments = await prisma.assignment.findMany({});
+  const allMyGroups = await prisma.group.findMany({
+    where: {
+      teacherId: currentUser.id,
+    },
+    include: { assignments: true },
+  });
+  if (allMyGroups.length === 0 || !allMyGroups) {
+    const allMyGroupsStudent = await prisma.group.findMany({
+      where: {
+        studentId: currentUser.id,
+      },
+      include: {
+        assignments: true,
+      },
+    });
 
-  return NextResponse.json(assignments);
+    return NextResponse.json(
+      allMyGroupsStudent.map((group) =>
+        group.assignments.map((assignment) => assignment)
+      )
+    );
+  }
+  return NextResponse.json( allMyGroups.map((group) =>
+      group.assignments.map((assignment) => assignment)
+    ));
 }

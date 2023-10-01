@@ -18,7 +18,7 @@ import { BadgeCheck, BadgeX } from "lucide-react";
 export type AssignmentsColumn = {
   id: string;
   type: string;
-  createdAt: string;
+  dateStart: string;
   dateDue: string;
   points: string;
   done: boolean;
@@ -34,17 +34,17 @@ export const columns: ColumnDef<AssignmentsColumn>[] = [
     header: "Number of Points",
   },
   {
-    accessorKey: "createdAt",
-    header: "Date Enrolled",
+    accessorKey: "dateStart",
+    header: "Date Assigned",
     cell: ({ row }) => (
       <div className='flex items-center gap-x-2'>
-        {new Date(row.original.createdAt).toDateString()}
+        {new Date(row.original.dateStart).toDateString()}
       </div>
     ),
   },
   {
     accessorKey: "dateDue",
-    header: "Date Enrolled",
+    header: "Date Due",
     cell: ({ row }) => (
       <div className='flex items-center gap-x-2'>
         {new Date(row.original.dateDue).toDateString()}
@@ -55,8 +55,18 @@ export const columns: ColumnDef<AssignmentsColumn>[] = [
     accessorKey: "done",
     header: "Finished",
     cell: ({ row }) => (
-      <div className='flex items-center gap-x-2'>
-        {row.original.done ? <BadgeCheck /> : <BadgeX />}
+      <div
+        className={
+          row.original.done
+            ? "flex items-center gap-x-2 justify-center p-4 bg-green-200 rounded-full h-full w-full py-4 border-[1px] border-green-500"
+            : "flex items-center gap-x-2 justify-center p-4 bg-red-200 rounded-full h-full w-full py-4 border-[1px] border-red-500"
+        }
+      >
+        {row.original.done ? (
+          <BadgeCheck className='text-green-500' size={25}/>
+        ) : (
+          <BadgeX className='text-red-500' size={25}/>
+        )}
       </div>
     ),
   },

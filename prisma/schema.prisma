@@ -65,6 +65,7 @@ model Student {
   role            String?
   biography       String?
   code            String?
+  points          String?
 
   groups Group[]
 }
@@ -134,9 +135,9 @@ groupId         String @db.ObjectId
 model Assignment{
 id              String @id @default(auto()) @map("_id") @db.ObjectId
 type            String
-value           String
+points          String
 description     String?
-dateStart       DateTime?
+dateStart       DateTime? @default(now())
 dateDue         DateTime?
 done            Boolean?
 

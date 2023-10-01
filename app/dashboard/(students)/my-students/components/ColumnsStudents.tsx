@@ -6,6 +6,7 @@ import {
   Activity,
   Assignment,
   Attendance,
+  Group,
   Result,
   Student,
   Subject,
@@ -22,12 +23,19 @@ export type StudentColumn = {
   assignments: Assignment[];
   activityGrades: Activity[];
   subject: Subject;
+  studentId: string;
+  student: Student;
 };
 
 export const columns: ColumnDef<StudentColumn>[] = [
   {
     accessorKey: "name",
     header: "Name",
+    cell: ({ row }) => (
+      <div className='flex items-center gap-x-2'>
+        {row.original.student?.name ? row.original.student?.name : "0"}
+      </div>
+    ),
   },
   {
     accessorKey: "results",

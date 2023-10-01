@@ -1,17 +1,6 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import CellActionGroup from "./CellActionAssignments";
-import {
-  Activity,
-  Assignment,
-  Attendance,
-  Group,
-  Result,
-  Student,
-  Subject,
-  Teacher,
-} from "@prisma/client";
 import CellActionStudent from "./CellActionAssignments";
 import { BadgeCheck, BadgeX } from "lucide-react";
 
@@ -22,6 +11,7 @@ export type AssignmentsColumn = {
   dateDue: string;
   points: string;
   done: boolean;
+  role: string;
 };
 
 export const columns: ColumnDef<AssignmentsColumn>[] = [
@@ -72,6 +62,6 @@ export const columns: ColumnDef<AssignmentsColumn>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => <CellActionStudent data={row.original} />,
+    cell: ({ row }) => {row.original.role === "Teacher" ? <CellActionStudent data={row.original} /> : null},
   },
 ];

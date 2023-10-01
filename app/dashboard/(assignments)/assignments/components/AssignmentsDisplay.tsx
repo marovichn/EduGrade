@@ -7,11 +7,24 @@ import { columns } from "./ColumnsAssignments";
 import axios from "axios";
 import { ListTodo, Plus } from "lucide-react";
 import Link from "next/link";
-import { Assignment } from "@prisma/client";
 
-interface AssignmentsDisplayProps {}
+interface AssignmentsDisplayProps {
+  user: {
+    id: string;
+    name: string | null;
+    lastname: string | null;
+    email: string | null;
+    emailVerified: Date | null;
+    image: string | null;
+    hashedPassword: string | null;
+    createdAt: Date;
+    updatedAt: Date;
+    role: string | null;
+    code: string | null;
+  } | null;
+}
 
-const AssignmentsDisplay: FC<AssignmentsDisplayProps> = ({}) => {
+const AssignmentsDisplay: FC<AssignmentsDisplayProps> = ({ user }) => {
   const [assignments, setAssignments] = useState([]);
   useEffect(() => {
     const getAssignments = async () => {
@@ -29,15 +42,17 @@ const AssignmentsDisplay: FC<AssignmentsDisplayProps> = ({}) => {
       <PageWrapper>
         <div className='w-full flex items-center justify-between mb-10'>
           <h1 className='text-4xl font-bold'>All My Assignments:</h1>
-          <Link
-            href='/dashboard/create-assignments'
-            className='w-12 h-12 p-2 pl-3 bg-yellow-300 flex items-center justify-center rounded-md cursor-pointer'
-          >
-            <div className='flex'>
-              <ListTodo />
-              <Plus size={10} />
-            </div>
-          </Link>
+          {user?.role === "Teacher" ? (
+            <Link
+              href='/dashboard/create-assignments'
+              className='w-12 h-12 p-2 pl-3 bg-yellow-300 flex items-center justify-center rounded-md cursor-pointer'
+            >
+              <div className='flex'>
+                <ListTodo />
+                <Plus size={10} />
+              </div>
+            </Link>
+          ) : null}
         </div>
 
         <GroupDataTable

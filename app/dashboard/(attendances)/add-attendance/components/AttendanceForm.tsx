@@ -110,7 +110,7 @@ const AttendanceForm: FC<AttendanceFormProps> = ({
             register={register}
             errors={errors}
             required
-            type="number"
+            type='number'
             id='numberOfClasses'
             label='Number of Classes'
           />

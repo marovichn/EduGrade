@@ -34,25 +34,25 @@ const CellActionStudent: FC<CellActionStudentProps> = ({ data }) => {
         <DropdownMenuContent className="bg-white">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuItem
-            onClick={() => router.push(`/dashboard/create-results/${data.id}`)}
+            onClick={() => router.push(`/dashboard/create-results`)}
           >
             <CheckCheck className='mr-2 h-4 w-4' />
             Add Grade
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() => router.push(`/dashboard/create-results/${data.id}`)}
+            onClick={() => router.push(`/dashboard/create-activity`)}
           >
             <Sticker className='mr-2 h-4 w-4' />
             Add Activity
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() => router.push(`/dashboard/create-results/${data.id}`)}
+            onClick={() => router.push(`/dashboard/add-attendance`)}
           >
             <CalendarCheck className='mr-2 h-4 w-4' />
             Add Attendance
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() => router.push(`/dashboard/create-results/${data.id}`)}
+            onClick={() => router.push(`/dashboard/create-assignment`)}
           >
             <ListTodo className='mr-2 h-4 w-4' />
             Add Assignment

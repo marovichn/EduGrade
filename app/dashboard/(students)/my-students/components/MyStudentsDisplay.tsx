@@ -40,6 +40,7 @@ const MyStudentsDisplay: FC<MyStudentsDisplayProps> = ({ user }) => {
       });
       setGroups(Object.values(groupedByStudentId));
     };
+
     getGroups();
   }, []);
 

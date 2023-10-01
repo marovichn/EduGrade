@@ -16,6 +16,10 @@ export async function POST(request: Request) {
       student: true,
       subject: true,
       teacher: true,
+      assignments: true,
+      activityGrades: true,
+      attendances: true,
+      results: true,
     },
   });
 

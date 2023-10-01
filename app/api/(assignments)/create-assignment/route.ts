@@ -7,31 +7,39 @@ export async function POST(request: Request) {
     type,
     description,
     groupId,
-    date,
-    numberOfClasses: numberOfClassesString,
-    subjectId,
+    date: dateDue,
+    points,
+    done: doneJSON,
   } = await request.json();
-
-  const numberOfClasses = Number(numberOfClassesString);
-
-  const createClasses = () => {
-    let classes: string[] = Array(numberOfClasses).fill(subjectId);
-    return classes;
-  };
 
   const currentUser = await getCurrentUser();
   if (currentUser?.role !== "Teacher") {
     return new NextResponse("Anauthorized", { status: 401 });
   }
+  let done;
 
-  const user = await prisma.attendance.create({
+  if (doneJSON === "true") {
+    done = true;
+  } else if (doneJSON === "false") {
+    done = false;
+  } else {
+    return new NextResponse("Invalid Input", { status: 400 });
+  }
+  console.log({
+    type,
+    description,
+    groupId,
+    dateDue,
+  });
+
+  const user = await prisma.assignment.create({
     data: {
-      classes: createClasses(),
       type,
       description,
       groupId,
-      date,
-      numberOfClasses,
+      dateDue,
+      points,
+      done,
     },
   });
 

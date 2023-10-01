@@ -68,7 +68,7 @@ export const navRoutes = [
     icon: CalendarCheck,
   },
   {
-    href: "/dashboard/students",
+    href: "/dashboard/my-students",
     role: "Teacher",
     name: "My Students",
     icon: GraduationCap,

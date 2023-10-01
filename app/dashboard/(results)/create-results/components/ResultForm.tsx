@@ -65,7 +65,7 @@ const ResultsForm: FC<ResultsFormProps> = ({
       .post("/api/create-result", data)
       .then(() => {
         toast.success("Grade Added");
-        router.push("/dashboard/students");
+        router.push("/dashboard/my-students");
       })
       .catch(() => toast.error("Something went wrong!"))
       .finally(() => setIsLoading(false));

@@ -56,7 +56,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant, userRole }) => {
         .post("/api/register", data)
         .then(() => {
           toast.success("Student Profile created.");
-          router.push("/dashboard/students");
+          router.push("/dashboard/my-students");
         })
         .catch(() => toast.error("Something went wrong!"))
         .finally(() => setIsLoading(false));

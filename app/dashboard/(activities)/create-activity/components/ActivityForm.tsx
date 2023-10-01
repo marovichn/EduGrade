@@ -80,7 +80,7 @@ const ResultsForm: FC<ResultsFormProps> = ({
       .post("/api/create-activity", data)
       .then(() => {
         toast.success("Activity Added");
-        router.push("/dashboard/students");
+        router.push("/dashboard/my-students");
       })
       .catch(() => toast.error("Something went wrong!"))
       .finally(() => setIsLoading(false));

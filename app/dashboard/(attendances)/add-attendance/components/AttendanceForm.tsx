@@ -57,7 +57,7 @@ const AttendanceForm: FC<AttendanceFormProps> = ({
       .post("/api/add-attendance", data)
       .then(() => {
         toast.success("Attendance Added");
-        router.push("/dashboard/students");
+        router.push("/dashboard/my-students");
       })
       .catch(() => toast.error("Something went wrong!"))
       .finally(() => setIsLoading(false));

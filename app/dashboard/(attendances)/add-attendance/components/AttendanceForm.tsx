@@ -19,9 +19,11 @@ interface AttendanceFormProps {
   groups: Group[];
   students: Student[];
   subjects: Subject[];
+  date: Date | undefined;
 }
 
 const AttendanceForm: FC<AttendanceFormProps> = ({
+  date,
   userRole,
   students,
   groups,
@@ -50,11 +52,11 @@ const AttendanceForm: FC<AttendanceFormProps> = ({
 
   const onSubmit: SubmitHandler<FieldValues> = (dataForm) => {
     setIsLoading(true);
-    const data = { ...dataForm };
+    const data = { ...dataForm, date };
     axios
-      .post("/api/create-activity", data)
+      .post("/api/add-attendance", data)
       .then(() => {
-        toast.success("Activity Added");
+        toast.success("Attendance Added");
         router.push("/dashboard/students");
       })
       .catch(() => toast.error("Something went wrong!"))

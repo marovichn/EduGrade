@@ -85,6 +85,7 @@ const AddAttendanceDisplay: FC<AddAttendanceDisplayProps> = ({ user }) => {
         </div>
         <div className='w-full max-md:mt-20'>
           <AttendanceForm
+            date={date}
             userRole={user?.role}
             groups={groups}
             students={students}

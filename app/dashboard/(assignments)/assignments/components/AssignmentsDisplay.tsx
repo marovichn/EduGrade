@@ -3,7 +3,7 @@
 import { GroupDataTable } from "@/app/components/GroupDataTable";
 import PageWrapper from "@/app/components/PageWrapper";
 import { FC, useEffect, useState } from "react";
-import { columns } from "./ColumnsAssignments";
+import { columns, columnsStudent } from "./ColumnsAssignments";
 import axios from "axios";
 import { ListTodo, Plus } from "lucide-react";
 import Link from "next/link";
@@ -56,7 +56,7 @@ const AssignmentsDisplay: FC<AssignmentsDisplayProps> = ({ user }) => {
         </div>
 
         <GroupDataTable
-          columns={columns}
+          columns={user?.role === "Teacher" ? columns : columnsStudent}
           data={assignments}
           searchKey='type'
         ></GroupDataTable>

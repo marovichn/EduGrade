@@ -74,7 +74,7 @@ export const navRoutes = [
     icon: GraduationCap,
   },
   {
-    href: "/dashboard/create-assignments",
+    href: "/dashboard/assignments",
     role: "Teacher",
     name: "Assignments",
     icon: ListTodo,

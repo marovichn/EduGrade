@@ -82,7 +82,11 @@ const ResultsForm: FC<ResultsFormProps> = ({
         toast.success("Activity Added");
         router.push("/dashboard/my-students");
       })
-      .catch(() => toast.error("Something went wrong!"))
+      .catch(() =>
+        toast.error(
+          "Something went wrong! Make sure you selected all the necessary fields."
+        )
+      )
       .finally(() => setIsLoading(false));
   };
 

@@ -63,7 +63,11 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
               router.push("/dashboard");
             }
           })
-          .catch(() => toast.error("Something went wrong!"))
+          .catch(() =>
+            toast.error(
+              "Something went wrong! Make sure you selected all the necessary fields."
+            )
+          )
           .finally(() => setIsLoading(false));
       }
 

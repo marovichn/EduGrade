@@ -25,12 +25,6 @@ export async function POST(request: Request) {
   } else {
     return new NextResponse("Invalid Input", { status: 400 });
   }
-  console.log({
-    type,
-    description,
-    groupId,
-    dateDue,
-  });
 
   const user = await prisma.assignment.create({
     data: {

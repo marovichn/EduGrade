@@ -49,7 +49,11 @@ const SubjectForm: FC<SubjectFormProps> = ({ variant, userRole }) => {
           toast.success("Subject created.");
           router.push("/dashboard/subjects");
         })
-        .catch(() => toast.error("Something went wrong!"))
+        .catch(() =>
+          toast.error(
+            "Something went wrong! Make sure you selected all the necessary fields."
+          )
+        )
         .finally(() => setIsLoading(false));
     }
 

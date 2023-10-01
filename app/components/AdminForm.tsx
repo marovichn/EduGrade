@@ -53,7 +53,11 @@ const AuthForm: FC<AuthFormProps> = ({ variant, userRole}) => {
           toast.success("Admin Created");
           router.push("/dashboard/admins");
         })
-        .catch(() => toast.error("Something went wrong!"))
+        .catch(() =>
+          toast.error(
+            "Something went wrong! Make sure you selected all the necessary fields."
+          )
+        )
         .finally(() => setIsLoading(false));
     }
 

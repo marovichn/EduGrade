@@ -58,7 +58,11 @@ const AuthForm: FC<AuthFormProps> = ({ variant, userRole }) => {
           toast.success("Student Profile created.");
           router.push("/dashboard/my-students");
         })
-        .catch(() => toast.error("Something went wrong!"))
+        .catch(() =>
+          toast.error(
+            "Something went wrong! Make sure you selected all the necessary fields."
+          )
+        )
         .finally(() => setIsLoading(false));
     }
 

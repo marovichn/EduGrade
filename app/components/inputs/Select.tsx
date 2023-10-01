@@ -1,3 +1,4 @@
+import { ArrowDown } from "lucide-react";
 import { FC } from "react";
 import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 
@@ -25,9 +26,15 @@ const Select: FC<SelectProps> = ({ register, options, name,id,label, ...rest }) 
           leading-6 
           text-gray-900
         '
-      >{label}
+      >
+        {label}
       </label>
-      <select className="w-full p-2 border-2 rounded-md " {...register(name)} {...rest}>
+      <select
+        className='w-full p-2 border-2 rounded-md '
+        {...register(name)}
+        {...rest}
+      >
+        <option disabled>Select {"->"}</option>
         {options.map((value) => (
           <option key={value} value={value}>
             {value}

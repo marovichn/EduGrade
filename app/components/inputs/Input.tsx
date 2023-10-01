@@ -12,6 +12,7 @@ interface InputProps {
   errors: FieldErrors;
   disabled?: boolean;
   placeholder?:string;
+  min?: number
 }
 
 const Input: React.FC<InputProps> = ({
@@ -22,7 +23,8 @@ const Input: React.FC<InputProps> = ({
   errors,
   type = "text",
   disabled,
-  placeholder
+  placeholder,
+  min
 }) => {
   return (
     <div>
@@ -42,6 +44,7 @@ const Input: React.FC<InputProps> = ({
         <input
         placeholder={placeholder}
           id={id}
+          min={min}
           type={type}
           autoComplete={id}
           disabled={disabled}

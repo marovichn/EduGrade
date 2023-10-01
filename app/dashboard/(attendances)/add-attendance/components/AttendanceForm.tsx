@@ -114,6 +114,7 @@ const AttendanceForm: FC<AttendanceFormProps> = ({
             required
             type='number'
             id='numberOfClasses'
+            min={1}
             label='Number of Classes'
           />
           <Select

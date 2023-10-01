@@ -4,7 +4,6 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   const { value, type, description, groupId } = await request.json();
-  console.log({ value, type, description, groupId });
 
   const currentUser = await getCurrentUser();
   if (currentUser?.role !== "Teacher") {

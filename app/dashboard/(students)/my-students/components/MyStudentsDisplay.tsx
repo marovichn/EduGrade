@@ -38,6 +38,7 @@ const MyStudentsDisplay: FC<MyStudentsDisplayProps> = ({ user }) => {
       );
       //@ts-ignore
       const studentIds = [...studentIdsSet];
+        
       studentIds.forEach((studentId) => {
         const getStudent = async () => {
           const student = await axios.post("/api/my-students", { studentId });

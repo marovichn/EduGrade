@@ -11,8 +11,9 @@ import {
   Subject,
   Teacher,
 } from "@prisma/client";
+import CellActionStudent from "./CellActionStudents";
 
-export type GroupColumn = {
+export type StudentColumn = {
   id: string;
   name: string;
   createdAt: string;
@@ -20,46 +21,17 @@ export type GroupColumn = {
   attendances: Attendance[];
   assignments: Assignment[];
   activityGrades: Activity[];
-  teacher: Teacher;
-  student: Student;
   subject: Subject;
 };
 
-export const columns: ColumnDef<GroupColumn>[] = [
+export const columns: ColumnDef<StudentColumn>[] = [
   {
     accessorKey: "name",
     header: "Name",
   },
   {
-    accessorKey: "teacher",
-    header: "Group Teacher",
-    cell: ({ row }) => (
-      <div className='flex items-center gap-x-2'>
-        {row.original.teacher?.name}
-      </div>
-    ),
-  },
-  {
-    accessorKey: "student",
-    header: "Group Student",
-    cell: ({ row }) => (
-      <div className='flex items-center gap-x-2'>
-        {row.original.student?.name}
-      </div>
-    ),
-  },
-  {
-    accessorKey: "subject",
-    header: "Group Subject",
-    cell: ({ row }) => (
-      <div className='flex items-center gap-x-2'>
-        {row.original.subject?.name}
-      </div>
-    ),
-  },
-  {
     accessorKey: "results",
-    header: "Number of Results",
+    header: "Number of Grades",
     cell: ({ row }) => (
       <div className='flex items-center gap-x-2'>
         {row.original.results?.length ? row.original.results?.length : "0"}
@@ -89,8 +61,19 @@ export const columns: ColumnDef<GroupColumn>[] = [
     ),
   },
   {
+    accessorKey: "activityGrades",
+    header: "Activities Number",
+    cell: ({ row }) => (
+      <div className='flex items-center gap-x-2'>
+        {row.original.activityGrades?.length
+          ? row.original.activityGrades?.length
+          : "0"}
+      </div>
+    ),
+  },
+  {
     accessorKey: "createdAt",
-    header: "Date",
+    header: "Date Enrolled",
     cell: ({ row }) => (
       <div className='flex items-center gap-x-2'>
         {new Date(row.original.createdAt).toDateString()}
@@ -99,6 +82,6 @@ export const columns: ColumnDef<GroupColumn>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => <CellActionGroup data={row.original} />,
+    cell: ({ row }) => <CellActionStudent data={row.original} />,
   },
 ];

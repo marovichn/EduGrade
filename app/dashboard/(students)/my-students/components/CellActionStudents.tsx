@@ -9,46 +9,21 @@ import {
   DropdownMenuLabel,
   DropdownMenuItem,
 } from "@/app/components/ui/dropdown-menu";
-import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
-import { toast } from "react-hot-toast";
-import axios from "axios";
-import { GroupColumn } from "./ColumnsStudents";
+import { CalendarCheck, CheckCheck, Edit, ListTodo, MoreHorizontal, Sticker, Trash } from "lucide-react";
+
+import { StudentColumn } from "./ColumnsStudents";
 import AlertModal from "@/app/components/modals/AlertModal";
 import { Button } from "@/app/components/ui/button";
 
-interface CellActionProps {
-  data: GroupColumn;
+interface CellActionStudentProps {
+  data: StudentColumn;
 }
 
-const CellAction: FC<CellActionProps> = ({ data }) => {
-  const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(false);
+const CellActionStudent: FC<CellActionStudentProps> = ({ data }) => {
   const router = useRouter();
-  const params = useParams();
-
-  const deleteHandler = async () => {
-    try {
-      setLoading(true);
-      await axios.delete(`/api/groups/${data.id}`);
-
-      router.refresh();
-      toast.success("Product deleted successfully");
-    } catch (err) {
-      toast.error("Something went wrong");
-    } finally {
-      setLoading(false);
-      setOpen(false);
-    }
-  };
 
   return (
     <>
-      <AlertModal
-        loading={loading}
-        onConfirm={deleteHandler}
-        isOpen={open}
-        onClose={() => setOpen(false)}
-      />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant='ghost' className='h-8 w-8 p-0'>
@@ -56,17 +31,31 @@ const CellAction: FC<CellActionProps> = ({ data }) => {
             <MoreHorizontal className='h-4 w-4 ' />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent>
+        <DropdownMenuContent className="bg-white">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuItem
-            onClick={() => router.push(`/dashboaard/groups/${params.groupId}`)}
+            onClick={() => router.push(`/dashboard/create-results/${data.id}`)}
           >
-            <Edit className='mr-2 h-4 w-4' />
-            Edit
+            <CheckCheck className='mr-2 h-4 w-4' />
+            Add Grade
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setOpen(true)}>
-            <Trash className='mr-2 -ml-1 h-6 w-6 bg-red-700/50 text-red-700 text-bold p-1 rounded-md' />
-            Delete
+          <DropdownMenuItem
+            onClick={() => router.push(`/dashboard/create-results/${data.id}`)}
+          >
+            <Sticker className='mr-2 h-4 w-4' />
+            Add Activity
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => router.push(`/dashboard/create-results/${data.id}`)}
+          >
+            <CalendarCheck className='mr-2 h-4 w-4' />
+            Add Attendance
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => router.push(`/dashboard/create-results/${data.id}`)}
+          >
+            <ListTodo className='mr-2 h-4 w-4' />
+            Add Assignment
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -74,4 +63,4 @@ const CellAction: FC<CellActionProps> = ({ data }) => {
   );
 };
 
-export default CellAction;
+export default CellActionStudent;

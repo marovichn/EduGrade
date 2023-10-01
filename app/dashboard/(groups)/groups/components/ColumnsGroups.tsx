@@ -1,7 +1,6 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import CellActionGroup from "./CellActionGroup";
 import {
   Activity,
   Assignment,
@@ -96,9 +95,5 @@ export const columns: ColumnDef<GroupColumn>[] = [
         {new Date(row.original.createdAt).toDateString()}
       </div>
     ),
-  },
-  {
-    id: "actions",
-    cell: ({ row }) => <CellActionGroup data={row.original} />,
   },
 ];

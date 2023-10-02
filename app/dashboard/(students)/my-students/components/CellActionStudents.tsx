@@ -52,7 +52,7 @@ const CellActionStudent: FC<CellActionStudentProps> = ({ data }) => {
             Add Attendance
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() => router.push(`/dashboard/create-assignment`)}
+            onClick={() => router.push(`/dashboard/create-assignments`)}
           >
             <ListTodo className='mr-2 h-4 w-4' />
             Add Assignment

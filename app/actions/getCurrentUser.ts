@@ -23,6 +23,9 @@ const getCurrentUser = async () => {
       where: {
         email: session.user.email as string,
       },
+      include: {
+        groups: true,
+      },
     });
 
     if (currentStudent) {
@@ -32,6 +35,9 @@ const getCurrentUser = async () => {
     const currentTeacher = await prisma.teacher.findUnique({
       where: {
         email: session.user.email as string,
+      },
+      include: {
+        groups: true,
       },
     });
 

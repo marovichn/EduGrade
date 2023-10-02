@@ -10,10 +10,11 @@ export async function GET() {
 
   const allMyGroups = await prisma.group.findMany({
     where: {
-      teacherId: currentUser.id,
+      studentId: currentUser.id,
     },
     include: { assignments: true },
   });
+  
   if (allMyGroups.length === 0 || !allMyGroups) {
     const allMyGroupsStudent = await prisma.group.findMany({
       where: {
@@ -30,7 +31,9 @@ export async function GET() {
       )
     );
   }
-  return NextResponse.json( allMyGroups.map((group) =>
+  return NextResponse.json(
+    allMyGroups.map((group) =>
       group.assignments.map((assignment) => assignment)
-    ));
+    )
+  );
 }

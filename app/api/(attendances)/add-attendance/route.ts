@@ -26,6 +26,7 @@ export async function POST(request: Request) {
 
   const user = await prisma.attendance.create({
     data: {
+      t: "Attendance",
       classes: createClasses(),
       type,
       description,

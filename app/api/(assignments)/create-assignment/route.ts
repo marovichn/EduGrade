@@ -28,6 +28,7 @@ export async function POST(request: Request) {
 
   const user = await prisma.assignment.create({
     data: {
+      t: "Assignment",
       type,
       description,
       groupId,

@@ -12,6 +12,7 @@ export async function POST(request: Request) {
 
   const user = await prisma.activity.create({
     data: {
+      t: "Activity",
       type,
       value,
       description,

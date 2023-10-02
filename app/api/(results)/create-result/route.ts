@@ -13,6 +13,7 @@ export async function POST(request: Request) {
 
   const user = await prisma.result.create({
     data: {
+      t: "Result",
       type,
       value,
       description,

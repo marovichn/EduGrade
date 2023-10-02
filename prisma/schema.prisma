@@ -101,6 +101,7 @@ type            String
 value           String
 description     String?
 date            DateTime? @default(now())
+t               String?
 
 group           Group  @relation(fields: [groupId], references: [id])
 groupId         String @db.ObjectId
@@ -113,6 +114,7 @@ type            String
 value           String
 description     String?
 date            DateTime?
+t               String?
 
 group           Group  @relation(fields: [groupId], references: [id])
 groupId         String @db.ObjectId
@@ -126,6 +128,7 @@ description     String?
 date            DateTime?
 numberOfClasses Int
 classes         String[]
+t               String?
 
 group           Group  @relation(fields: [groupId], references: [id])
 groupId         String @db.ObjectId
@@ -140,6 +143,7 @@ description     String?
 dateStart       DateTime @default(now())
 dateDue         DateTime?
 done            Boolean?
+t               String?
 
 group           Group  @relation(fields: [groupId], references: [id])
 groupId         String @db.ObjectId

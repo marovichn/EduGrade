@@ -23,6 +23,7 @@ interface UpdateDisplayProps {
 const UpdateDisplay: FC<UpdateDisplayProps> = ({ user }) => {
   const [data, setData] = useState([]);
   useEffect(() => {
+    const storeData = async()=>{
     const getData = async () => {
       const assignmentRes = await axios.get("/api/assignments");
       //@ts-ignore
@@ -33,15 +34,25 @@ const UpdateDisplay: FC<UpdateDisplayProps> = ({ user }) => {
         const attendanceRes = await axios.post("/api/my-attendances", {
           groupId: group.id,
         });
-        console.log(resultRes.data, attendanceRes.data);
+        const activitiesRes = await axios.post("/api/my-activities", {
+          groupId: group.id,
+        });
+        const data = [].concat(
+          activitiesRes.data,
+          resultRes.data,
+          attendanceRes.data
+        );
+        setData((p) => [...p, ...data]);
       });
       if (assignmentRes.status !== 200) {
         return;
       }
       const assignments = [].concat(...assignmentRes.data);
-      setData(assignments);
+      setData((p) => [...p, ...assignments]);
     };
-    getData();
+    await getData();
+  }
+  storeData();
   }, []);
   return (
     <div className=''>
@@ -52,7 +63,7 @@ const UpdateDisplay: FC<UpdateDisplayProps> = ({ user }) => {
       </div>
       <div className='bg-auth-banner w-full h-screen bg-fixed opacity-20 absolute'></div>
       <div className='pt-[80px]'>
-        <UpdatesList />
+        <UpdatesList data={data}/>
       </div>
     </div>
   );

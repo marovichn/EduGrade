@@ -168,7 +168,7 @@ const ResultsForm: FC<ResultsFormProps> = ({
             options={[
               "Class Activity",
               "Group Project Activity",
-              "individual Project Activity",
+              "Individual Project Activity",
               "Other Activity",
             ]}
             disabled={isLoading}

@@ -61,8 +61,7 @@ const UpdateDisplay: FC<UpdateDisplayProps> = ({ user }) => {
           {user?.name} {user?.lastname} {"  "} ({user?.role})
         </h1>
       </div>
-      <div className='bg-auth-banner w-full h-screen bg-fixed opacity-20 absolute z-[-9]'></div>
-      <div className='pt-[80px]'>
+      <div className='pt-[56px] '>
         <UpdatesList data={data}/>
       </div>
     </div>

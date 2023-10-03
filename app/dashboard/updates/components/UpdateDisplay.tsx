@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, useEffect, useState } from "react";
-import UpdatesList from "./UpdatesList";
+import UpdatesList from "../../../components/UpdatesList";
 import axios from "axios";
 
 interface UpdateDisplayProps {
@@ -21,13 +21,14 @@ interface UpdateDisplayProps {
 }
 
 const UpdateDisplay: FC<UpdateDisplayProps> = ({ user }) => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<any[]>([]);
   useEffect(() => {
     const storeData = async () => {
       const getData = async () => {
         const assignmentRes = await axios.get("/api/assignments");
         //@ts-ignore
         user?.groups.forEach(async (group) => {
+          const groupRes = await axios.get(`/api/group/${group.id}`);
           const resultRes = await axios.post("/api/my-results", {
             groupId: group.id,
           });
@@ -37,11 +38,17 @@ const UpdateDisplay: FC<UpdateDisplayProps> = ({ user }) => {
           const activitiesRes = await axios.post("/api/my-activities", {
             groupId: group.id,
           });
+          const dataRes = [].concat(resultRes.data);
+          const dataResultWithGroup: any = dataRes.map((data) => ({
+            group: groupRes.data[0],
+            data
+          }));
           const data = [].concat(
             activitiesRes.data,
-            resultRes.data,
-            attendanceRes.data
+            attendanceRes.data,
+            dataResultWithGroup
           );
+          console.log(data);
           setData((p) => [...p, ...data]);
         });
         if (assignmentRes.status !== 200) {
@@ -65,7 +72,7 @@ const UpdateDisplay: FC<UpdateDisplayProps> = ({ user }) => {
     return Number(new Date(b.date)) - Number(new Date(a.date));
   });
   return (
-    <div className=''>
+    <div>
       <div className='w-full fixed bg-white border-b-2 h-14 p-4 flex items-center justify-start font-bold z-10'>
         <h1>
           {user?.name} {user?.lastname} {"  "} ({user?.role})

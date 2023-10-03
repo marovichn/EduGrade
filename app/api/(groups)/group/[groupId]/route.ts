@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request, context: any) {
   const currentUser = await getCurrentUser();
 
-  if (currentUser) {
+  if (!currentUser) {
     return new NextResponse("Anauthorized", { status: 401 });
   }
   const { groupId } = context.params;

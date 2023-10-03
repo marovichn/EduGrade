@@ -78,6 +78,8 @@ model Group {
   description     String
   createdAt       DateTime @default(now())
   ends            DateTime?
+  t               String?
+  b               String?
 
   results         Result[]
   attendances     Attendance[]

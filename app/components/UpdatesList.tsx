@@ -176,11 +176,11 @@ const UpdatesList: FC<UpdatesListProps> = ({ data }) => {
           )}
         </div>
       );
-    } else if (update.t === "Result") {
+    } else if (update.data && update.data.t === "Result") {
       return (
         <div className='flex items-center jutsify-between p-5 gap-y-5 gap-x-5 bg-transparent'>
           <div className='flex items-center justify-center flex-col h-28 p-5 bg-white rounded-xl w-28 border-2 border-black/40'>
-            {new Date(update.date).toDateString()}
+            {new Date(update.data.date).toDateString()}
           </div>
           <div
             className='flex items-center justify-between h-28 p-5 bg-white rounded-xl w-auto'
@@ -211,13 +211,16 @@ const UpdatesList: FC<UpdatesListProps> = ({ data }) => {
             ></div>
             <div className='flex items-center justify-around gap-x-5 max-sm:flex-col max-sm:items-start'>
               <div className='flex flex-col items-start justify-start'>
-                <h1 className='text-xl font-bold'>{update.type}</h1>
-                <p>{update.description}</p>
+                <h1 className='text-xl font-bold'>
+                  {update.group.subject.name}
+                </h1>
+                <h1 className='font-semibold'>{update.data.type}</h1>
+                <p className='text-xs'>{update.data.description}</p>
               </div>
               <div className='w-12 h-1 bg-black rotate-90 max-sm:hidden'></div>
               <div className='mr-5 p-[17px] px-6 bg-purple-800 rounded-full'>
                 <span className='text-4xl font-bold text-white'>
-                  {update.value}
+                  {update.data.value}
                 </span>
               </div>
             </div>
@@ -352,8 +355,8 @@ const UpdatesList: FC<UpdatesListProps> = ({ data }) => {
             <p className='w-10 h-10 bg-white rounded-full animate-bounce delay-1000'></p>
             <p className='w-10 h-10 bg-white rounded-full animate-bounce delay-300'></p>
           </div>
-          <p className='group-hover:opacity-100 opacity-0 transition relative -top-[75px] left-[120px] max-md:flex max-md:w-full max-md:items-center max-md:justify-center max-md:static max-md:-mt-[75px] max-md:pb-10'>
-            No more updates
+          <p className='group-hover:opacity-100 opacity-0 transition relative -top-[75px] left-[110px] max-md:flex max-md:w-full max-md:items-center max-md:justify-center max-md:static max-md:-mt-[75px] max-md:pb-10'>
+            You reached the end.
           </p>
         </div>
       </div>

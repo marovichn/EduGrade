@@ -1,11 +1,16 @@
-import { FC } from 'react'
+import getCurrentUser from "@/app/actions/getCurrentUser";
+import { FC } from "react";
+import ResultDisplay from "./components/ResultDisplay";
 
-interface pageProps {
-  
-}
+interface pageProps {}
 
-const page: FC<pageProps> = ({}) => {
-  return <div>Student Grades By Subject Results</div>
-}
+const page: FC<pageProps> = async ({}) => {
+  const user = await getCurrentUser();
+  return (
+    <div>
+      <ResultDisplay user={user} />
+    </div>
+  );
+};
 
-export default page
+export default page;

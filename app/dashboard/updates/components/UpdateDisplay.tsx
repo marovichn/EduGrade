@@ -23,37 +23,47 @@ interface UpdateDisplayProps {
 const UpdateDisplay: FC<UpdateDisplayProps> = ({ user }) => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    const storeData = async()=>{
-    const getData = async () => {
-      const assignmentRes = await axios.get("/api/assignments");
-      //@ts-ignore
-      user?.groups.forEach(async (group) => {
-        const resultRes = await axios.post("/api/my-results", {
-          groupId: group.id,
+    const storeData = async () => {
+      const getData = async () => {
+        const assignmentRes = await axios.get("/api/assignments");
+        //@ts-ignore
+        user?.groups.forEach(async (group) => {
+          const resultRes = await axios.post("/api/my-results", {
+            groupId: group.id,
+          });
+          const attendanceRes = await axios.post("/api/my-attendances", {
+            groupId: group.id,
+          });
+          const activitiesRes = await axios.post("/api/my-activities", {
+            groupId: group.id,
+          });
+          const data = [].concat(
+            activitiesRes.data,
+            resultRes.data,
+            attendanceRes.data
+          );
+          setData((p) => [...p, ...data]);
         });
-        const attendanceRes = await axios.post("/api/my-attendances", {
-          groupId: group.id,
-        });
-        const activitiesRes = await axios.post("/api/my-activities", {
-          groupId: group.id,
-        });
-        const data = [].concat(
-          activitiesRes.data,
-          resultRes.data,
-          attendanceRes.data
-        );
-        setData((p) => [...p, ...data]);
-      });
-      if (assignmentRes.status !== 200) {
-        return;
-      }
-      const assignments = [].concat(...assignmentRes.data);
-      setData((p) => [...p, ...assignments]);
+        if (assignmentRes.status !== 200) {
+          return;
+        }
+        const assignments = [].concat(...assignmentRes.data);
+        setData((p) => [...p, ...assignments]);
+      };
+      await getData();
     };
-    await getData();
-  }
-  storeData();
+    storeData();
   }, []);
+  const dataSorted = data.sort((a: any, b: any) => {
+    if (!a.date) {
+      return Number(new Date(b.date)) - Number(new Date(a.dateStart));
+    } else if (!b.date) {
+      return Number(new Date(b.dateStart)) - Number(new Date(a.date));
+    } else if (!a.date && !b.date) {
+      return Number(new Date(b.dateStart)) - Number(new Date(a.dateStart));
+    }
+    return Number(new Date(b.date)) - Number(new Date(a.date));
+  });
   return (
     <div className=''>
       <div className='w-full fixed bg-white border-b-2 h-14 p-4 flex items-center justify-start font-bold z-10'>
@@ -62,7 +72,7 @@ const UpdateDisplay: FC<UpdateDisplayProps> = ({ user }) => {
         </h1>
       </div>
       <div className='pt-[56px] '>
-        <UpdatesList data={data}/>
+        <UpdatesList data={dataSorted} />
       </div>
     </div>
   );

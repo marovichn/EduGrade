@@ -1,11 +1,13 @@
 import {
   BadgeCheck,
   BadgeX,
-  CheckCheck,
   CheckCircle,
   Frown,
   Meh,
   Smile,
+  UserCheck2,
+  UserCog2,
+  UserX2,
 } from "lucide-react";
 import { FC } from "react";
 
@@ -222,7 +224,120 @@ const UpdatesList: FC<UpdatesListProps> = ({ data }) => {
           </div>
         </div>
       );
-    } else {
+    } else if (update.t === "Attendance") {
+      return (
+        <div className='flex items-center jutsify-between p-5 gap-y-5 gap-x-5 '>
+          <div className='flex items-center justify-center flex-col h-28 p-5 bg-white rounded-xl w-28 border-2 border-black/40'>
+            {new Date(update.date).toDateString()}
+          </div>
+          {update.type === "Unjustified" ? (
+            <>
+              <div
+                className='flex items-center justify-between h-28 p-5 bg-white rounded-xl w-auto'
+                style={{
+                  border: "2px solid red",
+                  borderLeft: "6px solid red",
+                }}
+              >
+                <div
+                  className='w-10 h-2 left-[120px] z-[-1] bg-black absolute'
+                  style={{
+                    backgroundColor: "red",
+                  }}
+                ></div>
+                <UserX2 className='text-red-500' size={40} />
+              </div>
+              <div
+                className='flex items-center justify-center flex-col h-28 p-5 bg-white rounded-xl w-auto max-sm:h-full '
+                style={{
+                  border: "2px dotted red",
+                }}
+              >
+                <div
+                  className='w-10 h-2 left-[220px] z-[-1] bg-black absolute'
+                  style={{
+                    backgroundColor: "red",
+                  }}
+                ></div>
+                <div className='flex items-center justify-around gap-x-5 max-sm:flex-col max-sm:items-start'>
+                  <div className='flex flex-col items-start justify-start'>
+                    <h1 className='text-xl font-bold'>{update.type}</h1>
+                    <p>{update.description}</p>
+                  </div>
+                  <div className='w-12 h-1 bg-black rotate-90 max-sm:hidden'></div>
+                  <div className='pr-5'>
+                    <span className='text-2xl'>
+                      {update.numberOfClasses === 1
+                        ? `1 class`
+                        : `${update.numberOfClasses} classes`}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div
+                className='flex items-center justify-between h-28 p-5 bg-white rounded-xl w-auto'
+                style={{
+                  border:
+                    update.type === "Regulated"
+                      ? "2px solid green"
+                      : " 2px solid gold",
+                  borderLeft:
+                    update.type === "Regulated"
+                      ? "6px solid green"
+                      : " 6px solid gold",
+                }}
+              >
+                <div
+                  className='w-10 h-2 left-[120px] z-[-1] bg-black absolute'
+                  style={{
+                    backgroundColor:
+                      update.type === "Regulated" ? "green" : "gold",
+                  }}
+                ></div>
+                {(update.type === "Regulated") === true ? (
+                  <UserCheck2 className='text-green-500' size={40} />
+                ) : (
+                  <UserCog2 className='text-yellow-400' size={40} />
+                )}
+              </div>
+              <div
+                className='flex items-center justify-center flex-col h-28 p-5 bg-white rounded-xl w-auto max-sm:h-full '
+                style={{
+                  border:
+                    update.type === "Regulated"
+                      ? "2px dotted green"
+                      : " 2px dotted gold",
+                }}
+              >
+                <div
+                  className='w-10 h-2 left-[220px] z-[-1] bg-black absolute'
+                  style={{
+                    backgroundColor:
+                      update.type === "Regulated" ? "green" : "gold",
+                  }}
+                ></div>
+                <div className='flex items-center justify-around gap-x-5 max-sm:flex-col max-sm:items-start'>
+                  <div className='flex flex-col items-start justify-start'>
+                    <h1 className='text-xl font-bold'>{update.type}</h1>
+                    <p>{update.description}</p>
+                  </div>
+                  <div className='w-12 h-1 bg-black rotate-90 max-sm:hidden'></div>
+                  <div className='pr-5'>
+                    <span className='text-2xl'>
+                      {update.numberOfClasses === 1
+                        ? `1 class`
+                        : `${update.numberOfClasses} classes`}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      );
     }
   };
   return (
@@ -231,14 +346,15 @@ const UpdatesList: FC<UpdatesListProps> = ({ data }) => {
         {data.map((update) => (
           <div className='flex flex-col gap-y-5'>{updateDisplay(update)}</div>
         ))}
-        <div className='flex items-center justify-start text-3xl font-semibold ml-32'>
-          The
-          <div className='flex items-center justify-center p-20 py-32 bg-white rounded-full gap-x-10 border-2 border-black scale-50'>
-            <p className='w-10 h-10 bg-black rounded-full'></p>
-            <p className='w-10 h-10 bg-black rounded-full'></p>
-            <p className='w-10 h-10 bg-black rounded-full'></p>
+        <div className='flex flex-col items-start justify-center group -mt-10 transition max-md:flex max-md:w-full max-md:items-center'>
+          <div className='flex items-center justify-center bg-black/70  p-20 rounded-full gap-x-10 border-2 border-black scale-[0.2] transition'>
+            <p className='w-10 h-10 bg-white rounded-full animate-bounce delay-700'></p>
+            <p className='w-10 h-10 bg-white rounded-full animate-bounce delay-1000'></p>
+            <p className='w-10 h-10 bg-white rounded-full animate-bounce delay-300'></p>
           </div>
-          End
+          <p className='group-hover:opacity-100 opacity-0 transition relative -top-[75px] left-[120px] max-md:flex max-md:w-full max-md:items-center max-md:justify-center max-md:static max-md:-mt-[75px] max-md:pb-10'>
+            No more updates
+          </p>
         </div>
       </div>
     </>

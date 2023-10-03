@@ -38,14 +38,7 @@ const ResultDisplay: FC<ResultDisplayProps> = ({ user }) => {
     storeData();
   }, []);
   const dataSorted = data.sort((a: any, b: any) => {
-    if (!a.date) {
-      return Number(new Date(b.date)) - Number(new Date(a.dateStart));
-    } else if (!b.date) {
-      return Number(new Date(b.dateStart)) - Number(new Date(a.date));
-    } else if (!a.date && !b.date) {
-      return Number(new Date(b.dateStart)) - Number(new Date(a.dateStart));
-    }
-    return Number(new Date(b.date)) - Number(new Date(a.date));
+    return Number(new Date(b.data.date)) - Number(new Date(a.data.date));
   });
   return (
     <div>

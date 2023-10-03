@@ -41,7 +41,7 @@ const UpdateDisplay: FC<UpdateDisplayProps> = ({ user }) => {
           const dataRes = [].concat(resultRes.data);
           const dataResultWithGroup: any = dataRes.map((data) => ({
             group: groupRes.data[0],
-            data
+            data,
           }));
           const data = [].concat(
             activitiesRes.data,
@@ -62,12 +62,26 @@ const UpdateDisplay: FC<UpdateDisplayProps> = ({ user }) => {
     storeData();
   }, []);
   const dataSorted = data.sort((a: any, b: any) => {
-    if (!a.date) {
-      return Number(new Date(b.date)) - Number(new Date(a.dateStart));
-    } else if (!b.date) {
-      return Number(new Date(b.dateStart)) - Number(new Date(a.date));
+    if (!a.date && b.date) {
+      if (!a.data) {
+        return Number(new Date(b.date)) - Number(new Date(a.dateStart));
+      }
+      return Number(new Date(b.date)) - Number(new Date(a.data.date));
+    } else if (!b.date && a.date) {
+      if (!b.data) {
+        return Number(new Date(b.dateStart)) - Number(new Date(a.date));
+      }
+      return Number(new Date(b.data.date)) - Number(new Date(a.date));
     } else if (!a.date && !b.date) {
-      return Number(new Date(b.dateStart)) - Number(new Date(a.dateStart));
+      if (!a.data && !b.data) {
+        return Number(new Date(b.dateStart)) - Number(new Date(a.dateStart));
+      } else if (!b.data && a.data) {
+        return Number(new Date(b.dateStart)) - Number(new Date(a.data.date));
+      } else if (b.data && !a.data) {
+        return Number(new Date(b.data.date)) - Number(new Date(a.dateStart));
+      } else if (b.data && a.data) {
+        return Number(new Date(b.data.date)) - Number(new Date(a.data.date));
+      }
     }
     return Number(new Date(b.date)) - Number(new Date(a.date));
   });

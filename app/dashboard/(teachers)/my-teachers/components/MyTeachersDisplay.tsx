@@ -30,14 +30,27 @@ const MyTeachersDisplay: FC<MyTeachersDisplayProps> = ({ user }) => {
       if (groupsRes.status !== 200) {
         return;
       }
-      //@ts-ignore
-      const teachers = groupsRes.data.map((group: Group) => group.teacher);
-      //@ts-ignore
-      const teachersSet = new Set<Teacher>(teachers);
-      console.log(teachersSet);
-      //@ts-ignore
-      const teachersSetted = [...teachersSet];
-      setTeachers(teachersSetted);
+      const teachers = groupsRes.data.map((g: any) => g.teacher);
+
+      // Create a Set to store unique teacher IDs
+      const uniqueTeacherIdsSet = new Set();
+
+      // Create an array to store unique teachers
+      const uniqueTeachers: any[] = [];
+
+      // Iterate through the teachers array
+      teachers.forEach((teacher: any) => {
+        const teacherId = teacher.id;
+
+        // Check if the teacher's ID is not in the Set, and add it to the Set and the uniqueTeachers array
+        if (!uniqueTeacherIdsSet.has(teacherId)) {
+          uniqueTeacherIdsSet.add(teacherId);
+          uniqueTeachers.push(teacher);
+        }
+      });
+
+      // Now, uniqueTeachers contains unique teachers based on their IDs
+      setTeachers(uniqueTeachers);
     };
     getTeachers();
   }, []);

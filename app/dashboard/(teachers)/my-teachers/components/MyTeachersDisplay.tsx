@@ -1,7 +1,10 @@
+"use client";
+
 import { FC } from "react";
-import UsersList from "@/app/components/UsersList";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Group, Teacher } from "@prisma/client";
+import TeachersList from "./TeachersList";
 
 interface MyTeachersDisplayProps {
   user: {
@@ -20,21 +23,28 @@ interface MyTeachersDisplayProps {
 }
 
 const MyTeachersDisplay: FC<MyTeachersDisplayProps> = ({ user }) => {
-  const [teachers, setTeachers] = useState([]);
+  const [teachers, setTeachers] = useState<any[]>([]);
   useEffect(() => {
     const getTeachers = async () => {
-      const res = await axios.post("/api/my-teachers", { user });
-      if (res.status !== 200) {
+      const groupsRes = await axios.post("/api/my-groups", { user });
+      if (groupsRes.status !== 200) {
         return;
       }
-      setTeachers(res.data);
+      //@ts-ignore
+      const teachers = groupsRes.data.map((group: Group) => group.teacher);
+      //@ts-ignore
+      const teachersSet = new Set<Teacher>(teachers);
+      console.log(teachersSet);
+      //@ts-ignore
+      const teachersSetted = [...teachersSet];
+      setTeachers(teachersSetted);
     };
     getTeachers();
   }, []);
 
   return (
     <div>
-      <UsersList users={teachers} roleUrl='teachers'></UsersList>
+      <TeachersList users={teachers} roleUrl='teachers'></TeachersList>
     </div>
   );
 };

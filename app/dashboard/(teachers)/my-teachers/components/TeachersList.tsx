@@ -12,14 +12,14 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { FC } from "react";
-import PageWrapper from "./PageWrapper";
+import PageWrapper from "@/app/components/PageWrapper";
 
-interface UsersListProps {
+interface TeachersListProps {
   users?: Admin[] | Student[] | Teacher[] | null | undefined;
   roleUrl?: string;
 }
 
-const UsersList: FC<UsersListProps> = ({ users, roleUrl }) => {
+const TeachersList: FC<TeachersListProps> = ({ users, roleUrl }) => {
   const [page, setPage] = useState(1);
   const [startIndex, setStartIndex] = useState(0);
   const [endIndex, setEndIndex] = useState(5);
@@ -53,35 +53,17 @@ const UsersList: FC<UsersListProps> = ({ users, roleUrl }) => {
     }
   };
 
-  if (users?.map((u) => u.role === "Admin")[0]) {
-    Icon = <ShieldPlus className='text-white' />;
-  } else if (users?.map((u) => u.role === "Student")[0]) {
-    Icon = <User2 className='text-white' />;
-  } else {
-    Icon = <GraduationCap className='text-white' />;
-  }
+  Icon = <GraduationCap className='text-white' />;
 
   return (
     <PageWrapper>
       <div className=''>
         <div className='mb-16 text-4xl font-bold flex items-center justify-between'>
-          <h1>
-            All {roleUrl?.charAt(0).toUpperCase() + roleUrl?.slice(1)!} on
-            EduGrade:
-          </h1>
-          <Link
-            href={`${roleUrl}/create`}
-            className='w-12 h-12 bg-yellow-300 flex items-center justify-center rounded-lg hover:bg-yellow-200 pl-1'
-          >
-            <UserPlus />
-          </Link>
+          <h1>My Teachers on EduGrade:</h1>
         </div>
         {users?.length === 0 && (
-          <div className="flex flex-col items-center justify-center">
-            You are not allowed to see this data!
-            <div className="my-28">
-              <ShieldAlert className="" size={250}/>
-            </div>
+          <div className='flex flex-col items-center justify-center'>
+            No teachers yet...
           </div>
         )}
         {indexedUsers?.map((user, index) => (
@@ -140,4 +122,4 @@ const UsersList: FC<UsersListProps> = ({ users, roleUrl }) => {
   );
 };
 
-export default UsersList;
+export default TeachersList;

@@ -1,25 +1,11 @@
-"use client";
+import getCurrentUser from "@/app/actions/getCurrentUser";
+import MyTeachersDisplay from "./components/MyTeachersDisplay";
 
-import UsersList from "@/app/components/UsersList";
-import axios from "axios";
-import {  useEffect, useState } from "react";
-
-const page = () => {
-  const [teachers, setTeachers] = useState([]);
-  useEffect(() => {
-    const getTeachers = async () => {
-      const res = await axios.get("/api/teachers");
-      if (res.status !== 200) {
-        return;
-      }
-      setTeachers(res.data);
-    };
-    getTeachers();
-  }, []);
-
+const page = async () => {
+  const user = await getCurrentUser();
   return (
     <div>
-      <UsersList users={teachers} roleUrl='teachers'></UsersList>
+      <MyTeachersDisplay user={user} />
     </div>
   );
 };

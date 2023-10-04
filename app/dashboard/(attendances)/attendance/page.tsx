@@ -1,13 +1,16 @@
-import { FC } from "react";
-import TeachersForm from "@/app/components/TeacherForm";
 import getCurrentUser from "@/app/actions/getCurrentUser";
+import { FC } from "react";
+import AttendanceDisplay from "./components/AttendanceDisplay";
 
 interface pageProps {}
 
 const page: FC<pageProps> = async ({}) => {
   const user = await getCurrentUser();
-
-  return <TeachersForm userRole={user?.role} variant='REGISTER' />;
+  return (
+    <div>
+      <AttendanceDisplay user={user} />
+    </div>
+  );
 };
 
 export default page;

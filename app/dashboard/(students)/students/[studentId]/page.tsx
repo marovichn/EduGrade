@@ -4,12 +4,13 @@ import { Student } from "@prisma/client";
 import axios from "axios";
 import { FC, useEffect, useState } from "react";
 import StudentData from "./components/StudentData";
+import { getServerSession } from "next-auth";
 
 interface pageProps {
   params: { studentId: string };
 }
 
-const page: FC<pageProps> = ({ params }) => {
+const page: FC<pageProps> =({ params }) => {
   const [data, setData] = useState<Student[]>([]);
   useEffect(() => {
     console.log(params);

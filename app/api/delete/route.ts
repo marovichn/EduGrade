@@ -13,6 +13,10 @@ export async function DELETE(request: Request) {
   }
 
   if (role === "Admin") {
+    const admins = await prisma.admin.findMany();
+    if (admins.length <= 1) {
+      return new NextResponse("Can't delete last admin!", { status: 403 });
+    }
     await prisma.admin.delete({ where: { id: id } });
   }
 

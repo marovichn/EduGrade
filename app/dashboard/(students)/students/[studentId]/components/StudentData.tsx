@@ -1,8 +1,8 @@
 import Avatar from "@/app/components/Avatar";
-import Button from "@/app/components/Button";
 import { Student } from "@prisma/client";
 import axios from "axios";
-import { Trash } from "lucide-react";
+import { ShieldAlert, Trash } from "lucide-react";
+import { getServerSession } from "next-auth";
 import { useRouter } from "next/navigation";
 import { FC } from "react";
 import toast from "react-hot-toast";
@@ -28,7 +28,10 @@ const StudentData: FC<StudentDataProps> = ({ data }) => {
       }
       toast.success("Successfully deleted!");
       router.push("/dashboard/students");
-    } catch (err) {
+    } catch (err:any) {
+      if(err?.response.status === 401){
+        toast.error("You are not allowed to do that!");
+      }
       toast.error("Something went wrong");
     }
   };
@@ -70,17 +73,29 @@ const StudentData: FC<StudentDataProps> = ({ data }) => {
           </div>
           <div>
             Parent Name: {"  "}
-            <span className='font-bold'>{data.parentName ? data.parentName: "No Parent Name Data Available"}</span>
+            <span className='font-bold'>
+              {data.parentName
+                ? data.parentName
+                : "No Parent Name Data Available"}
+            </span>
           </div>
           <div>
             Parent Email: {"  "}
-            <span className='font-bold'>{data.parentEmail ? data.parentEmail: "No Parent Email Data Available"}</span>
+            <span className='font-bold'>
+              {data.parentEmail
+                ? data.parentEmail
+                : "No Parent Email Data Available"}
+            </span>
           </div>
           <div>
             Parent Phone Number: {"  "}
-            <span className='font-bold'>{data.parentPhone ? data.parentPhone: "No Parent Phone Number Data Available"}</span>
+            <span className='font-bold'>
+              {data.parentPhone
+                ? data.parentPhone
+                : "No Parent Phone Number Data Available"}
+            </span>
           </div>
-          
+
           <div>
             Unique code: {"  "}[{"  "}
             <span className='font-bold'>
@@ -96,10 +111,11 @@ const StudentData: FC<StudentDataProps> = ({ data }) => {
       </div>
       <button
         onClick={handleDelete}
-        className='flex items-centewr justify-center gap-x-4 text-white font-bold bg-red-500 p-5 rounded-br-lg'
+        className='flex items-center justify-center gap-x-4 text-white font-bold bg-red-500 p-5 rounded-br-lg'
       >
         <Trash />
         Delete {data.role}
+        <ShieldAlert size={20}/>
       </button>
     </div>
   );

@@ -50,14 +50,13 @@ const AuthForm: FC<AuthFormProps> = ({ variant, userRole }) => {
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
-    console.log(data);
-
-    /* if (variant === "REGISTER") {
+    if (variant === "REGISTER") {
+      console.log(data)
       axios
         .post("/api/register", data)
         .then(() => {
           toast.success("Student Profile created.");
-          router.push("/dashboard/my-students");
+          router.push("/dashboard/students");
         })
         .catch(() =>
           toast.error(
@@ -82,7 +81,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant, userRole }) => {
           }
         })
         .finally(() => setIsLoading(false));
-    } */
+    }
   };
 
   return (

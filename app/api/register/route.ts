@@ -40,7 +40,9 @@ export async function POST(request: Request) {
       data: {
         email,
         name,
+        lastname,
         role,
+        code,
         hashedPassword,
         adress,
         biography,
@@ -54,7 +56,9 @@ export async function POST(request: Request) {
     user = await prisma.teacher.create({
       data: {
         email,
+        code,
         name,
+        lastname,
         role,
         hashedPassword,
         degrees,

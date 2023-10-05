@@ -77,10 +77,10 @@ const UsersList: FC<UsersListProps> = ({ users, roleUrl }) => {
           </Link>
         </div>
         {users?.length === 0 && (
-          <div className="flex flex-col items-center justify-center">
+          <div className='flex flex-col items-center justify-center'>
             You are not allowed to see this data!
-            <div className="my-28">
-              <ShieldAlert className="" size={250}/>
+            <div className='my-28'>
+              <ShieldAlert className='' size={250} />
             </div>
           </div>
         )}
@@ -100,9 +100,10 @@ const UsersList: FC<UsersListProps> = ({ users, roleUrl }) => {
                 </div>
                 <div className='flex flex-col items-start justify-start'>
                   <h1 className='text-xl font-bold text-black'>
-                    {user.name} {user.lastname && user.lastname}{" "}
-                    {user.code && "-" + user.code}
+                    {user.name} {user.lastname && user.lastname}
                   </h1>
+
+                  <p className="text-xs">{user.code && "(" + user.code + ")"}</p>
                   <p>{user.email}</p>
                 </div>
               </div>

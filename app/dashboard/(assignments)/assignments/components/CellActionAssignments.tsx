@@ -23,7 +23,6 @@ interface CellActionAssignmentsProps {
 const CellActionAssignments: FC<CellActionAssignmentsProps> = ({ data }) => {
   const router = useRouter();
   const handleUpdate = async () => {
-    console.log(data);
     const res = await axios.post(`/api/assignment/${data.id}`, {
       done: !data.done,
     });

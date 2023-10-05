@@ -79,7 +79,6 @@ const GroupForm: FC<GroupFormProps> = ({ variant, userRole}) => {
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
-    console.log(data)
 
     if (variant === "REGISTER") {
       axios

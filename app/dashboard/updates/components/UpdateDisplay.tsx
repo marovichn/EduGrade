@@ -48,7 +48,6 @@ const UpdateDisplay: FC<UpdateDisplayProps> = ({ user }) => {
             attendanceRes.data,
             dataResultWithGroup
           );
-          console.log(data);
           setData((p) => [...p, ...data]);
         });
         if (assignmentRes.status !== 200) {

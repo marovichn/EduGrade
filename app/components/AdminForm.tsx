@@ -20,13 +20,13 @@ interface AuthFormProps {
   userRole: string | null | undefined;
 }
 
-const AuthForm: FC<AuthFormProps> = ({ variant, userRole}) => {
+const AuthForm: FC<AuthFormProps> = ({ variant, userRole }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-    if (!userRole || userRole !== "Admin") {
-      router.push("/dashboard");
-    }
+  if (!userRole || userRole !== "Admin") {
+    router.push("/dashboard");
+  }
   const {
     register,
     handleSubmit,
@@ -34,17 +34,16 @@ const AuthForm: FC<AuthFormProps> = ({ variant, userRole}) => {
   } = useForm<FieldValues>({
     defaultValues: {
       name: "",
-      lastname:"",
+      lastname: "",
       role: "",
       email: "",
       password: "",
-      code:"",
+      code: "",
     },
   });
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    /*  setIsLoading(true); */
-    console.log(data);
+    setIsLoading(true);
 
     if (variant === "REGISTER") {
       axios
@@ -134,7 +133,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant, userRole}) => {
                   required
                   id='code'
                   label='Code Identifier'
-                  placeholder="(PP-DC-01)"
+                  placeholder='(PP-DC-01)'
                 />
                 <Input
                   disabled={isLoading}

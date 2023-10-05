@@ -5,6 +5,7 @@ import { FC, useEffect, useState } from "react";
 
 interface NavItemProps {
   route: {
+    key: string;
     href: string;
     role: string;
     name: string;
@@ -21,18 +22,15 @@ const NavItem: FC<NavItemProps> = ({ route }) => {
 
   return (
     <Link
-    key={route.name}
-    href={route.href}
+      key={route?.key}
+      href={route.href}
       className={
         selected
           ? "flex items-center justify-center gap-x-0 font-bold bg-gray-100 w-full h-full transition group cursor-pointer mb-[16px] pt-4"
           : "flex items-center justify-center gap-x-3 font-bold hover:bg-gray-100 w-full h-full transition group cursor-pointer mb-[16px] pt-4"
       }
     >
-      <div
-        
-        className='flex items-center justify-center gap-x-3'
-      >
+      <div className='flex items-center justify-center gap-x-3'>
         <route.icon className='text-[#2C2E43] group-hover:text-black group-hover:animate-bounce' />
       </div>
     </Link>

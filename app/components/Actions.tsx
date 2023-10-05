@@ -9,7 +9,6 @@ interface ActionsProps {
 
 const Actions: FC<ActionsProps> = ({ userRole }) => {
   const actions = navRoutes.filter((a) => a.role === userRole);
-  console.log(actions);
   return (
     <div className='mt-16'>
       {actions.map((a) => (

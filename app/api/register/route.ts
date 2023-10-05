@@ -4,7 +4,21 @@ import prisma from "@/app/libs/prismadb";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
-  const { email, name, password, role } = await request.json();
+  const {
+    email,
+    name,
+    password,
+    role,
+    lastname,
+    code,
+    adress,
+    biography,
+    parentEmail,
+    parentName,
+    parentPhone,
+    degrees,
+    experience,
+  } = await request.json();
   let user;
   const hashedPassword = await bcrypt.hash(password, 12);
 
@@ -15,6 +29,8 @@ export async function POST(request: Request) {
         name,
         role,
         hashedPassword,
+        lastname,
+        code,
       },
     });
   }
@@ -26,6 +42,11 @@ export async function POST(request: Request) {
         name,
         role,
         hashedPassword,
+        adress,
+        biography,
+        parentEmail,
+        parentName,
+        parentPhone,
       },
     });
   }
@@ -36,6 +57,9 @@ export async function POST(request: Request) {
         name,
         role,
         hashedPassword,
+        degrees,
+        experience,
+        biography,
       },
     });
   }

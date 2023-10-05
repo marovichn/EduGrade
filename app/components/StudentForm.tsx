@@ -44,14 +44,15 @@ const AuthForm: FC<AuthFormProps> = ({ variant, userRole }) => {
       parentEmail: "",
       parentPhone: "",
       biography: "",
-      code:"",
+      code: "",
     },
   });
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
+    console.log(data);
 
-    if (variant === "REGISTER") {
+    /* if (variant === "REGISTER") {
       axios
         .post("/api/register", data)
         .then(() => {
@@ -81,7 +82,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant, userRole }) => {
           }
         })
         .finally(() => setIsLoading(false));
-    }
+    } */
   };
 
   return (
@@ -147,7 +148,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant, userRole }) => {
                   required
                   id='code'
                   label='Code Identifier'
-                  placeholder="(CS-IV-05)"
+                  placeholder='(CS-IV-05)'
                 />
                 <Input
                   disabled={isLoading}

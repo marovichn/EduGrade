@@ -8,7 +8,7 @@ interface TeacherDataProps {
 
 const TeacherData: FC<TeacherDataProps> = ({ data }) => {
   return (
-    <div className='p-5 w-full bg-gray-100'>
+    <div className='p-5 w-full bg-gray-100 border-b-2'>
       <div className='flex items-center justify-between'>
         <div>
           <div className='flex flex-col items-center justify-center'></div>

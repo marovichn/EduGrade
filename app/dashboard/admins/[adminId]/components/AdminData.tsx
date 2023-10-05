@@ -1,12 +1,12 @@
 import Avatar from "@/app/components/Avatar";
-import { Student } from "@prisma/client";
+import { Admin } from "@prisma/client";
 import { FC } from "react";
 
-interface StudentDataProps {
-  data: Student;
+interface AdminDataProps {
+  data: Admin;
 }
 
-const StudentData: FC<StudentDataProps> = ({ data }) => {
+const AdminData: FC<AdminDataProps> = ({ data }) => {
   return (
     <div className='p-5 w-full bg-gray-100 border-b-2'>
       <div className='flex items-center justify-between'>
@@ -27,12 +27,6 @@ const StudentData: FC<StudentDataProps> = ({ data }) => {
           On EduGrade from: {"  "}
           <span className='font-bold'>
             {new Date(data.createdAt).toDateString()}
-          </span>
-        </div>
-        <div>
-          Short Biography: {"  "}
-          <span className='font-bold'>
-            {data.biography ? data.biography : "No biography"}
           </span>
         </div>
         <div>
@@ -57,4 +51,4 @@ const StudentData: FC<StudentDataProps> = ({ data }) => {
   );
 };
 
-export default StudentData;
+export default AdminData;

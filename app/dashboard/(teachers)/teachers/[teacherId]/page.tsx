@@ -3,6 +3,7 @@
 import { Teacher } from "@prisma/client";
 import axios from "axios";
 import { FC, useEffect, useState } from "react";
+import TeacherData from "./components/TeacherData";
 
 interface pageProps {
   params: { teacherId: string };
@@ -24,8 +25,14 @@ const page: FC<pageProps> = ({ params }) => {
     };
     getData();
   }, []);
-
-  return <div>{}</div>;
+  console.log();
+  return (
+    <div>
+      {data.map((dataObject) => (
+        <TeacherData data={dataObject} />
+      ))}
+    </div>
+  );
 };
 
 export default page;

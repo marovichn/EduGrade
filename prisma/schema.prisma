@@ -23,7 +23,7 @@ model Admin {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
   role            String?
-  code            String?
+  code            String? @unique
 }
 
 
@@ -41,8 +41,7 @@ model Teacher {
   biography     String?
   degrees       String?
   experience    String?
-  code          String?
-
+  code          String? @unique
 
   groups Group[]
 }
@@ -64,7 +63,7 @@ model Student {
   updatedAt       DateTime @updatedAt
   role            String?
   biography       String?
-  code            String?
+  code            String? @unique
   points          String?
 
   groups Group[]

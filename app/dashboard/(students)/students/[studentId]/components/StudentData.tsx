@@ -1,12 +1,12 @@
 import Avatar from "@/app/components/Avatar";
-import { Teacher } from "@prisma/client";
+import { Student } from "@prisma/client";
 import { FC } from "react";
 
-interface TeacherDataProps {
-  data: Teacher;
+interface StudentDataProps {
+  data: Student;
 }
 
-const TeacherData: FC<TeacherDataProps> = ({ data }) => {
+const StudentData: FC<StudentDataProps> = ({ data }) => {
   return (
     <div className='p-5 w-full bg-gray-100'>
       <div className='flex items-center justify-between'>
@@ -37,15 +37,11 @@ const TeacherData: FC<TeacherDataProps> = ({ data }) => {
         </div>
         <div>
           Degrees: {"  "}
-          <span className='font-bold'>
-            {data.degrees ? data.degrees : "No degrees"}
-          </span>
+          <span className='font-bold'>{"No degrees"}</span>
         </div>
         <div>
           Experience: {"  "}
-          <span className='font-bold'>
-            {data.experience ? data.experience : "No experience"}
-          </span>
+          <span className='font-bold'>{"No experience"}</span>
         </div>
         <div>
           Unique code: {"  "}[{"  "}
@@ -61,4 +57,4 @@ const TeacherData: FC<TeacherDataProps> = ({ data }) => {
   );
 };
 
-export default TeacherData;
+export default StudentData;

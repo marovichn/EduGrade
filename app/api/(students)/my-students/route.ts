@@ -7,7 +7,7 @@ export async function POST(request: Request) {
   const currentUser = await getCurrentUser();
   const { studentId } = await request.json();
 
-  if (currentUser?.role !== "Teacher") {
+  if (!currentUser) {
     return new NextResponse("Anauthorized", { status: 401 });
   }
 

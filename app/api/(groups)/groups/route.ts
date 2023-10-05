@@ -7,12 +7,15 @@ export async function GET(request: Request) {
   if (currentUser?.role !== "Admin") {
     return new NextResponse("Anauthorized", { status: 401 });
   }
-  
+
   const groups = await prisma.group.findMany({
     include: {
       student: true,
       subject: true,
       teacher: true,
+      attendances: true,
+      results: true,
+      activityGrades: true,
     },
   });
 

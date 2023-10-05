@@ -26,7 +26,7 @@ const TeacherData: FC<TeacherDataProps> = ({ data }) => {
         toast.error("Something went wrong");
       }
       toast.success("Successfully deleted!");
-      router.push("/dashboard/students");
+      router.push("/dashboard/teachers");
     } catch (err: any) {
       if (err?.response.status === 401) {
         toast.error("You are not allowed to do that!");

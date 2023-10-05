@@ -10,6 +10,7 @@ import {
   Subject,
   Teacher,
 } from "@prisma/client";
+import CellActionsGroups from "./CellActionGroups";
 
 export type GroupColumn = {
   id: string;
@@ -95,5 +96,9 @@ export const columns: ColumnDef<GroupColumn>[] = [
         {new Date(row.original.createdAt).toDateString()}
       </div>
     ),
+  },
+  {
+    id: "actions",
+    cell: ({ row }) => <CellActionsGroups data={row.original} />,
   },
 ];

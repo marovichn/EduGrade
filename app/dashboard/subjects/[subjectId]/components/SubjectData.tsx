@@ -26,7 +26,8 @@ const SubjectData: FC<SubjectDataProps> = ({ data }) => {
         toast.error("Something went wrong");
       }
       toast.success("Successfully deleted!");
-      router.push("/dashboard/students");
+      router.push("/dashboard/subjects");
+      
     } catch (err: any) {
       if (err?.status === 401) {
         toast.error("You are not allowed to do that!");

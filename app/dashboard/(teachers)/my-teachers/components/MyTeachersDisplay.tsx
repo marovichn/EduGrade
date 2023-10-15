@@ -41,7 +41,7 @@ const MyTeachersDisplay: FC<MyTeachersDisplayProps> = ({ user }) => {
       // Iterate through the teachers array
       teachers.forEach((teacher: any) => {
         const teacherId = teacher?.id;
-        if(!teacherId){
+        if (!teacherId) {
           return;
         }
         // Check if the teacher's ID is not in the Set, and add it to the Set and the uniqueTeachers array

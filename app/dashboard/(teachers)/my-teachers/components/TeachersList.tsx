@@ -68,9 +68,9 @@ const TeachersList: FC<TeachersListProps> = ({ users, roleUrl }) => {
         )}
         {indexedUsers?.map((user, index) => (
           <Link
-            href={`/dashboard/${roleUrl}/${user.id}`}
+            href={`/dashboard/${roleUrl}/${user?.id}`}
             className='w-full h-20 flex justify-center items-center my-4 group '
-            key={user.name}
+            key={user?.name}
           >
             <div className='bg-gray-500 w-8 h-full rounded-lg mr-3 flex items-center justify-center'>
               <h1 className='text-white font-extrabold'>{index + 1}.</h1>
@@ -82,10 +82,10 @@ const TeachersList: FC<TeachersListProps> = ({ users, roleUrl }) => {
                 </div>
                 <div className='flex flex-col items-start justify-start'>
                   <h1 className='text-xl font-bold text-black'>
-                    {user.name} {user.lastname && user.lastname}{" "}
-                    {user.code && "-" + user.code}
+                    {user?.name} {user?.lastname && user?.lastname}{" "}
+                    {user?.code && "-" + user?.code}
                   </h1>
-                  <p>{user.email}</p>
+                  <p>{user?.email}</p>
                 </div>
               </div>
               <div>

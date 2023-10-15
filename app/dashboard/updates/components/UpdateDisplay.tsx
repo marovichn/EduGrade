@@ -28,7 +28,7 @@ const UpdateDisplay: FC<UpdateDisplayProps> = ({ user }) => {
         const assignmentRes = await axios.get("/api/assignments");
         //@ts-ignore
         user?.groups.forEach(async (group) => {
-          const groupRes = await axios.get(`/api/group/${group.id}`);
+          const groupRes = await axios.get(`/api/group/${group?.id}`);
           const resultRes = await axios.post("/api/my-results", {
             groupId: group.id,
           });

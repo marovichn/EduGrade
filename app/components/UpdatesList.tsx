@@ -31,7 +31,7 @@ const UpdatesList: FC<UpdatesListProps> = ({ data }) => {
             }}
           >
             <div
-              className='w-10 h-2 left-[120px] z-[-1] bg-black absolute'
+              className='w-20 h-2 left-[100px] z-[-1] bg-black absolute'
               style={{
                 backgroundColor: update.done ? "green" : "red",
               }}
@@ -43,20 +43,20 @@ const UpdatesList: FC<UpdatesListProps> = ({ data }) => {
             )}
           </div>
           <div
-            className='flex items-center justify-center flex-col h-28 p-5 bg-white rounded-xl w-auto max-sm:h-full '
+            className='flex items-center justify-center flex-col h-36 p-5 bg-white rounded-xl w-auto max-sm:h-full '
             style={{
               border: update.done ? "2px dotted green" : " 2px dotted red",
             }}
           >
             <div
-              className='w-10 h-2 left-[220px] z-[-1] bg-black absolute'
+              className='w-24 h-2 left-[190px] z-[-1] bg-black absolute'
               style={{
                 backgroundColor: update.done ? "green" : "red",
               }}
             ></div>
             <div className='flex items-center justify-around gap-x-5 max-sm:flex-col max-sm:items-start'>
               <div className='flex flex-col items-start justify-start'>
-                <h1 className='text-xl font-bold'>{update.type}</h1>
+                <h1 className='text-xl font-bold '>{update.type}</h1>
                 <p>{update.description}</p>
               </div>
               <div className='w-12 h-1 bg-black rotate-90 max-sm:hidden'></div>
@@ -88,7 +88,7 @@ const UpdatesList: FC<UpdatesListProps> = ({ data }) => {
                 }}
               >
                 <div
-                  className='w-10 h-2 left-[120px] z-[-1] bg-black absolute'
+                  className='w-24 h-2 left-[100px] z-[-1] bg-black absolute'
                   style={{
                     backgroundColor: "red",
                   }}
@@ -102,7 +102,7 @@ const UpdatesList: FC<UpdatesListProps> = ({ data }) => {
                 }}
               >
                 <div
-                  className='w-10 h-2 left-[220px] z-[-1] bg-black absolute'
+                  className='w-20 h-2 left-[190px] z-[-1] bg-black absolute'
                   style={{
                     backgroundColor: "red",
                   }}
@@ -135,7 +135,7 @@ const UpdatesList: FC<UpdatesListProps> = ({ data }) => {
                 }}
               >
                 <div
-                  className='w-10 h-2 left-[120px] z-[-1] bg-black absolute'
+                  className='w-20 h-2 left-[100px] z-[-1] bg-black absolute'
                   style={{
                     backgroundColor: update.value === ">80%" ? "green" : "gold",
                   }}
@@ -156,7 +156,7 @@ const UpdatesList: FC<UpdatesListProps> = ({ data }) => {
                 }}
               >
                 <div
-                  className='w-10 h-2 left-[220px] z-[-1] bg-black absolute'
+                  className='w-20 h-2 left-[190px] z-[-1] bg-black absolute'
                   style={{
                     backgroundColor: update.value === ">80%" ? "green" : "gold",
                   }}
@@ -190,7 +190,7 @@ const UpdatesList: FC<UpdatesListProps> = ({ data }) => {
             }}
           >
             <div
-              className='w-10 h-2 left-[120px] z-[-1] bg-black absolute'
+              className='w-20 h-2 left-[100px] z-[-1] bg-black absolute'
               style={{
                 backgroundColor: "purple",
               }}
@@ -204,7 +204,7 @@ const UpdatesList: FC<UpdatesListProps> = ({ data }) => {
             }}
           >
             <div
-              className='w-10 h-2 left-[220px] z-[-1] bg-black absolute'
+              className='w-20 h-2 left-[190px] z-[-1] bg-black absolute'
               style={{
                 backgroundColor: "purple",
               }}
@@ -243,7 +243,7 @@ const UpdatesList: FC<UpdatesListProps> = ({ data }) => {
                 }}
               >
                 <div
-                  className='w-10 h-2 left-[120px] z-[-1] bg-black absolute'
+                  className='w-20 h-2 left-[100px] z-[-1] bg-black absolute'
                   style={{
                     backgroundColor: "red",
                   }}
@@ -257,7 +257,7 @@ const UpdatesList: FC<UpdatesListProps> = ({ data }) => {
                 }}
               >
                 <div
-                  className='w-10 h-2 left-[220px] z-[-1] bg-black absolute'
+                  className='w-20 h-2 left-[190px] z-[-1] bg-black absolute'
                   style={{
                     backgroundColor: "red",
                   }}
@@ -294,7 +294,7 @@ const UpdatesList: FC<UpdatesListProps> = ({ data }) => {
                 }}
               >
                 <div
-                  className='w-10 h-2 left-[120px] z-[-1] bg-black absolute'
+                  className='w-20 h-2 left-[100px] z-[-1] bg-black absolute'
                   style={{
                     backgroundColor:
                       update.type === "Regulated" ? "green" : "gold",
@@ -316,7 +316,7 @@ const UpdatesList: FC<UpdatesListProps> = ({ data }) => {
                 }}
               >
                 <div
-                  className='w-10 h-2 left-[220px] z-[-1] bg-black absolute'
+                  className='w-20 h-2 left-[190px] z-[-1] bg-black absolute'
                   style={{
                     backgroundColor:
                       update.type === "Regulated" ? "green" : "gold",
@@ -346,8 +346,10 @@ const UpdatesList: FC<UpdatesListProps> = ({ data }) => {
   return (
     <>
       <div className='h-full w-full'>
-        {data.map((update) => (
-          <div className='flex flex-col gap-y-5'>{updateDisplay(update)}</div>
+        {data.map((update, index) => (
+          <div key={index} className='flex flex-col gap-y-5'>
+            {updateDisplay(update)}
+          </div>
         ))}
         <div className='flex flex-col items-start justify-center group -mt-10 transition max-md:flex max-md:w-full max-md:items-center'>
           <div className='flex items-center justify-center bg-black/70  p-20 rounded-full gap-x-10 border-2 border-black scale-[0.2] transition'>

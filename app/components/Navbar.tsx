@@ -45,13 +45,19 @@ const Navbar: FC<NavbarProps> = ({ user }) => {
       <div className='fixed top-16 z-15 bg-gray-300 text-black w-full h-16 z-[9]'>
         <div className='flex items-center justify-around  mt-2 w-full h-full '>
           {user?.role === "Admin"
-            ? adminRoutes.map((route) => <NavItem route={route} />)
+            ? adminRoutes.map((route) => (
+                <NavItem key={route.key} route={route} />
+              ))
             : ""}
           {user?.role === "Student"
-            ? studentRoutes.map((route) => <NavItem route={route} />)
+            ? studentRoutes.map((route) => (
+                <NavItem key={route.key} route={route} />
+              ))
             : ""}
           {user?.role === "Teacher"
-            ? teacherRoutes.map((route) => <NavItem route={route} />)
+            ? teacherRoutes.map((route) => (
+                <NavItem key={route.key} route={route} />
+              ))
             : ""}
         </div>
       </div>

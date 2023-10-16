@@ -1,3 +1,6 @@
+"use client";
+
+import axios from "axios";
 import {
   BadgeCheck,
   BadgeX,
@@ -9,13 +12,28 @@ import {
   UserCog2,
   UserX2,
 } from "lucide-react";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 
 interface UpdatesListProps {
   data: any[];
 }
 
 const UpdatesList: FC<UpdatesListProps> = ({ data }) => {
+  const assignments = data.filter((a) => a.t === "Assignment");
+  useEffect(() => {
+    const fetchData = async () => {
+      console.log(assignments);
+      try {
+        axios
+          .post("/api/check-missing", { assignments })
+          .then((res) => console.log(res));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [data, assignments]);
+
   const updateDisplay = (update: any) => {
     if (update?.t === "Assignment") {
       return (
@@ -65,9 +83,15 @@ const UpdatesList: FC<UpdatesListProps> = ({ data }) => {
                 <p>{new Date(update.dateDue).toDateString()}</p>
               </div>
               <div className='w-12 h-[2px] bg-black/70 rotate-90 max-sm:hidden '></div>
-              <div className='pr-5'>
-                <span className='text-2xl'>{update.points}</span> points
-              </div>
+              {update.isMissing ? (
+                <div className='text-2xl font-bold'>
+                  Assignment Deadline Expired
+                </div>
+              ) : (
+                <div className='pr-5'>
+                  <span className='text-2xl'>{update.points}</span> points
+                </div>
+              )}
             </div>
           </div>
         </div>

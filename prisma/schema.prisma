@@ -146,6 +146,7 @@ dateStart       DateTime @default(now())
 dateDue         DateTime?
 done            Boolean?
 t               String?
+isMissing       Boolean?
 
 group           Group  @relation(fields: [groupId], references: [id])
 groupId         String @db.ObjectId

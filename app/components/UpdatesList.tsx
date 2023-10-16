@@ -21,6 +21,7 @@ interface UpdatesListProps {
 const UpdatesList: FC<UpdatesListProps> = ({ data }) => {
   const assignments = data.filter((a) => a.t === "Assignment");
   useEffect(() => {
+    // Additional checking (node-schedule is automatically checking every 24 hours!)
     const fetchData = async () => {
       console.log(assignments);
       try {

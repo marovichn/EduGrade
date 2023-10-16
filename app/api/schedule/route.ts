@@ -1,5 +1,4 @@
 import schedule from "node-schedule";
-import getCurrentUser from "@/app/actions/getCurrentUser";
 import prisma from "@/app/libs/prismadb";
 
 // Create a rule to run the task every day at midnight (0:00)

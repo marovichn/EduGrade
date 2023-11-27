@@ -1,19 +1,130 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+datasource db {
+  provider     = "cockroachdb"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
-datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
+model Course {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId String
+  title String 
+  description String? 
+  imageUrl String? 
+  price Float?
+  isPublished Boolean @default(false)
+  eduxclusive Boolean @default(false)
+
+  categoryId String?
+  category Category? @relation(fields: [categoryId], references: [id])
+
+  chapters Chapter[]
+  attachments Attachment[]
+  purchases Purchase[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([categoryId])
 }
 
+model Category {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name String @unique
+  courses Course[]
+}
+
+model Attachment {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name String
+  url String 
+
+  courseId String
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([courseId])
+}
+
+model Chapter {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title String
+  description String? 
+  videoUrl String? 
+  position Int
+  isPublished Boolean @default(false)
+  isFree Boolean @default(false)
+
+  muxData MuxData?
+
+  courseId String
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  userProgress UserProgress[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([courseId])
+}
+
+model MuxData {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  assetId String
+  playbackId String?
+
+  chapterId String @unique
+  chapter Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+}
+
+model UserProgress {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId String
+
+  chapterId String
+  chapter Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  isCompleted Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([chapterId])
+  @@unique([userId, chapterId])
+}
+
+model Purchase {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId String
+
+  courseId String
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
+
+  @@unique([userId, courseId])
+  @@index([courseId])
+}
+
+model StripeCustomer {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId String @unique
+  stripeCustomerId String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 
 
 model Admin {
-  id              String @id @default(auto()) @map("_id") @db.ObjectId
+  id              String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name            String?
   lastname        String?
   email           String?   @unique
@@ -28,7 +139,7 @@ model Admin {
 
 
 model Teacher {
-  id              String @id @default(auto()) @map("_id") @db.ObjectId
+  id              String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name            String?
   lastname        String?
   email           String?   @unique
@@ -48,7 +159,7 @@ model Teacher {
 
 
 model Student {
-  id              String @id @default(auto()) @map("_id") @db.ObjectId
+  id              String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name            String?
   lastname        String?
   adress          String?
@@ -71,7 +182,7 @@ model Student {
 
 
 model Group {
-  id              String @id @default(auto()) @map("_id") @db.ObjectId
+  id              String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
 
   name            String
   description     String
@@ -87,18 +198,22 @@ model Group {
   activityGrades  Activity[]
 
   teacher Teacher?  @relation(fields: [teacherId], references: [id])
-  teacherId String? @db.ObjectId
+  teacherId String? @db.Uuid
 
   subject Subject @relation(fields: [subjectId], references: [id])
-  subjectId String @db.ObjectId
+  subjectId String @db.Uuid
 
   student Student @relation(fields: [studentId], references: [id])
-  studentId String @db.ObjectId
+  studentId String @db.Uuid
+
+  @@index([teacherId])
+  @@index([subjectId])
+  @@index([studentId])
 }
 
 
 model Result{
-id              String @id @default(auto()) @map("_id") @db.ObjectId
+id              String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
 type            String
 value           String
 description     String?
@@ -106,12 +221,14 @@ date            DateTime? @default(now())
 t               String?
 
 group           Group  @relation(fields: [groupId], references: [id])
-groupId         String @db.ObjectId
+groupId         String @db.Uuid
+
+  @@index([groupId])
 }
 
 
 model Activity{
-id              String @id @default(auto()) @map("_id") @db.ObjectId
+id              String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
 type            String
 value           String
 description     String?
@@ -119,12 +236,14 @@ date            DateTime? @default(now())
 t               String?
 
 group           Group  @relation(fields: [groupId], references: [id])
-groupId         String @db.ObjectId
+groupId         String @db.Uuid
+
+ @@index([groupId])
 }
 
 
 model Attendance{
-id              String @id @default(auto()) @map("_id") @db.ObjectId
+id              String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
 type            String
 description     String?
 date            DateTime?
@@ -133,12 +252,14 @@ classes         String[]
 t               String?
 
 group           Group  @relation(fields: [groupId], references: [id])
-groupId         String @db.ObjectId
+groupId         String @db.Uuid
+
+ @@index([groupId])
 }
 
 
 model Assignment{
-id              String @id @default(auto()) @map("_id") @db.ObjectId
+id              String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
 type            String
 points          String
 description     String?
@@ -149,11 +270,13 @@ t               String?
 isMissing       Boolean?
 
 group           Group  @relation(fields: [groupId], references: [id])
-groupId         String @db.ObjectId
+groupId         String  @db.Uuid
+
+ @@index([groupId])
 }
 
 model Subject{
-  id              String @id @default(auto()) @map("_id") @db.ObjectId
+  id              String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name String
   description String?
   color        String?

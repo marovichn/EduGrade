@@ -22,6 +22,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
   const session = useSession();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [test, setTest] = useState(false);
 
   useEffect(() => {
     if (session?.status === "authenticated") {
@@ -42,52 +43,52 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
     },
   });
 
-    const onSubmit: SubmitHandler<FieldValues> = (data) => {
-      setIsLoading(true);
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    setIsLoading(true);
 
-      if (variant === "REGISTER") {
-        axios
-          .post("/api/register", data)
-          .then(() =>
-            signIn("credentials", {
-              ...data,
-              redirect: false,
-            })
-          )
-          .then((callback) => {
-            if (callback?.error) {
-              toast.error("Invalid credentials!");
-            }
-
-            if (callback?.ok) {
-              router.push("/dashboard");
-            }
+    if (variant === "REGISTER") {
+      axios
+        .post("/api/register", data)
+        .then(() =>
+          signIn("credentials", {
+            ...data,
+            redirect: false,
           })
-          .catch(() =>
-            toast.error(
-              "Something went wrong! Make sure you selected all the necessary fields."
-            )
-          )
-          .finally(() => setIsLoading(false));
-      }
+        )
+        .then((callback) => {
+          if (callback?.error) {
+            toast.error("Invalid credentials!");
+          }
 
-      if (variant === "LOGIN") {
-        signIn("credentials", {
-          ...data,
-          redirect: false,
+          if (callback?.ok) {
+            router.push("/dashboard");
+          }
         })
-          .then((callback) => {
-            if (callback?.error) {
-              toast.error("Invalid credentials!");
-            }
+        .catch(() =>
+          toast.error(
+            "Something went wrong! Make sure you selected all the necessary fields."
+          )
+        )
+        .finally(() => setIsLoading(false));
+    }
 
-            if (callback?.ok) {
-              router.push("/dashboard");
-            }
-          })
-          .finally(() => setIsLoading(false));
-      }
-    };
+    if (variant === "LOGIN") {
+      signIn("credentials", {
+        ...data,
+        redirect: false,
+      })
+        .then((callback) => {
+          if (callback?.error) {
+            toast.error("Invalid credentials!");
+          }
+
+          if (callback?.ok) {
+            router.push("/dashboard");
+          }
+        })
+        .finally(() => setIsLoading(false));
+    }
+  };
 
   return (
     <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
@@ -96,7 +97,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
         bg-white
           px-[50px]
           py-16
-          pb-20
+          pb-6
           shadow
           sm:rounded-lg
           sm:px-6
@@ -105,7 +106,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
         <form className='space-y-6' onSubmit={handleSubmit(onSubmit)}>
           <div className='flex items-center justify-center gap-x-5 mb-10'>
             <div className='p-2 bg-black/70 rounded-lg'>
-              <MdCastForEducation className='w-12 h-12 text-yellow-300'/>
+              <MdCastForEducation className='w-12 h-12 text-yellow-300' />
             </div>
             <h2
               className=' 
@@ -167,6 +168,53 @@ const AuthForm: FC<AuthFormProps> = ({ variant }) => {
             </Button>
           </div>
         </form>
+        <div className='w-full flex items-center justify-center flex-col gap-y-3 p-2 pt-8 px-8'>
+          {test && (
+            <div className="transition">
+              <div className='flex w-full flex-row justify-between'>
+                <p className='flex flex-row gap-x-5 justify-between w-full'>
+                  <div className='flex flex-col items-start w-full flex-1'>
+                    <h1 className='font-bold'>Email Adress:</h1>
+                    <p>edugradeadmin@lmn.dev</p>
+                  </div>
+                  <div className='flex flex-col items-start w-full flex-1 pl-6'>
+                    <h1 className='font-bold'>Password:</h1>
+                    <p>testadmin</p>
+                  </div>
+                </p>
+              </div>
+              <div className='flex w-full flex-row justify-between'>
+                <p className='flex flex-row gap-x-5 justify-between w-full'>
+                  <div className='flex flex-col items-start w-full flex-1'>
+                    <h1 className='font-bold'>Email Adress:</h1>
+                    <p>nikolastudent@lmn.dev</p>
+                  </div>
+                  <div className='flex flex-col items-start w-full flex-1 pl-10'>
+                    <h1 className='font-bold'>Password:</h1>
+                    <p>teststudent</p>
+                  </div>
+                </p>
+              </div>
+              <div className='flex w-full flex-row justify-between'>
+                <p className='flex flex-row gap-x-5 justify-between w-full'>
+                  <div className='flex flex-col items-start w-full flex-1 '>
+                    <h1 className='font-bold'>Email Adress:</h1>
+                    <p>nikolateacher@lmn.dev</p>
+                  </div>
+                  <div className='flex flex-col items-start w-full flex-1  pl-10'>
+                    <h1 className='font-bold'>Password:</h1>
+                    <p>testteacher</p>
+                  </div>
+                </p>
+              </div>
+            </div>
+          )}
+          <div className="mt-3">
+            <Button onClick={() => setTest((p) => !p)}>
+              {test ? "Hide" : "Show test accounts"}
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );

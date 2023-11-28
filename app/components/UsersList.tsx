@@ -13,6 +13,7 @@ import {
 import Link from "next/link";
 import { FC } from "react";
 import PageWrapper from "./PageWrapper";
+import { MdHourglassEmpty } from "react-icons/md";
 
 interface UsersListProps {
   users?: Admin[] | Student[] | Teacher[] | null | undefined;
@@ -77,10 +78,13 @@ const UsersList: FC<UsersListProps> = ({ users, roleUrl }) => {
           </Link>
         </div>
         {users?.length === 0 && (
-          <div className='flex flex-col items-center justify-center'>
-            You are not allowed to see this data!
-            <div className='my-28'>
-              <ShieldAlert className='' size={250} />
+          <div className='flex flex-col items-center justify-center text-2xl'>
+            No data.
+            <span className='text-sm'>
+              (this data is protected if you are not Administrator you cant excess it)
+            </span>
+            <div className='mb-20 mt-2'>
+              <MdHourglassEmpty className='' size={150} />
             </div>
           </div>
         )}
@@ -103,7 +107,9 @@ const UsersList: FC<UsersListProps> = ({ users, roleUrl }) => {
                     {user.name} {user.lastname && user.lastname}
                   </h1>
 
-                  <p className="text-xs">{user.code && "(" + user.code + ")"}</p>
+                  <p className='text-xs'>
+                    {user.code && "(" + user.code + ")"}
+                  </p>
                   <p>{user.email}</p>
                 </div>
               </div>

@@ -21,7 +21,6 @@ import {
 } from "lucide-react";
 
 import { GroupColumn } from "./ColumnsGroups";
-import AlertModal from "@/app/components/modals/AlertModal";
 import { Button } from "@/app/components/ui/button";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -46,10 +45,7 @@ const CellActionsGroups: FC<CellActionsGroupsProps> = ({ data }) => {
         toast.error("Something went wrong");
       }
       toast.success("Successfully deleted!");
-      router.push("/dashboard/groups");
-      if (location) {
-        location.reload();
-      }
+      router.refresh();
     } catch (err: any) {
       if (err?.response.status === 401) {
         toast.error("You are not allowed to do that!");

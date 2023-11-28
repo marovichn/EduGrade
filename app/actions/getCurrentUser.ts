@@ -46,8 +46,9 @@ const getCurrentUser = async () => {
     }
 
     return null;
-  } catch (error: any) {
-    return null;
+  } catch (error) {
+    console.error("Error in getCurrentUser:", error);
+    throw error; // Rethrow the error to propagate it further
   }
 };
 

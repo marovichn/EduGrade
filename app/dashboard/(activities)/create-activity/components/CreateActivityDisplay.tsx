@@ -67,7 +67,11 @@ const CreateResultDisplay: FC<CreateResultDisplayProps> = ({ user }) => {
 
   return (
     <>
-      {loading && <p>Loading...</p>}
+      {loading && (
+        <div className='h-[80vh] w-full flex items-center justify-center'>
+          <div className='w-[100px] h-[100px] border-b-8 border-b-black rounded-full animate-spin'></div>
+        </div>
+      )}
       {!loading && (
         <ResultsForm
           subjects={subjects}

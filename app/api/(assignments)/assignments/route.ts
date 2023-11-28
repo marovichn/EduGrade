@@ -25,14 +25,10 @@ export async function GET() {
       },
     });
 
-    const assignments = allMyGroupsStudent.map((group) =>
-      group.assignments.map((assignment) => assignment)
-    );
+    let assignments = allMyGroups.map((group) => group.assignments).flat();
 
     return NextResponse.json(assignments);
   }
-  const assignments = allMyGroups.map((group) =>
-    group.assignments.map((assignment) => assignment)
-  );
+  const assignments = allMyGroups.map((group) => group.assignments).flat();
   return NextResponse.json(assignments);
 }

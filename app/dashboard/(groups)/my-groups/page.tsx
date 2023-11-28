@@ -1,6 +1,5 @@
 "use client";
 import { Admin, Student, Teacher } from "@prisma/client";
-import { useEffect, useState } from "react";
 import axios from "axios";
 
 import { columns } from "./components/ColumnsGroups";
@@ -8,14 +7,27 @@ import { columns } from "./components/ColumnsGroups";
 import PageWrapper from "@/app/components/PageWrapper";
 import GroupDisplay from "./components/GroupDisplay";
 
-const Page = () => {
-  const [user, setCurrentUser] = useState<Admin | Student | Teacher | null>(
-    null
-  );
+interface PageProps {
+  user: Admin | Student | Teacher | null;
+}
 
-  useEffect(() => {
-    axios.get("/api/current-user").then((data) => setCurrentUser(data.data));
-  }, []);
+export async function getServerSideProps() {
+  try {
+    const { data } = await axios.get("/api/current-user");
+    const user = data;
+
+    return {
+      props: { user },
+    };
+  } catch (error) {
+    console.error("Error fetching current user:", error);
+
+    return {
+      props: { user: null },
+    };
+  }
+}
+const page = ({ user }: PageProps) => {
   return (
     <PageWrapper>
       <div className='mb-16 text-4xl font-bold flex items-center justify-between'>
@@ -26,4 +38,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default page;

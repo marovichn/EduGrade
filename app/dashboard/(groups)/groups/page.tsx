@@ -8,8 +8,7 @@ import PageWrapper from "@/app/components/PageWrapper";
 import Link from "next/link";
 import { Group, Plus } from "lucide-react";
 
-
-const Page =() => {
+const Page = () => {
   const [groups, setGroups] = useState([]);
   useEffect(() => {
     const getGroups = async () => {

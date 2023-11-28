@@ -2,7 +2,7 @@ import getCurrentUser from "@/app/actions/getCurrentUser";
 import prisma from "@/app/libs/prismadb";
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(request: Request) {
   const currentUser = await getCurrentUser();
   if (!currentUser) {
     throw new NextResponse("Unauthorized", { status: 401 });
@@ -25,10 +25,12 @@ export async function GET() {
       },
     });
 
-    let assignments = allMyGroupsStudent.map((group) => group.assignments).flat();
+    let assignments = allMyGroupsStudent
+      .map((group) => group.assignments)
+      .flat();
 
-    return NextResponse.json({assignments});
+    return NextResponse.json(assignments);
   }
   const assignments = allMyGroups.map((group) => group.assignments).flat();
-  return NextResponse.json({assignments});
+  return NextResponse.json(assignments);
 }

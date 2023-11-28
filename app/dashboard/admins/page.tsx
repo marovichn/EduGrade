@@ -3,8 +3,6 @@ import UsersList from "@/app/components/UsersList";
 import axios from "axios";
 import {  useEffect, useState } from "react";
 
-
-
 const AdminsPage = () => {
   const [admins, setAdmins] = useState([]);
   useEffect(() => {

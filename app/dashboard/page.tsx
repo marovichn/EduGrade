@@ -1,11 +1,8 @@
-import { FC } from "react";
 import getCurrentUser from "../actions/getCurrentUser";
 import PageWrapper from "../components/PageWrapper";
 import Actions from "../components/Actions";
 
-interface pageProps {}
-
-const page: FC<pageProps> = async ({}) => {
+const page = async ({}) => {
   const user = await getCurrentUser();
   return (
     <PageWrapper>

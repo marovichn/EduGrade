@@ -1,10 +1,7 @@
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import StudentForm from "@/app/components/StudentForm";
-import { FC } from "react";
 
-interface pageProps {}
-
-const page: FC<pageProps> =async ({}) => {
+const page =async ({}) => {
 const user =await getCurrentUser();
 
   return (

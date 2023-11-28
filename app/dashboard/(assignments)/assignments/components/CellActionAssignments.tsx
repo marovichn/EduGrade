@@ -30,7 +30,9 @@ const CellActionAssignments: FC<CellActionAssignmentsProps> = ({ data }) => {
       toast.error("Something went wrong!");
     } else {
       toast.success("Successfully updated assignment.");
-      location.reload();
+      if (location) {
+        location.reload();
+      }
     }
   };
   const handleDelete = async () => {
@@ -39,7 +41,9 @@ const CellActionAssignments: FC<CellActionAssignmentsProps> = ({ data }) => {
       toast.error("Something went wrong!");
     } else {
       toast.success("Successfully deleted assignment.");
-      location.reload();
+      if (location) {
+        location.reload();
+      }
     }
   };
 

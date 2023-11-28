@@ -47,7 +47,9 @@ const CellActionsGroups: FC<CellActionsGroupsProps> = ({ data }) => {
       }
       toast.success("Successfully deleted!");
       router.push("/dashboard/groups");
-      location.reload();
+      if (location) {
+        location.reload();
+      }
     } catch (err: any) {
       if (err?.response.status === 401) {
         toast.error("You are not allowed to do that!");

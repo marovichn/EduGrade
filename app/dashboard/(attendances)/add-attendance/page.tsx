@@ -1,9 +1,19 @@
-import AddAttendanceDisplay from "./components/AddAttendanceDisplay";
-import getCurrentUser from "@/app/actions/getCurrentUser";
+"use client";
+import { Admin, Student, Teacher } from "@prisma/client";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-const page= async ({}) => {
-  const user = await getCurrentUser();
+import AddAttendanceDisplay from "./components/AddAttendanceDisplay";
+
+const Page =  ({}) => {
+ const [user, setCurrentUser] = useState<Admin | Student | Teacher | null>(
+   null
+ );
+
+ useEffect(() => {
+   axios.get("/api/current-user").then((data) => setCurrentUser(data.data));
+ }, []);
   return <AddAttendanceDisplay user={user} />;
 };
 
-export default page;
+export default Page;

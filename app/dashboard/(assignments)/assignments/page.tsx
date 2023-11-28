@@ -1,9 +1,19 @@
-import AssignmentsDisplay from "./components/AssignmentsDisplay";
-import getCurrentUser from "@/app/actions/getCurrentUser";
+"use client";
 
-const page = async ({}) => {
-  const user = await getCurrentUser();
+import { Admin, Student, Teacher } from "@prisma/client";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import AssignmentsDisplay from "./components/AssignmentsDisplay";
+
+const Page = async ({}) => {
+  const [user, setCurrentUser] = useState<Admin | Student | Teacher | null>(
+    null
+  );
+
+  useEffect(() => {
+    axios.get("/api/current-user").then((data) => setCurrentUser(data.data));
+  }, []);
   return <AssignmentsDisplay user={user} />;
 };
 
-export default page;
+export default Page;

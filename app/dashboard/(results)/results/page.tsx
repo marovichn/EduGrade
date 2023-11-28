@@ -1,11 +1,17 @@
-
-import getCurrentUser from "@/app/actions/getCurrentUser";
+"use client";
+import { Admin, Student, Teacher } from "@prisma/client";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import ResultDisplay from "./components/ResultDisplay";
 
+const Page = ({}) => {
+  const [user, setCurrentUser] = useState<Admin | Student | Teacher | null>(
+    null
+  );
 
-
-const page = async ({}) => {
-  const user = await getCurrentUser();
+  useEffect(() => {
+    axios.get("/api/current-user").then((data) => setCurrentUser(data.data));
+  }, []);
   return (
     <div>
       <ResultDisplay user={user} />
@@ -13,4 +19,4 @@ const page = async ({}) => {
   );
 };
 
-export default page;
+export default Page;

@@ -25,10 +25,10 @@ export async function GET() {
       },
     });
 
-    let assignments = allMyGroups.map((group) => group.assignments).flat();
+    let assignments = allMyGroupsStudent.map((group) => group.assignments).flat();
 
-    return NextResponse.json(assignments);
+    return NextResponse.json({assignments});
   }
   const assignments = allMyGroups.map((group) => group.assignments).flat();
-  return NextResponse.json(assignments);
+  return NextResponse.json({assignments});
 }

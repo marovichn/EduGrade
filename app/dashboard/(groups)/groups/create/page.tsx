@@ -1,7 +1,6 @@
 import { FC } from "react";
 import GroupForm from "../components/GroupForm";
 import getCurrentUser from "@/app/actions/getCurrentUser";
-import { useRouter } from "next/navigation";
 
 interface pageProps {}
 

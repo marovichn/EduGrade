@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import AssignmentsDisplay from "./components/AssignmentsDisplay";
 
-const Page = async ({}) => {
+const Page = ({}) => {
   const [user, setCurrentUser] = useState<Admin | Student | Teacher | null>(
     null
   );

@@ -7,7 +7,7 @@ import GroupForm from "../components/GroupForm";
 
 interface PageProps {}
 
-const Page = async ({}) => {
+const Page =  ({}) => {
 const [user, setCurrentUser] = useState<Admin | Student | Teacher | null>(null);
 
 useEffect(() => {

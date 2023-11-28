@@ -5,7 +5,7 @@ import axios from "axios";
 import {  useEffect, useState } from "react";
 
 
-const page =() => {
+const Page =() => {
   const [students, setStudents] = useState([]);
   useEffect(() => {
     const getStudents = async () => {
@@ -25,4 +25,4 @@ const page =() => {
   );
 };
 
-export default page;
+export default Page;

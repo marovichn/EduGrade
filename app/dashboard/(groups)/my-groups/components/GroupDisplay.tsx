@@ -22,7 +22,7 @@ const GroupDisplay: FC<GroupDisplayProps> = ({ columns, user }) => {
       setGroups(res.data);
     };
     getGroups();
-  }, []);
+  }, [user]);
 
   return (
     <GroupDataTable

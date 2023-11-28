@@ -18,7 +18,7 @@ const NavItem: FC<NavItemProps> = ({ route }) => {
   const [selected, setSlected] = useState(false);
   useEffect(() => {
     setSlected(route.href === pathname);
-  }, [pathname]);
+  }, [pathname, route.href]);
 
   return (
     <Link

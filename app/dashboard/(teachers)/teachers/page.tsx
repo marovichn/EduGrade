@@ -4,7 +4,7 @@ import UsersList from "@/app/components/UsersList";
 import axios from "axios";
 import {  useEffect, useState } from "react";
 
-const page = () => {
+const TeachersPage = () => {
   const [teachers, setTeachers] = useState([]);
   useEffect(() => {
     const getTeachers = async () => {
@@ -24,4 +24,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default TeachersPage;

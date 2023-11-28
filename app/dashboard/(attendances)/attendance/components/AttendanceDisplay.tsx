@@ -34,7 +34,10 @@ const AttendanceDisplay: FC<AttendanceDisplayProps> = ({ user }) => {
       });
     };
     storeData();
-  }, []);
+  }, [
+    //@ts-ignore
+    user?.groups,
+  ]);
   const dataSorted = data.sort((a: any, b: any) => {
     return Number(new Date(b.date)) - Number(new Date(a.date));
   });

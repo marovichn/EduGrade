@@ -42,7 +42,7 @@ const MyStudentsDisplay: FC<MyStudentsDisplayProps> = ({ user }) => {
     };
 
     getGroups();
-  }, []);
+  }, [user]);
 
   return (
     <div>

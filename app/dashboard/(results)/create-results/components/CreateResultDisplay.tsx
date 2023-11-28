@@ -65,7 +65,7 @@ const CreateResultDisplay: FC<CreateResultDisplayProps> = ({ user }) => {
       }
     };
     getGroups();
-  }, []);
+  }, [user]);
 
   return (
     <>

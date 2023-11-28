@@ -59,7 +59,10 @@ const UpdateDisplay: FC<UpdateDisplayProps> = ({ user }) => {
       await getData();
     };
     storeData();
-  }, []);
+  }, [
+    //@ts-ignore
+    user?.groups,
+  ]);
   const dataSorted = data.sort((a: any, b: any) => {
     if (!a.date && b.date) {
       if (!a.data) {

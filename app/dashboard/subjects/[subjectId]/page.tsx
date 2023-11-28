@@ -5,11 +5,11 @@ import axios from "axios";
 import { FC, useEffect, useState } from "react";
 import SubjectData from "./components/SubjectData";
 
-interface pageProps {
+interface SubjectIdPageProps {
   params: { subjectId: string };
 }
 
-const page: FC<pageProps> = ({ params }) => {
+const SubjectIdPage: FC<SubjectIdPageProps> = ({ params }) => {
   const [data, setData] = useState<Subject[]>([]);
   useEffect(() => {
     console.log(params);
@@ -24,15 +24,15 @@ const page: FC<pageProps> = ({ params }) => {
       setData(data.data);
     };
     getData();
-  }, []);
+  }, [params]);
   console.log();
   return (
     <div>
       {data.map((dataObject) => (
-        <SubjectData data={dataObject} />
+        <SubjectData key={dataObject.id} data={dataObject} />
       ))}
     </div>
   );
 };
 
-export default page;
+export default SubjectIdPage;

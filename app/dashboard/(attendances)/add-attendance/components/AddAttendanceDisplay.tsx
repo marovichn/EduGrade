@@ -68,7 +68,11 @@ const AddAttendanceDisplay: FC<AddAttendanceDisplayProps> = ({ user }) => {
       }
     };
     getGroups();
-  }, []);
+  }, [
+    user,
+    //@ts-ignore
+    user?.groups,
+  ]);
 
   return (
     <PageWrapper>

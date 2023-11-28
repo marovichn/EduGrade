@@ -9,7 +9,7 @@ import Link from "next/link";
 import { Group, Plus } from "lucide-react";
 
 
-const page =() => {
+const Page =() => {
   const [groups, setGroups] = useState([]);
   useEffect(() => {
     const getGroups = async () => {
@@ -42,4 +42,4 @@ const page =() => {
   );
 };
 
-export default page;
+export default Page;

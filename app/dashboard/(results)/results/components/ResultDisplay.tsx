@@ -31,12 +31,18 @@ const ResultDisplay: FC<ResultDisplayProps> = ({ user }) => {
           groupId: group.id,
         });
         const dataRes = [].concat(resultRes.data);
-         const dataResultWithGroup: any = dataRes.map((data)=>({group:groupRes.data[0], data}))
+        const dataResultWithGroup: any = dataRes.map((data) => ({
+          group: groupRes.data[0],
+          data,
+        }));
         setData((p) => [...p, ...dataResultWithGroup]);
       });
     };
     storeData();
-  }, []);
+  }, [
+    //@ts-ignore
+    user?.groups,
+  ]);
   const dataSorted = data.sort((a: any, b: any) => {
     return Number(new Date(b.data.date)) - Number(new Date(a.data.date));
   });

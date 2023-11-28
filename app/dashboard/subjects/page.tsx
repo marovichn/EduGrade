@@ -4,9 +4,9 @@ import SubjectsList from "@/app/components/SubjectsList";
 import axios from "axios";
 import { FC, useEffect, useState } from "react";
 
-interface pageProps {}
+interface SubjectsPageProps {}
 
-const page: FC<pageProps> = ({}) => {
+const SubjectsPage: FC<SubjectsPageProps> = ({}) => {
   const [subjects, setSubjects] = useState([]);
   useEffect(() => {
     const getSubjects = async () => {
@@ -26,4 +26,4 @@ const page: FC<pageProps> = ({}) => {
   );
 };
 
-export default page;
+export default SubjectsPage;

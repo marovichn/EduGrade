@@ -5,7 +5,7 @@ import { Calendar } from "@/app/components/ui/calendar";
 import { FC, useEffect, useState } from "react";
 import AssignmentsForm from "./AssignmentsForm";
 import axios from "axios";
-import { Admin, Group, Student, Teacher } from "@prisma/client";
+import { Group } from "@prisma/client";
 
 interface AddAssignmentDisplayProps {
   user: {
@@ -68,7 +68,7 @@ const AddAssignmentDisplay: FC<AddAssignmentDisplayProps> = ({ user }) => {
       }
     };
     getGroups();
-  }, []);
+  }, [user]);
 
   return (
     <PageWrapper>

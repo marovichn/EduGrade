@@ -55,7 +55,7 @@ const MyTeachersDisplay: FC<MyTeachersDisplayProps> = ({ user }) => {
       setTeachers(uniqueTeachers);
     };
     getTeachers();
-  }, []);
+  }, [user]);
 
   return (
     <div>

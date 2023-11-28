@@ -5,11 +5,11 @@ import axios from "axios";
 import { FC, useEffect, useState } from "react";
 import AdminData from "./components/AdminData";
 
-interface pageProps {
+interface AdminIdPageProps {
   params: { adminId: string };
 }
 
-const page: FC<pageProps> = ({ params }) => {
+const AdminIdPage: FC<AdminIdPageProps> = ({ params }) => {
   const [data, setData] = useState<Admin[]>([]);
   useEffect(() => {
     console.log(params);
@@ -24,15 +24,15 @@ const page: FC<pageProps> = ({ params }) => {
       setData(data.data);
     };
     getData();
-  }, []);
+  }, [params]);
   console.log();
   return (
     <div>
       {data.map((dataObject) => (
-        <AdminData data={dataObject} />
+        <AdminData key={dataObject.id} data={dataObject} />
       ))}
     </div>
   );
 };
 
-export default page;
+export default AdminIdPage;

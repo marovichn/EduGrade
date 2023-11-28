@@ -3,7 +3,7 @@
 import Variant from "@/types";
 import { FC } from "react";
 import axios from "axios";
-import { signIn} from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
@@ -17,16 +17,11 @@ import SelectSpecificSubject from "./SelectSpecificSubject";
 
 interface GroupFormProps {
   variant: Variant;
-  userRole: string | null | undefined
+  userRole: string | null | undefined;
 }
 
-const GroupForm: FC<GroupFormProps> = ({ variant, userRole}) => {
+const GroupForm: FC<GroupFormProps> = ({ variant, userRole }) => {
   const router = useRouter();
-
-  if(userRole !== "Admin"){
-    router.push("/dashboard")
-    return;
-  }
   const [isLoading, setIsLoading] = useState(false);
   const [teachers, setTeachers] = useState([]);
   const [students, setStudents] = useState([]);
@@ -59,8 +54,7 @@ const GroupForm: FC<GroupFormProps> = ({ variant, userRole}) => {
     getStudents();
     getSubjects();
   }, []);
-
-
+  
   const {
     register,
     handleSubmit,
@@ -70,12 +64,19 @@ const GroupForm: FC<GroupFormProps> = ({ variant, userRole}) => {
       name: "",
       description: "",
       date: "",
-      time:"",
-      teacher:"",
-      subject:"",
-      student:"",
+      time: "",
+      teacher: "",
+      subject: "",
+      student: "",
     },
   });
+
+  if (userRole !== "Admin") {
+    router.push("/dashboard");
+    return;
+  }
+
+  
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
@@ -176,7 +177,7 @@ const GroupForm: FC<GroupFormProps> = ({ variant, userRole}) => {
                   required
                   id='date'
                   label='When due (date)?'
-                  type="date"
+                  type='date'
                 />
                 <Input
                   disabled={isLoading}
@@ -185,7 +186,7 @@ const GroupForm: FC<GroupFormProps> = ({ variant, userRole}) => {
                   required
                   id='time'
                   label='When due (time)?'
-                  type="time"
+                  type='time'
                 />
                 <SelectSpecific
                   name='teacher'

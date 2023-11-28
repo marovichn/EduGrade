@@ -1,4 +1,6 @@
-import { Admin, Student, Subject, Teacher } from "@prisma/client";
+"use client"
+
+import {  Subject } from "@prisma/client";
 import { useState, useEffect } from "react";
 import { ArrowLeft, ArrowRight, Book, BookPlus, FileEdit } from "lucide-react";
 import Link from "next/link";
@@ -9,7 +11,7 @@ interface subjectsListProps {
   subjects?: Subject[] | null | undefined;
 }
 
-const subjectsList: FC<subjectsListProps> = ({ subjects }) => {
+const SubjectsList: FC<subjectsListProps> = ({ subjects }) => {
   const [page, setPage] = useState(1);
   const [startIndex, setStartIndex] = useState(0);
   const [endIndex, setEndIndex] = useState(5);
@@ -106,4 +108,4 @@ const subjectsList: FC<subjectsListProps> = ({ subjects }) => {
   );
 };
 
-export default subjectsList;
+export default SubjectsList;

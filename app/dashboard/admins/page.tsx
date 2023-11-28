@@ -5,7 +5,7 @@ import {  useEffect, useState } from "react";
 
 
 
-const page = () => {
+const AdminsPage = () => {
   const [admins, setAdmins] = useState([]);
   useEffect(() => {
     const getAdmins = async () => {
@@ -25,4 +25,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default AdminsPage;

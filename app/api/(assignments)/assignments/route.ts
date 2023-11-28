@@ -14,7 +14,7 @@ export async function GET() {
     },
     include: { assignments: true },
   });
-  
+
   if (allMyGroups.length === 0 || !allMyGroups) {
     const allMyGroupsStudent = await prisma.group.findMany({
       where: {
@@ -25,15 +25,14 @@ export async function GET() {
       },
     });
 
-    return NextResponse.json(
-      allMyGroupsStudent.map((group) =>
-        group.assignments.map((assignment) => assignment)
-      )
-    );
-  }
-  return NextResponse.json(
-    allMyGroups.map((group) =>
+    const assignments = allMyGroupsStudent.map((group) =>
       group.assignments.map((assignment) => assignment)
-    )
+    );
+
+    return NextResponse.json(assignments);
+  }
+  const assignments = allMyGroups.map((group) =>
+    group.assignments.map((assignment) => assignment)
   );
+  return NextResponse.json(assignments);
 }

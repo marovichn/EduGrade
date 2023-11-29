@@ -1,33 +1,22 @@
+"use client";
+
 import { Session } from "next-auth";
 import Navbar from "../components/Navbar";
-import { Admin, Student, Teacher } from "@prisma/client";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
-export async function getServerSideProps() {
-  try {
-    const { data } = await axios.get("/api/current-user");
-    const currentUser = data;
-
-    return {
-      props: { currentUser },
-    };
-  } catch (error) {
-    console.error("Error fetching current currentUser:", error);
-
-    return {
-      props: { currentUser: null },
-    };
-  }
-}
-
-export default async function DashboardLayout({
+export default function DashboardLayout({
   children,
-  currentUser,
 }: {
   children: React.ReactNode;
   session: Session;
-  currentUser: Admin | Student | Teacher | null;
 }) {
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    axios.get("/api/current-user").then((data) => setCurrentUser(data.data));
+  }, []);
+
   return (
     <>
       <Navbar user={currentUser!} />

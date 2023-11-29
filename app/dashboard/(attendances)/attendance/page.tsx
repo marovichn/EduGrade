@@ -1,32 +1,18 @@
-
+"use client";
 import { Admin, Student, Teacher } from "@prisma/client";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 import AttendanceDisplay from "./components/AttendanceDisplay";
 
+const Page = ({}) => {
+  const [user, setCurrentUser] = useState<Admin | Student | Teacher | null>(
+    null
+  );
 
-interface PageProps {
-  user: Admin | Student | Teacher | null;
-}
-
-export async function getServerSideProps() {
-  try {
-    const { data } = await axios.get("/api/current-user");
-    const user = data;
-
-    return {
-      props: { user },
-    };
-  } catch (error) {
-    console.error("Error fetching current user:", error);
-
-    return {
-      props: { user: null },
-    };
-  }
-}
-
-const page = ({user}: PageProps) => {
+  useEffect(() => {
+    axios.get("/api/current-user").then((data) => setCurrentUser(data.data));
+  }, []);
   return (
     <div>
       <AttendanceDisplay user={user} />
@@ -34,4 +20,4 @@ const page = ({user}: PageProps) => {
   );
 };
 
-export default page;
+export default Page;

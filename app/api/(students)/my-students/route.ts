@@ -2,7 +2,7 @@ import getCurrentUser from "@/app/actions/getCurrentUser";
 import prisma from "@/app/libs/prismadb";
 import { Student } from "@prisma/client";
 import { NextResponse } from "next/server";
-
+export const dynamic = "force-dynamic";
 export async function POST(request: Request) {
   const currentUser = await getCurrentUser();
   const { studentId } = await request.json();

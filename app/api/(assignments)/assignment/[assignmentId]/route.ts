@@ -3,6 +3,8 @@ import prisma from "@/app/libs/prismadb";
 import { NextApiRequest } from "next";
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(req: Request, context: any) {
   const assignmentId = context.params.assignmentId;
   const { done } = await req.json();

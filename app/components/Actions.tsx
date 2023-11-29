@@ -13,7 +13,7 @@ const Actions: FC<ActionsProps> = ({ userRole }) => {
     <div className='mt-16'>
       {actions.map((a) => (
         <Link
-          href={userRole === "Admin" ? `${a.href}/create` : a.href}
+          href={userRole === "Admin" ? `${a.href}` : a.href}
           className='w-full h-20 flex justify-center items-center my-4 group '
           key={a.name}
         >

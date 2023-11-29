@@ -25,7 +25,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant, userRole }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   if (!userRole || userRole !== "Admin") {
-    router.push("/teachers");
+    router.push("/dashboard/teachers");
   }
 
   const {

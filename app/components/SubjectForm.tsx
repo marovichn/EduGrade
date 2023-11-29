@@ -24,7 +24,7 @@ const SubjectForm: FC<SubjectFormProps> = ({ variant, userRole }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   if (!userRole || userRole !== "Admin") {
-    router.push("/students");
+    router.push("/dashboard/students");
   }
 
   const {

@@ -8,7 +8,6 @@ const Page = ({}) => {
   const [user, setCurrentUser] = useState<Admin | Student | Teacher | null>(
     null
   );
-
   const [mount, setMount] = useState(false);
 
   useEffect(() => {
@@ -17,7 +16,7 @@ const Page = ({}) => {
   }, []);
 
   if (!mount) {
-    return <></>;
+    return <div>Loading...</div>;
   }
 
   return <StudentForm variant='REGISTER' userRole={user?.role}></StudentForm>;

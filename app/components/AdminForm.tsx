@@ -3,9 +3,8 @@
 import Variant from "@/types";
 import { FC } from "react";
 import axios from "axios";
-import { signIn, useSession } from "next-auth/react";
-import { useCallback, useEffect, useState } from "react";
-import { MdCastForEducation } from "react-icons/md";
+import { signIn } from "next-auth/react";
+import {  useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 

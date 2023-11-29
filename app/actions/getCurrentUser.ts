@@ -1,9 +1,11 @@
 import prisma from "@/app/libs/prismadb";
 import getSession from "./getSession";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/route";
 
 const getCurrentUser = async () => {
   try {
-    const session = await getSession();
+    const session = await getServerSession(authOptions);
 
     if (!session?.user?.email) {
       return null;

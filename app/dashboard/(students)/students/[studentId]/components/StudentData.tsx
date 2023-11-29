@@ -2,7 +2,6 @@ import Avatar from "@/app/components/Avatar";
 import { Student } from "@prisma/client";
 import axios from "axios";
 import { ShieldAlert, Trash } from "lucide-react";
-import { getServerSession } from "next-auth";
 import { useRouter } from "next/navigation";
 import { FC } from "react";
 import toast from "react-hot-toast";

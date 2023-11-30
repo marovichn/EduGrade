@@ -1,21 +1,16 @@
-"use client";
-
-import { Session } from "next-auth";
+import { getServerSession } from "next-auth";
 import Navbar from "../components/Navbar";
-import { useEffect, useState } from "react";
-import axios from "axios";
-
-export default function DashboardLayout({
+import { authOptions } from "@/lib/authOptions";
+import getCurrentUser from "../actions/getCurrentUser";
+export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
-  session: Session;
 }) {
-  const [currentUser, setCurrentUser] = useState(null);
-
-  useEffect(() => {
-    axios.get("/api/current-user").then((data) => setCurrentUser(data.data));
-  }, []);
+  const session = await getServerSession(authOptions);
+  const currentUser = await getCurrentUser(
+    session?.user?.email ? session.user.email : ""
+  );
 
   return (
     <>

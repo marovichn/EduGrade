@@ -1,18 +1,13 @@
-"use client";
-import { Admin, Student, Teacher } from "@prisma/client";
-import { useEffect, useState } from "react";
-import axios from "axios";
-
 import MyStudentsDisplay from "./components/MyStudentsDisplay";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/authOptions";
+import getCurrentUser from "@/app/actions/getCurrentUser";
 
-const Page = () => {
-  const [user, setCurrentUser] = useState<Admin | Student | Teacher | null>(
-    null
+const page = async ({}) => {
+  const session = await getServerSession(authOptions);
+  const user = await getCurrentUser(
+    session?.user?.email ? session.user.email : ""
   );
-
-  useEffect(() => {
-    axios.get("/api/current-user").then((data) => setCurrentUser(data.data));
-  }, []);
   return (
     <div>
       <MyStudentsDisplay user={user} />
@@ -20,4 +15,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default page;

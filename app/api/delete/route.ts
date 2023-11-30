@@ -3,12 +3,18 @@ import bcrypt from "bcrypt";
 import prisma from "@/app/libs/prismadb";
 import { NextResponse } from "next/server";
 import getCurrentUser from "@/app/actions/getCurrentUser";
-
-export const dynamic = "force-dynamic";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/authOptions";
 
 export async function DELETE(request: Request) {
   const { role, id } = await request.json();
-  const user = await getCurrentUser();
+  const session = await getServerSession(authOptions);
+
+  if (!session?.user?.email) {
+    return new NextResponse("Unauthorized", { status: 401 });
+  }
+
+  const user = await getCurrentUser(session?.user?.email);
 
   if (user?.role !== "Admin") {
     return new NextResponse("Unauthorized", { status: 200 });

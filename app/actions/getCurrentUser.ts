@@ -1,17 +1,12 @@
-import getSession from "./getSession";
 import getUserDataByEmail from "./getUserDataByEmail";
 
-export const dynamic = "force-dynamic";
-
-const getCurrentUser = async () => {
+const getCurrentUser = async (email: string) => {
   try {
-    const session = await getSession(); // Assuming getSession returns the session
-
-    if (!session?.user?.email) {
+    if (!email) {
       return null;
     }
 
-    const userData = await getUserDataByEmail(session.user.email);
+    const userData = await getUserDataByEmail(email);
     return userData;
   } catch (error) {
     console.error("Error in getCurrentUser:", error);

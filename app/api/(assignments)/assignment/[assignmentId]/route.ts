@@ -4,8 +4,6 @@ import { authOptions } from "@/lib/authOptions";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
- 
-
 export async function POST(req: Request, context: any) {
   const assignmentId = context.params.assignmentId;
   const { done } = await req.json();
@@ -15,7 +13,7 @@ export async function POST(req: Request, context: any) {
     return new NextResponse("Unauthorized", { status: 401 });
   }
 
-  const currentUser = await getCurrentUser(session?.user?.email);;
+  const currentUser = await getCurrentUser(session?.user?.email);
   if (!currentUser) {
     return new NextResponse("Unauthorized", { status: 401 });
   }
@@ -42,7 +40,7 @@ export async function DELETE(req: Request, context: any) {
     return new NextResponse("Unauthorized", { status: 401 });
   }
 
-  const currentUser = await getCurrentUser(session?.user?.email);;
+  const currentUser = await getCurrentUser(session?.user?.email);
   if (!currentUser) {
     return new NextResponse("Unauthorized", { status: 401 });
   }

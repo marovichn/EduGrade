@@ -30,9 +30,9 @@ const Navbar: FC<NavbarProps> = ({ user }) => {
             </span>
           </Link>
           <div className='flex justify-center items-center gap-x-4'>
-            <Link href={`/account/${session.data?.user?.email}`}>
+            <div>
               <Avatar user={session.data?.user}></Avatar>
-            </Link>
+            </div>
             <div
               className='w-full h-full hover:bg-white/20 group p-2 rounded-xl mb-1 cursor-pointer'
               onClick={() => signOut()}
